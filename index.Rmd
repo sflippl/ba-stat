@@ -1,0 +1,29 @@
+--- 
+author: "Samuel Lippl"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: report
+subparagraph: true
+bibliography: [bachelor-thesis.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+# Abstract {-}
+
+This report will provide an overview over outlier detection in R. It starts by discussing some general principles of outlier detection. Linear methods and their nonlinear extensions are presented next. Along the general methods, examples of application and an appropriate methodology in R are introduced. The report will be concluded by a discussion of method evaluation as well as a comparison of the different introduced algorithms.
+
+`r if (knitr::is_latex_output()) '\\tableofcontents'`
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library(vdem.tectr)
+library(tectr)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+```

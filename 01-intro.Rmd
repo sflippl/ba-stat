@@ -1,0 +1,49 @@
+# Introduction {#intro}
+
+`r if (knitr::is_latex_output()) '\\pagenumbering{arabic}
+\\setcounter{page}{1}'`
+
+One of the main advantages of the statistical programming language R [@R] lies in its conciseness. With just one line of code, it is possible to build a linear model, visualize a variable's distribution or conduct complex modifications on several datasets. This is possible because R is a domain-specific language and is therefore able to make strong assumptions -- many people will need to build a linear model or read in a csv file and it is therefore sensible to create custom functions for these purpose.
+
+An important property of this conciseness is that the code is still easy to read. Two features that are especially important for this both rely on the specific domain of statistical analysis for which R was created:
+
+* *Specialized functions:* `read.csv` essentially calls `read.table` with a few modified parameters. Nonetheless, it is immediately clear what this line of code is supposed to achieve.
+
+* *Default values:* The user does not need to specify every single parameter of a function. For instance, it is helpful that `read.table` contains the parameter `na.strings` that allows the user to specify values that encode `NA`s. However, in most cases, `NA`s are encoded by the string `NA` or a missing value [^1]. By setting default values, the user only needs to think about this parameter when the file structure is out of the ordinary.
+
+[^1:] The latter is only implemented in `read_delim` from the package `readr` but the advantage of default values remains valid nevertheless.
+
+These advantages are certainly not unique to R. They are designed to minimize the expected time a user needs to spend with coding his decisions while maintaining easy reproducibility of his work. On the other hand, if there are more complicated tasks to undertake, a consistent interface allows the user to do that, as well.
+
+A good example for this concept, in my mind, is the package `stringr` [@stringr]. Functions like `str_trim` (trim whitespace) or `str_to_title` (capitalize) make special use cases easily accessible. On the other hand, `str_replace` allows more complicated operations with regular expressions using the same consistent interface.
+
+Things, however, start to fall apart when one attempts to modify default values. This is possible by setting the global options in R; however, relying on these makes reproducibility harder. On the other hand, one could write new functions to solve this problem. This is, however, more laborious than such an endeavour needs to be.
+
+A good example of this are datasets with many variables as they occur in the social sciences. As an example, I will consider the Varieties of Democracy [v-dem.net](V-DEM) dataset which produces indicators of democracy [@vdem2018, @Pemstein2018]. It contains many variables on different aspects of democracy with values per country and year. If one wishes to visualize the development of this variable over time, a simple line plot often makes sense. Consider, for instance, the variable which characterizes the freedom of religion on a scale between 0 and 4 for Germany:
+
+```{r ex1, fig.cap = "Example: Freedom of religion in Germany over time"}
+df_vdem %>% 
+  filter(country_name == "Germany") %>% 
+  ggplot(aes(year, v2clacfree_osp)) + 
+  geom_line()
+```
+
+Although there are considerable changes within a single year, freedom of religion is a continuous value and linear interpolation of this development within a year makes sense.
+
+Considering the variable `v2elvotbuy_osp`, however, a line plot makes less sense. This variable captures whether there was evidence of vote buying during a national election and is therefore only present in years where there has been a national election. A step plot seems more sensible in this case as the represented value would always refer to the last election.
+
+```{r ex2, fig.cap="Example: Election vote buying in Germany over time"}
+df_vdem %>% 
+  filter(country_name == "Germany") %>% 
+  select(year, v2elvotbuy_osp) %>% 
+  na.omit() %>% 
+  ggplot(aes(year, v2elvotbuy_osp)) + geom_step()
+```
+
+Furthermore, the scale titles should be modified to show an interpretable variable name, the scale should in many be standardized to depict the entire range between 0 and 4.
+
+In summary, there are many considerations one needs to implement in such a visualization. Therefore, every time the statistician needs to implement such a visualization, she needs to think about these questions again, which is time expensive and makes interactive user interfaces impossible. This problem is not limited to visualization; another example would be descriptive tables of a linear model or a report summarizing all covariates that have been used.
+
+In summary, R provides amazing opportunities to to outsource everyday thought processes in data analysis. However, adapting these mechanisms for application-specific thought processes is expensive and difficult. A broad framework for such an adaptation would enable researchers to think about certain decisions (like the visualization of a specific variable) once and then be done with it. Both the researcher himself and his colleagues who might not need to think about this at all would benefit from this.
+
+In this Bachelor's Thesis, I describe such a framework, implement it as the package `tectr` in R and apply it to the V-DEM dataset. The [#methods](next chapter) discusses some details regarding the package construction and the dataset before we get a [#example](first look) in the third chapter. The [#concept](fourth chapter) will present the framework and the implementation in a more specific way. [#application](Chapter five) presents the application of `tectr` to the V-DEM dataset and the [#summary](final chapter) summarizes the thesis and discusses the next steps regarding `tectr`.
