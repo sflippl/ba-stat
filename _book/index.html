@@ -25,7 +25,7 @@
 <meta name="author" content="Samuel Lippl">
 
 
-<meta name="date" content="2018-09-13">
+<meta name="date" content="2018-09-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -106,16 +107,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methodology</a><ul>
-<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#v-dem"><i class="fa fa-check"></i><b>2.1</b> V-DEM</a><ul>
+<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#v-dem"><i class="fa fa-check"></i><b>2.1</b> V-Dem</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="methods.html"><a href="methods.html#introduction-to-the-database"><i class="fa fa-check"></i><b>2.1.1</b> Introduction to the database</a></li>
 <li class="chapter" data-level="2.1.2" data-path="methods.html"><a href="methods.html#vdem.tectr"><i class="fa fa-check"></i><b>2.1.2</b> <code>vdem.tectr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="methods.html"><a href="methods.html#package-construction"><i class="fa fa-check"></i><b>2.2</b> Package construction</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="effective-explicitness.html"><a href="effective-explicitness.html"><i class="fa fa-check"></i><b>3</b> Effective explicitness</a></li>
-<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
-<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
-<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+<li class="chapter" data-level="3" data-path="first-look.html"><a href="first-look.html"><i class="fa fa-check"></i><b>3</b> First look</a><ul>
+<li class="chapter" data-level="3.1" data-path="first-look.html"><a href="first-look.html#fx_ggplot-basics"><i class="fa fa-check"></i><b>3.1</b> <code>fx_ggplot</code>: Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="first-look.html"><a href="first-look.html#modifying-the-default-values"><i class="fa fa-check"></i><b>3.2</b> Modifying the default values</a></li>
+<li class="chapter" data-level="3.3" data-path="first-look.html"><a href="first-look.html#summary"><i class="fa fa-check"></i><b>3.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="concept.html"><a href="concept.html"><i class="fa fa-check"></i><b>4</b> Description of <code>tectr</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="concept.html"><a href="concept.html#effective-explicitness-a-perspective-of-knowledge"><i class="fa fa-check"></i><b>4.1</b> Effective Explicitness: A perspective of knowledge</a></li>
+<li class="chapter" data-level="4.2" data-path="concept.html"><a href="concept.html#underlying-structure"><i class="fa fa-check"></i><b>4.2</b> Underlying structure</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="concept.html"><a href="concept.html#the-metaframe"><i class="fa fa-check"></i><b>4.2.1</b> The metaframe</a></li>
+<li class="chapter" data-level="4.2.2" data-path="concept.html"><a href="concept.html#extending-fx-functions"><i class="fa fa-check"></i><b>4.2.2</b> Extending fx functions</a></li>
+<li class="chapter" data-level="4.2.3" data-path="concept.html"><a href="concept.html#other-concepts"><i class="fa fa-check"></i><b>4.2.3</b> Other concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="concept.html"><a href="concept.html#fx_default"><i class="fa fa-check"></i><b>4.3</b> <code>fx_default</code></a><ul>
+<li class="chapter" data-level="4.3.1" data-path="concept.html"><a href="concept.html#general-purpose"><i class="fa fa-check"></i><b>4.3.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.3.2" data-path="concept.html"><a href="concept.html#extensions"><i class="fa fa-check"></i><b>4.3.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.3.3" data-path="concept.html"><a href="concept.html#alternative-implementations"><i class="fa fa-check"></i><b>4.3.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.3.4" data-path="concept.html"><a href="concept.html#lifecycle"><i class="fa fa-check"></i><b>4.3.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="concept.html"><a href="concept.html#fx_info"><i class="fa fa-check"></i><b>4.4</b> <code>fx_info</code></a><ul>
+<li class="chapter" data-level="4.4.1" data-path="concept.html"><a href="concept.html#general-purpose-1"><i class="fa fa-check"></i><b>4.4.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.4.2" data-path="concept.html"><a href="concept.html#extensions-1"><i class="fa fa-check"></i><b>4.4.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.4.3" data-path="concept.html"><a href="concept.html#lifecycle-1"><i class="fa fa-check"></i><b>4.4.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="concept.html"><a href="concept.html#fx_output"><i class="fa fa-check"></i><b>4.5</b> <code>fx_output</code></a><ul>
+<li class="chapter" data-level="4.5.1" data-path="concept.html"><a href="concept.html#general-purpose-2"><i class="fa fa-check"></i><b>4.5.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.5.2" data-path="concept.html"><a href="concept.html#extensions-2"><i class="fa fa-check"></i><b>4.5.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.5.3" data-path="concept.html"><a href="concept.html#lifecycle-2"><i class="fa fa-check"></i><b>4.5.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="concept.html"><a href="concept.html#fx_write"><i class="fa fa-check"></i><b>4.6</b> <code>fx_write</code></a><ul>
+<li class="chapter" data-level="4.6.1" data-path="concept.html"><a href="concept.html#general-purpose-3"><i class="fa fa-check"></i><b>4.6.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.6.2" data-path="concept.html"><a href="concept.html#extensions-3"><i class="fa fa-check"></i><b>4.6.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.6.3" data-path="concept.html"><a href="concept.html#alternative-implementations-1"><i class="fa fa-check"></i><b>4.6.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.6.4" data-path="concept.html"><a href="concept.html#lifecycle-3"><i class="fa fa-check"></i><b>4.6.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="concept.html"><a href="concept.html#fx-ggplot"><i class="fa fa-check"></i><b>4.7</b> <code>fx_ggplot</code></a><ul>
+<li class="chapter" data-level="4.7.1" data-path="concept.html"><a href="concept.html#concept-of-fx_ggplot"><i class="fa fa-check"></i><b>4.7.1</b> Concept of <code>fx_ggplot</code></a></li>
+<li class="chapter" data-level="4.7.2" data-path="concept.html"><a href="concept.html#implementation-of-the-independent-layers"><i class="fa fa-check"></i><b>4.7.2</b> Implementation of the independent layers</a></li>
+<li class="chapter" data-level="4.7.3" data-path="concept.html"><a href="concept.html#implementation-of-the-voting-system"><i class="fa fa-check"></i><b>4.7.3</b> Implementation of the voting system</a></li>
+<li class="chapter" data-level="4.7.4" data-path="concept.html"><a href="concept.html#discussion-and-alternatives"><i class="fa fa-check"></i><b>4.7.4</b> Discussion and alternatives</a></li>
+<li class="chapter" data-level="4.7.5" data-path="concept.html"><a href="concept.html#lifecycle-and-further-development"><i class="fa fa-check"></i><b>4.7.5</b> Lifecycle and further development</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -144,14 +182,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="abstract" class="section level1 unnumbered">
 <h1>Abstract</h1>
 <p>This report will provide an overview over outlier detection in R. It starts by discussing some general principles of outlier detection. Linear methods and their nonlinear extensions are presented next. Along the general methods, examples of application and an appropriate methodology in R are introduced. The report will be concluded by a discussion of method evaluation as well as a comparison of the different introduced algorithms.</p>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 
 </div>
             </section>

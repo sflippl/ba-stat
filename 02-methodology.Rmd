@@ -1,25 +1,30 @@
 # Methodology {#methods}
 
-This chapter introduces the V-DEM dataset and discuss the methodological background of `tectr`'s construction.
+This chapter introduces the V-Dem dataset and discuss the methodological background of `tectr`'s construction.
 
-## V-DEM
+## V-Dem
 
 ### Introduction to the database
 
-The Varieties of Democracy Institute is concerned with measuring different aspects of democracy. It distinguishes between seven high-level principles: electoral, liberal, participatory, deliberative, egalitarian, majoritarian and consensual. These are measured by a variable in the interval $[0,1]$ and consist of several mid- and low-level indices. The low-level indices are coded with the help of several country experts. These receive a questionnaire. Most questions can be answered by an ordinal scale of five alternatives. Consider, as an example, the variable "Disclosure of campaign donations":
+The Varieties of Democracy Institute is concerned with measuring different aspects of democracy. It distinguishes between seven high-level principles: electoral, liberal, participatory, deliberative, egalitarian, majoritarian and consensual. These are measured by a variable in the interval $[0,1]$ and each consists of several mid- and low-level indices. The low-level indices are coded with the help of several country experts who answer a detailed questionnaire. Most questions can be answered by an ordinal scale of five alternatives. Consider, as an example, the variable "Disclosure of campaign donations":
 
-> *Question*: Are there disclosure requirements for donations to national election campaigns?
+> **Are there disclosure requirements for donations to national election campaigns?**
+>
 > 0: No. There are no disclosure requirements.
+>
 > 1: Not really. There are some, possibly partial, disclosure requirements in place but they are not observed or enforced most of the time.
+>
 > 2: Ambiguous. There are disclosure requirements in place, but it is unclear to what extent they are observed or enforced.
+>
 > 3: Mostly. The disclosure requirements may not be fully comprehensive (some donations not covered), but most existing arrangements are observed and enforced.
+>
 > 4: Yes. There are comprehensive requirements and they are observed and enforced almost all the time.
 
 The answers are then analyzed for inter-coder reliability and a standardized average of the responses together with a confidence interval which contains 68 % of the probability mass is created. Lower-level indices are created from these answers which are summarized in mid-level and then high-level indices. An overview over the structure can be found in appendix D of the codebook [@vdem-codebook2018]. The database contains data on 201 countries between 1789 and 2017. [@vdem2018, @Pemstein2018]
 
 ### `vdem.tectr`
 
-I have created the package `vdem.tectr` which contains the country-year dataset. It can be downloaded via [github.com/sflippl/vdem.tectr](github):
+I have created the package `vdem.tectr` which contains the country-year dataset version 8. It can be downloaded via [github](github.com/sflippl/vdem.tectr):
 
 ```{r eval=FALSE}
 # install.packages("devtools")
@@ -29,9 +34,9 @@ devtools::install_github("sflippl/vdem.tectr")
 The package contains three datasets:
 
 * `df_vdem`: This dataset contains all variables from the varieties of democracy dataset where interval variables are numeric and categorical variables are saved as factors or ordered factors where appropriate.
-* `vdem_spatial`: This *simple features* object [@sf] contains the polygon shapes of the different countries for every year between 1945 and 2017. I have used the CShapes dataset [@Weidmann2010, @Weidmann2010a], sovereignty- and state-level maps data from [www.naturalearthdata.com](Natural Earth) and the details from the document on country coding units from V-Dem [@Coppedge2018]. Note that the coded country borders by V-Dem do not constitute any endorsement of controversial entities such as Zanzibar.
+* `vdem_spatial`: This *simple features* object [@sf] contains the polygon shapes of the different countries for every year between 1945 and 2017. The borders in 2017 can be seen in \@ref(fig:vdem-spatial). I have used the CShapes dataset [@Weidmann2010, @Weidmann2010a], sovereignty- and state-level maps data from [Natural Earth](www.naturalearthdata.com) and the details from the document on country coding units from V-Dem [@Coppedge2018]. Note that the coded country borders by V-Dem do not constitute an endorsement of controversial entities such as Zanzibar. The function `vdem_geocode` makes it possible to join the shapes polygons to a data frame as long as the columns `country_name` and `year` exist.
 
-```{r vdem_spatial, fig.cap="Country borders in 2017 in the V-Dem database"}
+```{r vdem-spatial, fig.cap="Country borders in 2017 in the V-Dem database", echo = FALSE}
 vdem_spatial %>% 
   filter(end_year == 2017) %>% 
   ggplot() + 
@@ -39,10 +44,10 @@ vdem_spatial %>%
   theme_map()
 ```
 
-* `vdem` which contains the variables from `df_vdem`, the country shapes from `vdem_spatial` and further metainformation (see below)
+* `vdem` which contains the variables from `df_vdem`, the country shapes from `vdem_spatial` and further metainformation (see [below](#application))
 
 Details on these datasets and the reproducible code can be found in the folder "data-raw" in the package.
 
 ## Package construction
 
-The package has been constructed with the packages `devtools` [@devtools], `roxygen2` [@roxygen2] and `testthat` [@testthat].
+The package has been constructed with the packages `devtools` [@devtools], `roxygen2` [@roxygen2] and `testthat` [@testthat]. The Bachelor's Thesis has been written with `bookdown` [@bookdown-1, @bookdown-2].

@@ -7,6 +7,7 @@ subparagraph: true
 bibliography: [bachelor-thesis.bib]
 biblio-style: apalike
 link-citations: yes
+always_allow_html: yes
 ---
 
 # Abstract {-}
@@ -15,15 +16,17 @@ This report will provide an overview over outlier detection in R. It starts by d
 
 `r if (knitr::is_latex_output()) '\\tableofcontents'`
 
-```{r setup, echo=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
 	echo = TRUE,
 	message = FALSE,
 	warning = FALSE
 )
+library(knitr)
 library(vdem.tectr)
 library(tectr)
 library(ggplot2)
 library(dplyr)
 library(ggthemes)
+my_theme <- theme(text = element_text(size = 17))
 ```

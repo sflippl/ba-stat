@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+<meta name="author" content="Samuel Lippl">
+
+
+<meta name="date" content="2018-09-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="first-look.html">
+<link rel="next" href="final-words.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A user interface for complex datsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methodology</a><ul>
+<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#v-dem"><i class="fa fa-check"></i><b>2.1</b> V-Dem</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="methods.html"><a href="methods.html#introduction-to-the-database"><i class="fa fa-check"></i><b>2.1.1</b> Introduction to the database</a></li>
+<li class="chapter" data-level="2.1.2" data-path="methods.html"><a href="methods.html#vdem.tectr"><i class="fa fa-check"></i><b>2.1.2</b> <code>vdem.tectr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="methods.html"><a href="methods.html#package-construction"><i class="fa fa-check"></i><b>2.2</b> Package construction</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="first-look.html"><a href="first-look.html"><i class="fa fa-check"></i><b>3</b> First look</a><ul>
+<li class="chapter" data-level="3.1" data-path="first-look.html"><a href="first-look.html#fx_ggplot-basics"><i class="fa fa-check"></i><b>3.1</b> <code>fx_ggplot</code>: Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="first-look.html"><a href="first-look.html#modifying-the-default-values"><i class="fa fa-check"></i><b>3.2</b> Modifying the default values</a></li>
+<li class="chapter" data-level="3.3" data-path="first-look.html"><a href="first-look.html#summary"><i class="fa fa-check"></i><b>3.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="concept.html"><a href="concept.html"><i class="fa fa-check"></i><b>4</b> Description of <code>tectr</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="concept.html"><a href="concept.html#effective-explicitness-a-perspective-of-knowledge"><i class="fa fa-check"></i><b>4.1</b> Effective Explicitness: A perspective of knowledge</a></li>
+<li class="chapter" data-level="4.2" data-path="concept.html"><a href="concept.html#underlying-structure"><i class="fa fa-check"></i><b>4.2</b> Underlying structure</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="concept.html"><a href="concept.html#the-metaframe"><i class="fa fa-check"></i><b>4.2.1</b> The metaframe</a></li>
+<li class="chapter" data-level="4.2.2" data-path="concept.html"><a href="concept.html#extending-fx-functions"><i class="fa fa-check"></i><b>4.2.2</b> Extending fx functions</a></li>
+<li class="chapter" data-level="4.2.3" data-path="concept.html"><a href="concept.html#other-concepts"><i class="fa fa-check"></i><b>4.2.3</b> Other concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="concept.html"><a href="concept.html#fx_default"><i class="fa fa-check"></i><b>4.3</b> <code>fx_default</code></a><ul>
+<li class="chapter" data-level="4.3.1" data-path="concept.html"><a href="concept.html#general-purpose"><i class="fa fa-check"></i><b>4.3.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.3.2" data-path="concept.html"><a href="concept.html#extensions"><i class="fa fa-check"></i><b>4.3.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.3.3" data-path="concept.html"><a href="concept.html#alternative-implementations"><i class="fa fa-check"></i><b>4.3.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.3.4" data-path="concept.html"><a href="concept.html#lifecycle"><i class="fa fa-check"></i><b>4.3.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="concept.html"><a href="concept.html#fx_info"><i class="fa fa-check"></i><b>4.4</b> <code>fx_info</code></a><ul>
+<li class="chapter" data-level="4.4.1" data-path="concept.html"><a href="concept.html#general-purpose-1"><i class="fa fa-check"></i><b>4.4.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.4.2" data-path="concept.html"><a href="concept.html#extensions-1"><i class="fa fa-check"></i><b>4.4.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.4.3" data-path="concept.html"><a href="concept.html#lifecycle-1"><i class="fa fa-check"></i><b>4.4.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="concept.html"><a href="concept.html#fx_output"><i class="fa fa-check"></i><b>4.5</b> <code>fx_output</code></a><ul>
+<li class="chapter" data-level="4.5.1" data-path="concept.html"><a href="concept.html#general-purpose-2"><i class="fa fa-check"></i><b>4.5.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.5.2" data-path="concept.html"><a href="concept.html#extensions-2"><i class="fa fa-check"></i><b>4.5.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.5.3" data-path="concept.html"><a href="concept.html#lifecycle-2"><i class="fa fa-check"></i><b>4.5.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="concept.html"><a href="concept.html#fx_write"><i class="fa fa-check"></i><b>4.6</b> <code>fx_write</code></a><ul>
+<li class="chapter" data-level="4.6.1" data-path="concept.html"><a href="concept.html#general-purpose-3"><i class="fa fa-check"></i><b>4.6.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.6.2" data-path="concept.html"><a href="concept.html#extensions-3"><i class="fa fa-check"></i><b>4.6.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.6.3" data-path="concept.html"><a href="concept.html#alternative-implementations-1"><i class="fa fa-check"></i><b>4.6.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.6.4" data-path="concept.html"><a href="concept.html#lifecycle-3"><i class="fa fa-check"></i><b>4.6.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="concept.html"><a href="concept.html#fx-ggplot"><i class="fa fa-check"></i><b>4.7</b> <code>fx_ggplot</code></a><ul>
+<li class="chapter" data-level="4.7.1" data-path="concept.html"><a href="concept.html#concept-of-fx_ggplot"><i class="fa fa-check"></i><b>4.7.1</b> Concept of <code>fx_ggplot</code></a></li>
+<li class="chapter" data-level="4.7.2" data-path="concept.html"><a href="concept.html#implementation-of-the-independent-layers"><i class="fa fa-check"></i><b>4.7.2</b> Implementation of the independent layers</a></li>
+<li class="chapter" data-level="4.7.3" data-path="concept.html"><a href="concept.html#implementation-of-the-voting-system"><i class="fa fa-check"></i><b>4.7.3</b> Implementation of the voting system</a></li>
+<li class="chapter" data-level="4.7.4" data-path="concept.html"><a href="concept.html#discussion-and-alternatives"><i class="fa fa-check"></i><b>4.7.4</b> Discussion and alternatives</a></li>
+<li class="chapter" data-level="4.7.5" data-path="concept.html"><a href="concept.html#lifecycle-and-further-development"><i class="fa fa-check"></i><b>4.7.5</b> Lifecycle and further development</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="concept" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Description of <code>tectr</code></h1>
+<div id="effective-explicitness-a-perspective-of-knowledge" class="section level2">
+<h2><span class="header-section-number">4.1</span> Effective Explicitness: A perspective of knowledge</h2>
+<p>Let us revisit the introduction: specified functions and default values render R a powerful programming language for statistical analysis. These concepts are so useful because they constitute crystallized knowledge: when the user calls the function <code>read.csv</code>, he effectively uses the programmer’s knowledge of how to read in csv-files and therefore lightens his own cognitive load. Of course, this also applies if she has written the function herself; in this case, by externalizing the knowledge she does not need to think about the specifics anymore. There are therefore two main advantages of externalizing knowledge. Other users benefit from the user’s knowledge and the user himself benefits from its automization.</p>
+<p>Normally, these default values cannot be particularly fancy as the user needs to understand what the function yields under all circumstances – even if this result is not ideal. This is the restriction that will be loosened for <code>tectr</code>. The intention behind this is to automize <em>more</em> knowledge.</p>
+<p>How does this work? Let us briefly consider a hypothetical statistician who looks at a dataset. He might at first want to look at the distribution and a few summary statistics of the variable. Simultaneously, he learns the name and the definition of a variable. He might look at relationships between several variables. During all that time, he will create internal knowledge concerning a proper form of the statistical summary or a certain visualization, dependent on different aspects; for instance, he might determine a better axis title than <code>v2x_polyarchy</code> or find it helpful to denote the mean of the variable on the axis. He might also, for instance determine that a line plot is a better fit than a scatter plot in this case or find that a certain variable transformation is helpful.</p>
+<p>This knowledge is seldomly notated which leads to a less efficient workflow. After all, this means that while exploring the data, the statistician will think about every modification of the plot. As a by-product, any non-crucial change will be left out, even though she might actually benefit from a more descriptive axis title. More severely, when she wants to communicate her results, she needs to reproduce all the internally held knowledge; if she creates a certain visualization she needs to modify the axis title, in a table describing the variables, she needs to replace the non-descriptive variable names. If she would like an interactive visualization of the statistical analysis, the problem becomes even bigger; in this case, she needs to externalize her knowledge after the fact.</p>
+<p>In order to resolve these issues, <code>tectr</code> attempts to track these decisions <em>while they are being made</em>. The program does that by asking the user to be <em>explicit</em> about his knowledge – which is usually only represented internally.</p>
+<p>If <code>tectr</code> used default values of a similar kind as other functions, this would lead to a severe burden on the user as it is time expensive to externalize knowledge. <code>tectr</code> therefore uses more flexible default values that attempt to approximate the statistician’s thought process. The user therefore mainly has to intervene when something does not adhere to canonical assumptions. As he is more likely to think about these situations explicitly, the burden seems likely to decrease even considering that under usual circumstances, the users will be forced to make these explicit decisions several times.</p>
+<p>I will call this concept <em>effective explicitness</em> and it is central to <code>tectr</code>. To emphasize that, the keyword guides the semantics of <code>tectr</code>: those functions and objects which support effective explicitness will be preceded by <em>fx</em> (e<strong>f</strong>fective e<strong>x</strong>plicitness, pronounced: effex).</p>
+<p>The notion of explicitness is clear in this context; if the user gains new knowledge that is not represented in the metaframe he should be explicit about it. This applies to visualizations as well as general observations which he may notate in a comments field. This process should be effective in two ways: firstly, the metaframe needs to imitate the statistical thought process closely enough that many of its approximations are valid; secondly, if adaptations need to be made, they should be scalable. Consider, as an example, they variable year in the previous chapter. The immediate assumption of the program that this was an ordinary continuous variable was wrong. In order to correct the assumptions, it was sufficient to make explicit that the variable referred to time and tracked the development for different countries. On the other hand, the variable could also have been so individual that these little changes would not have sufficed. In these cases, it should be possible to make broader changes. The remaining chapter will present a pilot implementation of this more general philosophy. Before going on to discuss specific functions, I will present the underlying concepts which power these functions. In order to properly discuss the functions, I will focus on the following aspects:</p>
+<ul>
+<li><p>How is communicated what the functions should yield?</p></li>
+<li><p>How does the function allow the user to be explicit?</p></li>
+<li><p>What would be alternative implementations?</p></li>
+<li><p>How mature is the function?</p></li>
+</ul>
+<p>The last point is especially important: as a pilot implementation, <code>tectr</code> provides functionality that seems to go in the right direction. However, only a combination of more exhaustive features and applications will determine whether the approach was the right one. It is therefore important to identify those functions where an entirely different track of thought might be necessary in the future. In order to make the description lightweight and not focus too much on the particularities of implementation, I will often refer to the package documentation for further information.</p>
+</div>
+<div id="underlying-structure" class="section level2">
+<h2><span class="header-section-number">4.2</span> Underlying structure</h2>
+<div id="the-metaframe" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> The metaframe</h3>
+<p>The <em>metaframe</em> is the attribute of a database which captures the knowledge of the user. It adheres to the principle of tidy data <span class="citation">(Wickham <a href="#ref-Wickham2014">2014</a>)</span>:</p>
+<blockquote>
+<p>Each variable forms a column.</p>
+<p>Each observation forms a row.</p>
+<p>Each type of observational unit forms a table.</p>
+</blockquote>
+<p>Clearly, additional information about observations can be stored in an additional column. The metaframe stores additional information about variables by treating every variable as an observation and every type of information as a column. It consists of different protected variable names that fulfill specific functions. The <code>name</code> column refers to the corresponding variable name. The remaining information is preceded by a keyword to make clear what the variable refers to. More specifically, those variables that refer to semantic information are preceded by <code>fxInfo</code> (e. g. the name of variable <code>fxInfo_name</code>) and those variables that give information on the visualization are preceded by <code>fxGeom</code>.</p>
+<p>For details on metaframes, how to set or change them see the documentation. In my opinion the best workflow is provided by instantiating the metaframe with <code>fx_default</code> and then adding columns via <code>mutate_mf</code>. This allows you to only use the data frame itself as an attribute and provides a concise terminology:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">tibble</span>(<span class="dt">ht =</span> <span class="kw">c</span>(<span class="dv">158</span>, <span class="dv">189</span>, <span class="dv">178</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_default</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_mf</span>(<span class="dt">fxInfo_name =</span> <span class="st">&quot;Height&quot;</span>)
+<span class="kw">metaframe</span>(data)</code></pre></div>
+<pre><code>##   name fxInfo_name
+## 1   ht      Height</code></pre>
+</div>
+<div id="extending-fx-functions" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Extending fx functions</h3>
+<div id="dispatch" class="section level4">
+<h4><span class="header-section-number">4.2.2.1</span> Dispatch</h4>
+<p>Whereas in most cases, modifying the parameters to the functions should be sufficient, there are also many applications where a more extensive modification is necessary – or at least more effective. <code>tectr</code> uses method dispatch to structure these extension. In certain occasions, S4 classes are necessary. As long as S3 class suffice, they are utilized.</p>
+<p>It is important to emphasize that the fx function themselves are not generics. Internally, every fx function calls an <code>fxi</code> (short for fx <em>internal</em>) function which modifies its arguments to make dispatch possible. I will elaborate on the particular mechanism in the following sections. By defining dummy classes, the calls to so called <code>fxe</code> (short for fx <em>extendible</em>) functions employ dispatch and can be extended. The metaframe information of the current variable is called as spliced input to the <code>fxe</code> function. For instance, in the example above, an extendible function <code>fxe_fun</code> would have received as additional input the argument <code>fxInfo_name</code> and <code>name</code>.</p>
+</div>
+<div id="s3-dummy-classes" class="section level4">
+<h4><span class="header-section-number">4.2.2.2</span> S3 dummy classes</h4>
+<p>S3 dummy classes are mainly powered by the function <code>fxd</code> which creates a <em>subclass</em> for a specific <em>task</em>. For instance, the task “default” which specifies the default values for the metaframe columns has as its subclasses the corresponding columns, e. g.:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxd</span>(<span class="st">&quot;default&quot;</span>, <span class="st">&quot;fxInfo_name&quot;</span>)</code></pre></div>
+<pre><code>## list()
+## attr(,&quot;class&quot;)
+## [1] &quot;fxd_default_fxInfo_name&quot; &quot;fxd_default&quot;            
+## [3] &quot;fxd&quot;</code></pre>
+<p>This provides a lightweight and effective mechanism for dispatch via dummy classes.</p>
+</div>
+<div id="s4-dummy-classes" class="section level4">
+<h4><span class="header-section-number">4.2.2.3</span> S4 dummy classes</h4>
+<p>S4 dummy classes are powered by different classes for every task they employ. For instance the <code>fxGeom</code> dummy classes all inherit from <code>fxGeom</code> and consist of the aforementioned possible classes of input to visualization. Consider, for instance,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxGeom</span>(<span class="st">&quot;Continuous&quot;</span>)</code></pre></div>
+<pre><code>## An object of class &quot;fxGeomContinuous&quot;
+## [1] &quot;Continuous&quot;</code></pre>
+<p>which yields the corresponding S4 class <code>fxGeomContinuous</code>.</p>
+<p>This mechanism provides a better overview over all possible classes. However, it is necessary to explicitly define every task and every subclass. Normally, the <code>fxd</code> mechanism should be preferred. S4 dummy classes are mainly employed when multiple dispatch becomes necessary, see <code>fx_ggplot</code>.</p>
+</div>
+</div>
+<div id="other-concepts" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Other concepts</h3>
+<p>I have defined a few other objects that come in useful. I will shortly elaborate on them here.</p>
+<div id="filepaths" class="section level4">
+<h4><span class="header-section-number">4.2.3.1</span> Filepaths</h4>
+<p>The S3 class <code>filepath</code> consists of a character vector which contains paths to external data and a <code>reader</code> attribute which can read in the data. It allows you to retrieve stored data within a metaframe in an uncomplicated way.</p>
+</div>
+<div id="fx-factors" class="section level4">
+<h4><span class="header-section-number">4.2.3.2</span> fx factors</h4>
+<p>fx factors are a very simple class which extends the concept of factors from <code>character</code>s to arbitrary classes. Certain columns of the metaframe might, for instance, contain different functions many times and it would be a waste to store them separately. <code>fx_factor</code> creates an object which has as the attribute levels its unique values and refers to them within every element via the index of the levels. The original object can be recreated via <code>fx_evaluate</code>.</p>
+</div>
+</div>
+</div>
+<div id="fx_default" class="section level2">
+<h2><span class="header-section-number">4.3</span> <code>fx_default</code></h2>
+<div id="general-purpose" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> General purpose</h3>
+<p><code>fx_default</code> computes default values for every column of the metaframe so that the different fx functions can fill up the metaframe with the remaining necessary columns. The function therefore uses specific heuristics for the different columns to infer sensible values. As in many cases, the default values are modified, for every column there is a function <code>fx_default_&lt;colname&gt;</code> (e. g. <code>fx_default_fxInfo_name</code>) which allows the user to access the default values separate from the internal mechanism of <code>fx_default</code>.</p>
+<p>A call to <code>fx_default</code> specifies the columns to be imputed. By default, if the data frame has not metaframe, it creates the metaframe with one observation for every variable name.</p>
+</div>
+<div id="extensions" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Extensions</h3>
+<p>Extensions can be provided via S3 method dispatch over the function <code>fxe_default</code> and the class <code>fxd_default_&lt;colname&gt;</code>. The function may depend on the data and on its metaframe. If possible, it is recommended that the functions only depend on the data frame and the name column of the metaframe. Consider, for instance, the default function for <code>fxGeom_class</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tectr<span class="op">:::</span>fxe_default.fxd_default_fxGeom_class</code></pre></div>
+<pre><code>## function(data, mf, col, ...)
+##   fx_default_fxGeom_class(data, mf)
+## &lt;bytecode: 0x00000000462c01a8&gt;
+## &lt;environment: namespace:tectr&gt;</code></pre>
+<p>Internally, it calls the more accessible function <code>fx_default_fxGeom_class</code> which does the work (<a href="%60fx_ggplot%60">#fx-ggplot</a> will explain how the default value is determined).</p>
+</div>
+<div id="alternative-implementations" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Alternative implementations</h3>
+<p>As with default values in functions in R, there are essentially two possible implementations: either the default is specified in the head or the function recognizes that the default is needed if the argument has the value <code>NULL</code>. Which mechanism is preferable, depends strongly on the context. It is recommended that parameters that are specific to one function and have a very simple default value (for instance, a constant numerical value) are marked via <code>NULL</code> whereas broadly applicable parameters that employ a more elaborate inference mechanism may be of use for the user and should therefore be implemented via an <code>fx_default</code> function.</p>
+</div>
+<div id="lifecycle" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Lifecycle</h3>
+<p>The purpose of <code>fx_default</code> is clearly outlined and its application is very simple. Modifications of the internal dispatch are possible but the extendible functions and <code>fx_default</code> itself are unlikely to be reworked.</p>
+</div>
+</div>
+<div id="fx_info" class="section level2">
+<h2><span class="header-section-number">4.4</span> <code>fx_info</code></h2>
+<div id="general-purpose-1" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> General purpose</h3>
+<p>This function provides information on the different variables to the user. Examples for this information would be</p>
+<ul>
+<li>the name of the variable which differs from its internal name</li>
+<li>the description or definition of the variable</li>
+<li>summary statistics.</li>
+</ul>
+<p>A call to <code>fx_info</code> consists of the data itself, a topic and potentially additional parameters. The <em>topic</em> may either be a certain semantic topic like the name or the description or it may invoke a specific method. The most useful example of a topic is “stats” which renders a summary table with descriptive statistics that can be specified in the argument statistics:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_info</span>(mtcars, <span class="st">&quot;stats&quot;</span>, <span class="dt">statistics =</span> <span class="kw">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;quantile&quot;</span>))</code></pre></div>
+<pre><code>## # A tibble: 11 x 7
+##    name     mean `quantile: 0%` `quantile: 25%` `quantile: 50%`
+##    &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
+##  1 mpg    20.1            10.4            15.4            19.2 
+##  2 cyl     6.19            4               4               6   
+##  3 disp  231.             71.1           121.            196.  
+##  4 hp    147.             52              96.5           123   
+##  5 drat    3.60            2.76            3.08            3.70
+##  6 wt      3.22            1.51            2.58            3.32
+##  7 qsec   17.8            14.5            16.9            17.7 
+##  8 vs      0.438           0               0               0   
+##  9 am      0.406           0               0               0   
+## 10 gear    3.69            3               3               4   
+## 11 carb    2.81            1               2               2   
+## # ... with 2 more variables: `quantile: 75%` &lt;dbl&gt;, `quantile: 100%` &lt;dbl&gt;</code></pre>
+<p>As can be seen the function returns a data frame with a certain information in every column. If no method for the particular topic exists, the function searches the metaframe for a column of the name “fxInfo_<topic>” and returns that. Consider, for instance, a name and a short comment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(mpg) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_default</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_mf</span>(
+    <span class="dt">fxInfo_name =</span> <span class="st">&quot;Miles/(US) gallon&quot;</span>, 
+    <span class="dt">fxInfo_comment =</span> <span class="st">&quot;A gallon is 3.79 litres.&quot;</span>
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_info</span>(<span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;comment&quot;</span>, <span class="st">&quot;stats&quot;</span>), <span class="dt">statistics =</span> <span class="kw">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;quantile&quot;</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 9
+##   name  Name  Comment  mean `quantile: 0%` `quantile: 25%` `quantile: 50%`
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
+## 1 mpg   Mile~ A gall~  20.1           10.4            15.4            19.2
+## # ... with 2 more variables: `quantile: 75%` &lt;dbl&gt;, `quantile: 100%` &lt;dbl&gt;</code></pre>
+<p>We will later use this functionality to create meaningful descriptive tables.</p>
+<p>You may provide either characters or functions to statistics. Characters are evaluated via <code>do.call</code>, functions are called directly. If you specify a function, you should allow for arbitrary parameters via <code>...</code> as a function will receive the columns of the metaframe as input. A function’s first argument should be the corresponding column of the data frame. Consider the following example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_mean &lt;-<span class="st"> </span><span class="cf">function</span>(x, ..., fxInfo_digits) 
+  x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dt">digits =</span> fxInfo_digits)
+mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(mpg) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_default</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_mf</span>(
+    <span class="dt">fxInfo_name =</span> <span class="st">&quot;Miles/(US) gallon&quot;</span>, 
+    <span class="dt">fxInfo_digits =</span> <span class="dv">3</span>
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_info</span>(<span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;stats&quot;</span>), 
+          <span class="dt">statistics =</span> <span class="kw">list</span>(<span class="dt">mean =</span> stat_mean))</code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   name  Name               mean
+##   &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;
+## 1 mpg   Miles/(US) gallon  20.1</code></pre>
+</div>
+<div id="extensions-1" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Extensions</h3>
+<p>Extensions can be provide via dispatch over <code>fxe_info</code>. The dummy class for a certain topic will be provided by <code>fxd(&quot;info&quot;, &lt;topic&gt;)</code>, e. g.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxd</span>(<span class="st">&quot;info&quot;</span>, <span class="st">&quot;stats&quot;</span>)</code></pre></div>
+<pre><code>## list()
+## attr(,&quot;class&quot;)
+## [1] &quot;fxd_info_stats&quot; &quot;fxd_info&quot;       &quot;fxd&quot;</code></pre>
+</div>
+<div id="lifecycle-1" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Lifecycle</h3>
+<p>In my opinion, the combination of simplicity and power makes <code>fx_info</code> a very useful function that will most likely retain its structure. This means that new functions which enhance the power of <code>fx_info</code> and especially its stats will be the next step in its development.</p>
+</div>
+</div>
+<div id="fx_output" class="section level2">
+<h2><span class="header-section-number">4.5</span> <code>fx_output</code></h2>
+<div id="general-purpose-2" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> General purpose</h3>
+<p>This function makes <code>fx_info</code> immediately applicable in a wide variety of applications. It renders the data frame returned by <code>fx_info</code> into a certain <em>form</em>. In this case, a sparse wrapper around a function from another package often suffices. <code>fx_info</code> may return different formats. Currently, the supported formats are rst, html, latex and markdown. The two most useful forms that have been implemented so far are <em>table</em> and <em>collapse</em>.</p>
+<p>As an example, we will consider the mtcars summary statistics:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_median &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) 
+  x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">median</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">3</span>)
+stat_mean &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...)
+  x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">3</span>)
+info &lt;-<span class="st"> </span>
+<span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_info</span>(<span class="st">&quot;stats&quot;</span>, <span class="kw">list</span>(<span class="dt">mean =</span> stat_mean, <span class="dt">median =</span> stat_median))
+info</code></pre></div>
+<pre><code>## # A tibble: 11 x 3
+##    name     mean median
+##    &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1 mpg    20.1    19.2 
+##  2 cyl     6.19    6   
+##  3 disp  231.    196.  
+##  4 hp    147.    123   
+##  5 drat    3.60    3.70
+##  6 wt      3.22    3.32
+##  7 qsec   17.8    17.7 
+##  8 vs      0.438   0   
+##  9 am      0.406   0   
+## 10 gear    3.69    4   
+## 11 carb    2.81    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_output</span>(info, <span class="dt">form =</span> <span class="st">&quot;table&quot;</span>, <span class="dt">out_format =</span> <span class="st">&quot;markdown&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="right">mean</th>
+<th align="right">median</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mpg</td>
+<td align="right">20.09</td>
+<td align="right">19.20</td>
+</tr>
+<tr class="even">
+<td align="left">cyl</td>
+<td align="right">6.19</td>
+<td align="right">6.00</td>
+</tr>
+<tr class="odd">
+<td align="left">disp</td>
+<td align="right">230.72</td>
+<td align="right">196.30</td>
+</tr>
+<tr class="even">
+<td align="left">hp</td>
+<td align="right">146.69</td>
+<td align="right">123.00</td>
+</tr>
+<tr class="odd">
+<td align="left">drat</td>
+<td align="right">3.60</td>
+<td align="right">3.69</td>
+</tr>
+<tr class="even">
+<td align="left">wt</td>
+<td align="right">3.22</td>
+<td align="right">3.33</td>
+</tr>
+<tr class="odd">
+<td align="left">qsec</td>
+<td align="right">17.85</td>
+<td align="right">17.71</td>
+</tr>
+<tr class="even">
+<td align="left">vs</td>
+<td align="right">0.44</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">am</td>
+<td align="right">0.41</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">gear</td>
+<td align="right">3.69</td>
+<td align="right">4.00</td>
+</tr>
+<tr class="odd">
+<td align="left">carb</td>
+<td align="right">2.81</td>
+<td align="right">2.00</td>
+</tr>
+</tbody>
+</table>
+<p>The form “collapse”, on the other hand yields one row per observation. This row consists of different cells in which the variable information and its name are listed in a specified format and which are then glued together:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_output</span>(info, <span class="dt">form =</span> <span class="st">&quot;collapse&quot;</span>)</code></pre></div>
+<pre><code>## mean:  20.09, median:  19.2
+## mean:   6.19, median:   6.0
+## mean: 230.72, median: 196.3
+## mean: 146.69, median: 123.0
+## mean:   3.60, median:   3.7
+## mean:   3.22, median:   3.3
+## mean:  17.85, median:  17.7
+## mean:   0.44, median:   0.0
+## mean:   0.41, median:   0.0
+## mean:   3.69, median:   4.0
+## mean:   2.81, median:   2.0</code></pre>
+<p>These specifications can also be modified:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_output</span>(info, <span class="dt">form =</span> <span class="st">&quot;collapse&quot;</span>, <span class="dt">cell_scheme =</span> <span class="st">&quot;The {name} is {value}.&quot;</span>, <span class="dt">cell_sep =</span> <span class="st">&quot; --- &quot;</span>)</code></pre></div>
+<pre><code>## The mean is  20.09. --- The median is  19.2.
+## The mean is   6.19. --- The median is   6.0.
+## The mean is 230.72. --- The median is 196.3.
+## The mean is 146.69. --- The median is 123.0.
+## The mean is   3.60. --- The median is   3.7.
+## The mean is   3.22. --- The median is   3.3.
+## The mean is  17.85. --- The median is  17.7.
+## The mean is   0.44. --- The median is   0.0.
+## The mean is   0.41. --- The median is   0.0.
+## The mean is   3.69. --- The median is   4.0.
+## The mean is   2.81. --- The median is   2.0.</code></pre>
+<p>Further information can be found in the documentation.</p>
+</div>
+<div id="extensions-2" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Extensions</h3>
+<p><code>fx_output</code> may be extended via the <code>fxd</code> dummy class with the topic “output”.</p>
+</div>
+<div id="lifecycle-2" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Lifecycle</h3>
+<p><code>fx_output</code> is stable and the next step will be to refine and extend the output forms. In particular, the next version will provide an output form “report” which creates a dynamical report of the kind which we will render in the <a href="fifth%20chapter">#application</a>.</p>
+</div>
+</div>
+<div id="fx_write" class="section level2">
+<h2><span class="header-section-number">4.6</span> <code>fx_write</code></h2>
+<div id="general-purpose-3" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> General purpose</h3>
+<p>Besides providing summary tables, the main purpose of <code>fx_info</code> is to make information about the variable accessible. The foundation of this information can often be imported from a codebook of some form (see the <a href="application">#application</a>). Adding and editing this information – e. g. correcting typos – is, however, an awkward endeavour in R. A text editor of some sort would be more suitable. The <code>fx_write</code> family of functions attempts to adress this by allowing you to export the semantic data to human-readable documents which can then be modified. As it returns the data frame with a <code>filepath</code> column which refers to the export file, it can be easily read in – this functionality is provided by <code>fx_read</code>.</p>
+<p>Currently, only one <code>fx_write</code> function is implemented: <code>fx_write_json</code>. This function creates several files in JavaScript Object Notation which is well readable by humans. The function is powered by the package <code>jsonlite</code> <span class="citation">(Ooms <a href="#ref-jsonlite">2014</a>)</span> which uses a class based mapping to convert between JSON data and R objects. For details, see the documentation and the fifth chapter.</p>
+</div>
+<div id="extensions-3" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> Extensions</h3>
+<p>While <code>fx_write</code> does not employ any kind of dispatch but is a family of functions, it can be extended (in a looser definition of the word) by providing a new method with a consistent interface <code>fx_write_&lt;format&gt;</code>.</p>
+</div>
+<div id="alternative-implementations-1" class="section level3">
+<h3><span class="header-section-number">4.6.3</span> Alternative implementations</h3>
+<p><code>fx_write</code> is currently an experimental feature which has its disadvantages. Most notably, it is difficult to change the codebook import after somebody has changed the output of this process (i. e. the exported files). While version control would make this simpler, the fact remains that all changes to the document would have to be manually reentered. A primitive editor within R which tracks changes would render the process more reproducible and less complicated. However, this would be a considerable effort with limited applicability and for the time being, it seems to me that a method as represented by <code>fx_write_json</code> (or possibly another format) represents the best alternative.</p>
+</div>
+<div id="lifecycle-3" class="section level3">
+<h3><span class="header-section-number">4.6.4</span> Lifecycle</h3>
+<p>This function is at the moment very unstable and should be used with caution.</p>
+</div>
+</div>
+<div id="fx-ggplot" class="section level2">
+<h2><span class="header-section-number">4.7</span> <code>fx_ggplot</code></h2>
+<p>At last, I present the fx function which has the most extensive implementation so far: <code>fx_ggplot</code> which is concerned with the visualization of the data frame. This functions makes a more extensive introduction necessary. The first section will discuss the general concept behind <code>fx_ggplot</code>. We will then discuss the implementation in <code>tectr</code> and how it may be extended. The fourth section discusse3s possible alternatives and the fifth section elaborates how development of the function will progress.</p>
+<div id="concept-of-fx_ggplot" class="section level3">
+<h3><span class="header-section-number">4.7.1</span> Concept of <code>fx_ggplot</code></h3>
+<p>This function intends to provide a flexible visualization. As an input, it accepts aesthetics and then attempts to provide the best visualization that is compatible with the specified aesthetics. Therefore, it does not answer the question “What should I know about these five variables?”. More specifically, it does not prevent you from overplotting, non-sensical aesthetics etc. In my opinion, it is best applied by a person who approximately knows what she wants. In this case, it is especially adept at flexible, interactive visualizations (see below). For instance, if a statistician is interested in several time series of different variables, these should be differently visualized depending on the available information.</p>
+<p>While I will discuss this concept below, I will assume, for now, that this method is valid and consider the following question: How do we infer the best visualization from a given set of variables? As the function is created within the syntax of <code>ggplot2</code>, our task is to infer the set of layers which constructs the plot. These layers fall in two categories: <em>dependent</em> and <em>independent</em> layers.</p>
+<p><strong>Independent</strong> layers will be added for a certain specified aesthetics regardless of the other aesthetics. An example would be the x axis title. This title only depends on the x aesthetic. The y aesthetic has no influence on this layer.</p>
+<p>On the other hand, the y aesthetic has a big influence on the question what geometry we should add, as the suitable geometry depends on all aesthetics. Such layers are therefore called <strong>dependent layers</strong>.</p>
+<p>The determination of independent layers is relatively clear and simple; it only depends on one aesthetic and it is therefore easy to define a function which depends on certain parameters of the variable and yields a layer. On the other hand, the determination of dependent layers is messier, as we will se shortly.</p>
+<p>For that purpose, I will first present the original concept I had implemented for dependent layers: a strictly rule based structure which specifies, for any combination of relevant aesthetics which layers this would yield. For instance, this structure included:</p>
+<ul>
+<li>continuous x-variable and continuous y-variable: <code>geom_point()</code></li>
+<li>discrete x-variable and continuous y-variable: <code>geom_boxplot()</code></li>
+</ul>
+<p>The basic plots are easily produced with such a system but whereas it allows the user to be very explicit, it is very difficult to implement a meaningful influence via parameters. Instead, any new kind of visualization made necessary an entirely new class with a wide variety of methods. Furthermore, despite the seeming clarity of these simple rules, the resulting massive dispatch was likely to end in a lot of confusion and an unmanageable code base.</p>
+<p>I have therefore developed an alternative approach which implements a voting system for the dependent layers. As a brief overview this process consists of three phases:</p>
+<ul>
+<li>In the <strong>nomination phase</strong>, every variable nominates possible sets of layers which would make sense with this variable. These nominations depend on the aesthetic, the <code>fxGeom_class</code> and possibly the metaframe parameters.</li>
+<li>In the <strong>veto phase</strong>, every variable receives the entire list of nominations and removes those, it is incompatible with.</li>
+<li>In the <strong>voting phase</strong>, every variable distributes a number of votes on the various remaining nominations. These votes depend on properties of the nominations. The nomination with the most votes is chosen as the winner and yields the dependent layers.</li>
+</ul>
+<p>This approach may appear unconventional, at first, and I will adress some counterarguments below. But before that, I will present the implementation and process of extension for both the independent and the dependent layers. I will elaborate on the implementation of the independent layers in the fourth subsection.</p>
+<p>I will introduce the implementation with a simple example from the diamonds dataset: we will consider as <code>x</code> aesthetic the weight in <code>carat</code> and as <code>y</code> aesthetic the <code>price</code>. In the end, we will have created the following plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> carat, <span class="dt">y =</span> price))</code></pre></div>
+<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>The first step is to infer the default values of the metaframe. All required columns for <code>fx_ggplot</code> are stored in the vector <code>fx_ggplot_columns</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fx_diamonds &lt;-<span class="st"> </span>
+<span class="st">  </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(carat, price) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_default</span>(<span class="dt">columns =</span> fx_ggplot_columns)
+<span class="kw">metaframe</span>(fx_diamonds) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>kableExtra<span class="op">::</span><span class="kw">kable_styling</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="left">fxGeom_class</th>
+<th align="left">fxGeom_limits</th>
+<th align="left">fxGeom_trans</th>
+<th align="left">fxInfo_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">carat</td>
+<td align="left">Continuous</td>
+<td align="left">c(0.2, 5.01)</td>
+<td align="left">log10</td>
+<td align="left">carat</td>
+</tr>
+<tr class="even">
+<td align="left">price</td>
+<td align="left">Continuous</td>
+<td align="left">c(326, 18823)</td>
+<td align="left">log10</td>
+<td align="left">price</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="implementation-of-the-independent-layers" class="section level3">
+<h3><span class="header-section-number">4.7.2</span> Implementation of the independent layers</h3>
+<p>The independent layers are determined by the internal function <code>fxi_layer_single</code> which calls <code>fxe_layer_single</code> for every aesthetic. This function dispatches over <code>fx_geom</code>, the argument that is created by the <code>fxGeom_class</code> column. Therefore, the function is once called for the class <code>fxGeomContinuous</code> and <code>xAesName</code> and once for the class <code>fxGeomContinuous</code> and <code>yAesName</code>. The data frame itself is passed to the extendible function as well. The default method will simply put together the results of two underlying functions, <code>fxe_layer_scale</code> and <code>fxe_layer_other</code> of which the former is usually more important. <code>fxe_layer_scale</code> depends on almost all arguments (each with the prefix “fxGeom_”) which can be provided to a scale. If none are specified the default values will be used. Normally, at least the transformation and the limits will be specified by <code>fx_default</code>. In this case, the limits correspond to the range of the data and therefore to the default of the scale, as well. However, both the x and the y scale are logarithmized.</p>
+<p>Whereas the remaining scale arguments are relatively evident and may be looked up in the documentation, I will explain for a little bit how the transformation is determined. The transformation is inferred by the function <code>fx_default_fxGeom_trans</code> which depends on two additional parameters: <code>fxGeom_trans_simple</code>, a boolean, and <code>fxGeom_trans_p.threshold</code>, a numerical value between 0 and 1. <code>fxGeom_trans_simple</code> determines how complicated the allowed transformations may be. If it is false (the default), the function only chooses between three transformations: identity, square root and log. It determines the skewness as implemented in the <code>moments</code> package <span class="citation">(Komsta and Novomestky <a href="#ref-moments">2015</a>)</span> and chooses the transformation with the least absolute skewness. To ensure well-definedness, this only applies to positive values. In the other case, the identity is chosen by default. On an exploratory basis, this rule yielded good results. In the case of the weight and price of diamonds, a log-transformed scale is a sensible choice, as well.</p>
+<p>The aforementioned three transformations are special cases of the more general <em>boxcox-transformations</em> which have first been proposed by G. E. P. Box and D. R. Cox <span class="citation">(<a href="#ref-Box1964">1964</a>)</span>. These depend on the parameter <span class="math inline">\(\lambda&gt;=0\)</span> and take the following form:</p>
+<p><span class="math display">\[y^{(\lambda)}=\begin{cases}\frac{y^{\lambda}-1}{\lambda}&amp;\text{ if }\lambda &gt; 0\\\ln y&amp;\text{ if }\lambda = 0\end{cases}\]</span></p>
+<p>Thus, the log transformation is given for <span class="math inline">\(\lambda=0\)</span>, the square root transformation by <span class="math inline">\(\lambda =0.5\)</span> and the identity by <span class="math inline">\(\lambda=1\)</span>. These transformation can now be further generalized to allow that <span class="math inline">\(y\)</span> is previously transformed by an offset in order to adapt the transformation to negative values, as well. This <em>boxcox-transformation with offset</em> is employed by the non-simple inference mechanism.</p>
+<p>The function first uses the Agostino-test as implemented in <code>moments</code> as a heuristic whether the data is skewed. If the p-value of the test is below the threshold given by the parameter <code>fxGeom_trans_p.threshold</code>, it fits <span class="math inline">\(\lambda\)</span> and the offset with the help of the function <code>boxcoxfit</code> from the package <code>geoR</code> <span class="citation">(Ribeiro Jr and Diggle <a href="#ref-geoR">2018</a>)</span>. The resulting transformation is used for the corresponding scale.</p>
+<p>While the latter method is more sensitive to the patterns in the data, it has several disadvantages: firstly, the Agostino-test is flawed as a heuristic as, for large datasets, it essentially always denies the null hypothesis, even if the data is only slightly skewed and the identity transformation is still suitable. These leads to many general boxcox transformation which do not adhere to common first analyses whereas a log- or square root-scale is employed rather frequently. Finally, in some instances, the boxcoxfit function does not converge resulting in an error.</p>
+<p>These are the reasons why the simple transformation inference is the default.</p>
+<p>Therefore, both scales return a scale with a log transformation.</p>
+<p>It might also be interesting to see that <code>fx_info</code> is applied at this stage - this is how the number of missing values was displayed in the plots in chapter three. The relevant topic is the “title” which can be modified by parameters such a <code>fxInfo_title_na.show</code> or, more generally, <code>fxInfo_title_stats</code>. Consider, for instance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fx_diamonds &lt;-<span class="st"> </span>
+<span class="st">  </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(carat, price) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_default</span>(<span class="dt">columns =</span> fx_ggplot_columns) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_mf</span>(<span class="dt">fxInfo_title_na.show =</span> name <span class="op">==</span><span class="st"> &quot;price&quot;</span>, 
+            <span class="dt">fxInfo_title_n.show =</span> <span class="ot">TRUE</span>, 
+            <span class="dt">fxInfo_title_stats =</span> <span class="st">&quot;mean&quot;</span>, 
+            <span class="dt">fxInfo_unit =</span> purrr<span class="op">::</span><span class="kw">map</span>(name, <span class="op">~</span><span class="st"> </span><span class="cf">if</span>(. <span class="op">==</span><span class="st"> &quot;price&quot;</span>) <span class="st">&quot;$&quot;</span> <span class="cf">else</span> <span class="ot">NULL</span>), 
+            <span class="dt">fxInfo_title_unit.show =</span> <span class="ot">TRUE</span>)
+fx_diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">metaframe</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>kableExtra<span class="op">::</span><span class="kw">kable_styling</span>()</code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+fxGeom_class
+</th>
+<th style="text-align:left;">
+fxGeom_limits
+</th>
+<th style="text-align:left;">
+fxGeom_trans
+</th>
+<th style="text-align:left;">
+fxInfo_name
+</th>
+<th style="text-align:left;">
+fxInfo_title_na.show
+</th>
+<th style="text-align:left;">
+fxInfo_title_n.show
+</th>
+<th style="text-align:left;">
+fxInfo_title_stats
+</th>
+<th style="text-align:left;">
+fxInfo_unit
+</th>
+<th style="text-align:left;">
+fxInfo_title_unit.show
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+carat
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+c(0.2, 5.01)
+</td>
+<td style="text-align:left;">
+log10
+</td>
+<td style="text-align:left;">
+carat
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+mean
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+price
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+c(326, 18823)
+</td>
+<td style="text-align:left;">
+log10
+</td>
+<td style="text-align:left;">
+price
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+mean
+</td>
+<td style="text-align:left;">
+$
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table>
+<p>This modified metaframe results in the following plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fx_ggplot</span>(fx_diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> carat, <span class="dt">y =</span> price))</code></pre></div>
+<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>I refer to the documentation for more details.</p>
+<p>Another independent layer function is given by <code>fxi_labeller</code> which provides the labeller for a facetting variable. Facetting variables are specified in the argument <code>facet_vars</code> and need to be captured by the function <code>vars()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(color <span class="op">%in%</span><span class="st"> </span>LETTERS[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>]) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> carat, <span class="dt">y =</span> price), <span class="dt">facet_vars =</span> <span class="kw">vars</span>(color)) </code></pre></div>
+<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="implementation-of-the-voting-system" class="section level3">
+<h3><span class="header-section-number">4.7.3</span> Implementation of the voting system</h3>
+<p>The dependent layers are determined by the internal function <code>fxi_layer_complete</code>. The nominations are handled by <code>fxe_layer_complete_nominate</code>, which is dispatched over <code>fx_geom</code> and <code>aes_name</code>, as well. The function accepts the parameter <code>fxGeom_nominations</code> which may provide additional nominations. As these are absence, however, only the default nominations are provided.</p>
+<p>These are handled by the S3 class <code>nominations</code> which returns, depending on the access function, all layers, scales, facets, coordinate system or other <code>ggproto</code> objects within a certain nomination (see the documentation). This will become important for votes and vetos.</p>
+<p>The nominations by the x aesthetic can be caught by</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_noms &lt;-<span class="st"> </span><span class="kw">fxe_layer_complete_nominate</span>(<span class="kw">fxGeom</span>(<span class="st">&quot;Continuous&quot;</span>), <span class="kw">AesName</span>(<span class="st">&quot;x&quot;</span>), diamonds)</code></pre></div>
+<p>As such an object is messy to print, I will simply list the four nominations:</p>
+<ul>
+<li><code>geom_point()</code> with an automatically determined transparency value <code>alpha</code></li>
+<li><code>geom_histogram()</code></li>
+<li><code>geom_density()</code></li>
+<li><code>geom_hex(), scale_fill_gradient()</code> with limits which are anchored at 0 and a custom palette.</li>
+</ul>
+<p>Evidently, these layers are suitable for very different plots. If you consider which layers to nominate, you can simply choose all that make sense in some combination. Votes and vetos will take care of the rest.</p>
+<p>Besides supplying additional nominations via <code>fxGeom_nominations</code>, you can extend the function by importing the S4 generic and defining a new method.</p>
+<p>Going on, the function <code>fxe_layer_complete_veto</code> is responsible for the vetoes. Its structure is</p>
+<pre><code>fxe_layer_complete_veto(nomination, fx_geom, aes_name, data, ...)</code></pre>
+<p>and it dispatches over <code>fx_geom</code> and <code>aes_name</code>. The internal function calls the appopriate method for every nomination. The method simply returns a boolean where <code>FALSE</code> causes no action and <code>TRUE</code> indicates that the nomination ought to be removed. Consider, for instance, the call below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxe_layer_complete_veto</span>(<span class="kw">nomination</span>(<span class="kw">geom_density</span>()), <span class="kw">fxGeom</span>(<span class="st">&quot;Continuous&quot;</span>), <span class="kw">AesName</span>(<span class="st">&quot;y&quot;</span>), diamonds)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>This aesthetic vetoes a density plot because this would require a missing y aesthetic. Consequently, only the scatter plot and the hexagonal heatmap remain as valid options (all other nominations from the y aesthetic have been vetoed, as well).</p>
+<p>Finally, the following function casts the votes:</p>
+<pre><code>fxe_layer_complete_vote(nomination, fx_geom, aes_name, data, ...)</code></pre>
+<p>It dispatches over the same arguments and returns, for a given nomination an integer which represents the votes for a certain nomination. In this case, we observe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxe_layer_complete_vote</span>(<span class="kw">nomination</span>(<span class="kw">geom_point</span>()), <span class="kw">fxGeom</span>(<span class="st">&quot;Continuous&quot;</span>), <span class="kw">AesName</span>(<span class="st">&quot;x&quot;</span>), diamonds)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fxe_layer_complete_vote</span>(<span class="kw">nomination</span>(<span class="kw">geom_hex</span>()), <span class="kw">fxGeom</span>(<span class="st">&quot;Continuous&quot;</span>), <span class="kw">AesName</span>(<span class="st">&quot;x&quot;</span>), diamonds)</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>The same applies to the y aesthetic. Why does the heatmap receive more votes? The reason lies in the large amount of data – the threshold at which the heatmap receives the majority of votes can be determined by the parameter <code>fxGeom_hex.threshold</code>.</p>
+<p>The hexagonal heatmap therefore receives 4 votes whereas its only rival, the scatter plot, receives 0 votes. From these steps, the above pictured plot emerges.</p>
+</div>
+<div id="discussion-and-alternatives" class="section level3">
+<h3><span class="header-section-number">4.7.4</span> Discussion and alternatives</h3>
+<p>This subsection discusses the implementation of <code>fx_ggplot</code>, lists advantages and adresses possible disadvantages.</p>
+<div id="easy-extendibility" class="section level4">
+<h4><span class="header-section-number">4.7.4.1</span> Easy extendibility</h4>
+<p>The partition of the <code>fx_ggplot</code> functionality into these partial functions allows the user to build a complex visualization by many very simple steps; he only needs to think about one scale, one possible resp. impossible visualization at a time. If a visualization does not correspond to the user’s need, it is simple enough to fix it; she needs not define an entire new class but only modify certain parameters and, if a the need for a new class arises, its definition is both shorter and easier. This corresponds to the philosophy of <code>tectr</code> that it should be easy to integrate into the common explorative process of a statistician.</p>
+</div>
+<div id="high-flexibility" class="section level4">
+<h4><span class="header-section-number">4.7.4.2</span> High flexibility</h4>
+<p>This advantage is as much hypothesis as observation. The aforementioned easily acquired extension will also easily work with different classes that have not actually been intended to work together – they may even have been specified by different persons. In a rule-based process, it is not possible to achieve this kind of flexibility, as far as I can see it.</p>
+</div>
+<div id="what-about-intransparency" class="section level4">
+<h4><span class="header-section-number">4.7.4.3</span> What about intransparency?</h4>
+<p>A possible argument against the voting system might be the following:</p>
+<blockquote>
+<p>It is very intransparent what arguments will result in which plot. All these different functions occlude what could better be solved by an independent and a dependent layer function where the independent layer function is simply a rule-based process. The amount of time such detailedness would cost is easily exceeded by the follow-up process regarding an unsuitable visualization in the voting system where the user needs to consider three different functions and identify a suitable solution which he then needs to validate by some kind of testing. Finally, even when he has found a solution, changes in the functions of another aesthetic might result in an unsuitable plot once again. The voting system arises from laziness in the wrong domain and required a higher effort for an equally good result than a rule-based system.</p>
+</blockquote>
+<p>As applies to most arguments with regards to programs in such early stages of development, the most reliable answer would be to wait and see which system works best. However, I would argue for a few heuristics that are on my side. Firstly, I would argue that the amount of time for such an adaptation is limited, as the user can basically follow a -step program: let us assume that the dependent elements x are shown but the user would like to see the elements y.</p>
+<ol style="list-style-type: decimal">
+<li>See if y is nominated. If it is not, nominate y and see if the plot changes.</li>
+<li>See if y is vetoed. If it is, reconsider either the veto or your own preferences.</li>
+<li>See if x should be vetoed. If it should, implement the veto and see if the plot changes.</li>
+<li>See where x and where y gathers its vote. Change the voter attribution at the appropriate place.</li>
+</ol>
+<p>At any step, it might become useful to define a new class. However, this class would be quickly implemented because the user could start with few definitions whereas the rigidity of the rule-based system appears to me more vulnerable to modifications.</p>
+<p>This also applies to the second part of the argument. Of course, changes might affect certain plots. However, such a change is, in my estimate, more likely in a rule-based system, as the voting system cuts the function some slack and allows the user to demonstrate the importance of a certain nomination.</p>
+</div>
+<div id="what-about-numbers" class="section level4">
+<h4><span class="header-section-number">4.7.4.4</span> What about numbers?</h4>
+<p>This is, of course, a good starting point for a new criticism. It is actually a special case of the intransparency argument:</p>
+<blockquote>
+<p>Even if these numbers, if applied properly, supported a useful visualization system, it is too hard to apply them properly. Humans are not good at handling arbitrary numbers and in a complex system, the effect of these numbers is completely intransparent.</p>
+</blockquote>
+<p>I concede that the introduction of the votes is slightly artificial. I would argue, however, that the proper remedy is not admitting defeat or employing a rule-based system but rather to make these numbers less arbitrary by agreeing on certain standards. After a few application, analysis of the resulting problems might yield a good guideline. Complementary to such an approach, an automated system might be able to compensate human inability. The statistician might be suggested different corresponding plots for certain variable combination and can then choose the best among those plots. Following a certain heuristic, the automated system could infer the appropriate voting patterns.</p>
+</div>
+<div id="what-about-letting-it-go" class="section level4">
+<h4><span class="header-section-number">4.7.4.5</span> What about letting it go?</h4>
+<blockquote>
+<p>I agree that the voting system seems to more suitable for automatic visualization than a rule-based process. Regardless, these automatic visualizations are a fruitless endeavour. The independent elements yield a good adpatation of the plot but the dependent elements adress a problem in a very complicated manner that does not arise as much. In most cases there are only a few different kinds of plots that are employed and it is easier to define them directly and from case to case manually. Such a definition would be improved by integrating independent elements.</p>
+</blockquote>
+<p>Again, the most reliable response to this is to try both methods out and compare the results. However, I would like to raise a different point at this place: the definition of the dependent elements could very well occur with the aim of building a few kinds of visualizations. This would rather be a good heuristic from which to start. After building such a model, whenever the need of a new visualization arises it should become increasingly simple to adapt the system such that the new combinations fit together. Therefore, the very situation that has been described in the counterargument might also serve as a suitable situation for the implementation of a voting system.</p>
+<p>Nevertheless, the answer to this counter-arguments needs not be binary. We might very well employ dependent elements with voting system in certain contexts whereas a simpler solution might be suitable in other applications.</p>
+</div>
+</div>
+<div id="lifecycle-and-further-development" class="section level3">
+<h3><span class="header-section-number">4.7.5</span> Lifecycle and further development</h3>
+<p>As I have repeatedly remarked in the previous paragraphs, I believe further validation of the current approach to be crucial. Thus, I believe <code>fx_ggplot</code> in its current implementation to be potentially useful but far from stable. In particular, the internal nomination and investigation of the plot elements are a bit awkward and I can imagine that these functionalities should be properly nested in the <code>ggproto</code> system of <code>ggplot2</code>. However, determining this need and a suitable implementation requires more practical experience with the voting system.</p>
+<p>I will therefore apply the voting system to more databases to determine its strengths and weaknesses. In particular, I will consider possible voting pattern standards and a more suitable implementations of the internals.</p>
+<p>Indeed, a first application can be found in the next chapter.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Wickham2014">
+<p>Wickham, Hadley. 2014. “Tidy Data.” <em>Journal of Statistical Software</em> 59 (10): 1–23. doi:<a href="https://doi.org/10.18637/jss.v059.i10">10.18637/jss.v059.i10</a>.</p>
+</div>
+<div id="ref-jsonlite">
+<p>Ooms, Jeroen. 2014. “The jsonlite Package: A Practical and Consistent Mapping Between JSON Data and R Objects.” <em>arXiv:1403.2805 [Stat.CO]</em>. <a href="https://arxiv.org/abs/1403.2805" class="uri">https://arxiv.org/abs/1403.2805</a>.</p>
+</div>
+<div id="ref-moments">
+<p>Komsta, Lukasz, and Frederick Novomestky. 2015. <em>moments: Moments, cumulants, skewness, kurtosis and related tests</em>. <a href="https://cran.r-project.org/package=moments" class="uri">https://cran.r-project.org/package=moments</a>.</p>
+</div>
+<div id="ref-Box1964">
+<p>Box, G E P, and D R Cox. 1964. “An Analysis of Transformations.” <em>Journal of the Royal Statistical Society. Series B (Methodological)</em> 26 (2). [Royal Statistical Society, Wiley]: 211–52. <a href="http://www.jstor.org/stable/2984418" class="uri">http://www.jstor.org/stable/2984418</a>.</p>
+</div>
+<div id="ref-geoR">
+<p>Ribeiro Jr, Paulo J, and Peter J Diggle. 2018. <em>geoR: Analysis of Geostatistical Data</em>. <a href="https://cran.r-project.org/package=geoR" class="uri">https://cran.r-project.org/package=geoR</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="first-look.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["bachelor-thesis.pdf", "bachelor-thesis.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
