@@ -47,7 +47,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -179,29 +178,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="first-look" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> First look</h1>
-<p>This chapter is devoted to first applied example of the package before the <a href="fourth%20chapter">#concept</a> introduces the concepts of <code>tectr</code> in a more comprehensive way.</p>
+<p>This chapter is devoted to first applied example of the package before the <a href="concept.html#concept">fourth chapter</a> introduces the concepts of <code>tectr</code> in a more comprehensive way.</p>
 <p>As an example, we will consider the V-Dem database that has been introduced in the preceding chapter. We will focus on the function <code>fx_ggplot</code> as an example. It is based on the package <code>ggplot2</code> which implements the grammar of graphics to R in order to produce visualizations. <span class="citation">(Wickham <a href="#ref-ggplot">2016</a>)</span></p>
 <div id="fx_ggplot-basics" class="section level2">
 <h2><span class="header-section-number">3.1</span> <code>fx_ggplot</code>: Basics</h2>
-<p>We will at first consider the electoral democracy index and its distribution:</p>
+<p>In the following, I will present different example applications of <code>fx_ggplot</code>.</p>
+<p>We will at first consider the electoral democracy index and its distribution. The result is depicted in figure <a href="first-look.html#fig:3-1">3.1</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(v2x_polyarchy) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>This plot is evidently a histogram. However there are several differences to the ordinary call:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_vdem, <span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Namely, the axis title lists the number of NAs and the x-axis has been log transformed. This is because <code>tectr</code> attempts to guess reasonable default values which yield more informative plots than the default values of <code>ggplot</code>. It is able to do so because these default values can flexibly be changed.</p>
-<p>Behind the scenes, the function calls <code>fx_default</code> which sets several default values for every column and saves them in a <em>metaframe</em> which is stored as an attribute of the data frame.</p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme <span class="co"># my_theme makes the text larger</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-1"></span>
+<img src="bachelor-thesis_files/figure-html/3-1-1.png" alt="Visualization of v2x_polyarchy with fx_ggplot" width="50%" />
+<p class="caption">
+Figure 3.1: Visualization of v2x_polyarchy with <code>fx_ggplot</code>
+</p>
+</div>
+
+<p>This plot is evidently a histogram. However there are several differences to the ordinary call in figure <a href="first-look.html#fig:3-2">3.2</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_vdem, <span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-2"></span>
+<img src="bachelor-thesis_files/figure-html/3-2-1.png" alt="Ordinary histogram of v2x_polyarchy" width="50%" />
+<p class="caption">
+Figure 3.2: Ordinary histogram of v2x_polyarchy
+</p>
+</div>
+
+<p>Namely, the axis title lists the number of missing values and the x-axis has been log transformed. This is because <code>tectr</code> attempts to guess reasonable default values which yield more informative plots than the default values of <code>ggplot</code>. It is able to do so because these default values can flexibly be changed.</p>
+<p>Behind the scenes, the function calls <code>fx_default</code> which sets several default values for every column and saves them in a <em>metaframe</em> which is stored as an attribute of the data frame. The result can be seen in <a href="first-look.html#tab:3-3">3.1</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fx_ggplot_columns</code></pre></div>
 <pre><code>## [1] &quot;fxGeom_class&quot;  &quot;fxGeom_limits&quot; &quot;fxGeom_trans&quot;  &quot;fxInfo_name&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>
 <span class="st">  </span>df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(v2x_polyarchy) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_default</span>(<span class="dt">columns =</span> fx_ggplot_columns)
-<span class="kw">metaframe</span>(data) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">3</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">fx_default</span>(<span class="dt">columns =</span> fx_ggplot_columns)</code></pre></div>
 <table>
+<caption><span id="tab:3-3">Table 3.1: </span>The default metaframe of v2x_polyarchy.</caption>
 <thead>
 <tr class="header">
 <th align="left">name</th>
@@ -215,70 +229,117 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="odd">
 <td align="left">v2x_polyarchy</td>
 <td align="left">Continuous</td>
-<td align="left">c(0.00728491658127784, 0.939980764975532)</td>
+<td align="left">c(0.007, 0.94)</td>
 <td align="left">log10</td>
 <td align="left">v2x polyarchy</td>
 </tr>
 </tbody>
 </table>
-<p>In `fxGeom_class´, for instance, the class of the variable is listed which has an influence on the defined graphics and is used to influence a lot of other default values.</p>
-<p><code>fx_ggplot</code> itself attempts to infer the appropriate visualization from the specification of aesthetics and the class of the data. Thus, we receive a different plot if we specify the y variable, as well. Let us first consider the relationship between the electoral and the liberal democracy index in the 2017:</p>
+
+<p>In <code>fxGeom_class</code>, for instance, the class of the variable is listed which has an influence on the defined graphics and is used to influence a lot of other default values.</p>
+<p><code>fx_ggplot</code> itself attempts to infer the appropriate visualization from the specification of aesthetics and the class of the data. Thus, we receive a different plot if we specify the y variable, as well. Let us first consider the relationship between the electoral and the liberal democracy index in the 2017 which can be seen in <a href="first-look.html#fig:3-4">3.3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2017</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(v2x_polyarchy, v2x_libdem) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>In this case, the scatter plot is a sensible choice. On the other hand, if we wish to visualize the entire database (which consists of 26537 observations), an ordinary scatter plot would lead to severe overplotting. <code>fx_ggplot</code> recognizes this and chooses a more appropriate graphic:</p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-4"></span>
+<img src="bachelor-thesis_files/figure-html/3-4-1.png" alt="Scatter plot with fx_ggplot" width="50%" />
+<p class="caption">
+Figure 3.3: Scatter plot with <code>fx_ggplot</code>
+</p>
+</div>
+
+<p>In this case, the scatter plot is a sensible choice. On the other hand, if we wish to visualize the entire database (which consists of 26537 observations), an ordinary scatter plot would lead to severe overplotting. <code>fx_ggplot</code> recognizes this and chooses a more appropriate graphic in figure <a href="first-look.html#fig:3-5">3.4</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(v2x_polyarchy, v2x_libdem) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>This choice is flexible, as well; should we, for instance, wish to use the colour aesthetics to represent the year of the observation, the plot adapts:</p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-5"></span>
+<img src="bachelor-thesis_files/figure-html/3-5-1.png" alt="fx_ggplot prevents overplotting" width="50%" />
+<p class="caption">
+Figure 3.4: <code>fx_ggplot</code> prevents overplotting
+</p>
+</div>
+
+<p>This choice is flexible, as well; should we, for instance, wish to use the colour aesthetics to represent the year of the observation, the plot adapts, as can be seen in <a href="first-look.html#fig:3-6">3.5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(v2x_polyarchy, v2x_libdem, year) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> year))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>The increased transparency of the points improves oversight over the plot. Note that <code>fx_ggplot</code> is not intended to protect the user from specifications within <code>aes</code> that do not make sense but rather intends to build the best plot for the specified aesthetics. Adding the size of the points as an additional aesthetic would render the plot rather useless. This is, however, not the scope of <code>fx_ggplot</code> - I will discuss this point further in chapter 4.</p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> v2x_polyarchy, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> year)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-6"></span>
+<img src="bachelor-thesis_files/figure-html/3-6-1.png" alt="fx_ggplot with three variables" width="50%" />
+<p class="caption">
+Figure 3.5: <code>fx_ggplot</code> with three variables
+</p>
+</div>
+
+<p>The increased transparency of the points improves oversight over the plot. Note that <code>fx_ggplot</code> is not intended to protect the user from specifications within <code>aes</code> that do not make sense but rather intends to build the best plot for the specified aesthetics. Adding the size of the points as an additional aesthetic would make the plot confusing. This is, however, not the scope of <code>fx_ggplot</code>. I will discuss this point further in chapter 4.</p>
 </div>
 <div id="modifying-the-default-values" class="section level2">
 <h2><span class="header-section-number">3.2</span> Modifying the default values</h2>
-<p>The default values which the plot uses may be changed by modifying the metaframe in which they are stored. Consider, as an example, the development of the liberal democracy index in Germany and Afghanistan over time.</p>
+<p>The default values which the plot uses may be changed by modifying the metaframe in which they are stored. Consider, as an example, the development of the liberal democracy index in Germany and Afghanistan over time (figure <a href="first-look.html#fig:3-8">3.6</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(country_name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Afghanistan&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(year, v2x_libdem, country_name) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> country_name))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> country_name)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-8"></span>
+<img src="bachelor-thesis_files/figure-html/3-8-1.png" alt="Time series with fx_ggplot" width="50%" />
+<p class="caption">
+Figure 3.6: Time series with fx_ggplot
+</p>
+</div>
+
 <p>This is evidently not a very useful plot; although we are able to extrapolate the developments in both countries, a line plot would be preferred. The problem is that <code>fx_ggplot</code> does not know that year represents a time. The fxGeom class corresponding the time variable is “Time”. We can modify the metaframe accordingly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To modify default values, we need to define a function that changes the fxGeom_class of </span>
 <span class="co"># the questionable names and returns that (modified or unmodified) argument.</span>
+
 year_is_time &lt;-<span class="st"> </span><span class="cf">function</span>(fxGeom_class, name) {
   <span class="cf">if</span>(name <span class="op">==</span><span class="st"> &quot;year&quot;</span>) <span class="kw">return</span>(<span class="st">&quot;Time&quot;</span>)
   fxGeom_class
 }
+
 df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(country_name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Afghanistan&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(year, v2x_libdem, country_name) <span class="op">%&gt;%</span><span class="st"> </span>
+
 <span class="st">  </span><span class="co"># If called without an argument, fx_default simply instantiates the metaframe with the names.</span>
+
 <span class="st">  </span><span class="kw">fx_default</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>
 <span class="st">  </span><span class="co"># The function responsible for the default value is fx_default_fxGeom_class. </span>
-<span class="st">  </span><span class="co"># It accepts as an argument a function that changes these classes.</span>
-<span class="st">  </span><span class="co"># Its first argument is the data frame itself.</span>
+<span class="st">  </span><span class="co"># It accepts as an argument a function that changes the default classes.</span>
+<span class="st">  </span>
 <span class="st">  </span><span class="kw">mutate_mf</span>(
     <span class="dt">fxGeom_class =</span> <span class="kw">fx_default_fxGeom_class</span>(., <span class="dt">custom_fun =</span> year_is_time), 
     <span class="dt">fxGeom_assoc_vars =</span> <span class="kw">aes</span>(<span class="dt">group =</span> country_name) 
+  
     <span class="co"># The second variable specifies which observations should be viewed as a instances of a </span>
     <span class="co"># coherent unit, i. e. be connected by lines.</span>
-  ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> country_name))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Now, the expected line plot is displayed. The time class is able to prevent overplotting, as well. Suppose that we now consider all observations:</p>
+  
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem, <span class="dt">colour =</span> country_name)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-9"></span>
+<img src="bachelor-thesis_files/figure-html/3-9-1.png" alt="Time series with modified metaframe" width="50%" />
+<p class="caption">
+Figure 3.7: Time series with modified metaframe
+</p>
+</div>
+
+<p>In the resulting figure <a href="first-look.html#fig:3-9">3.7</a>, the expected line plot is displayed. The time class is able to prevent overplotting, as well. Suppose that we now consider all observations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(year, v2x_libdem, country_name) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>
 <span class="st">  </span><span class="co"># If called without an argument, fx_default simply instantiates the metaframe with the names.</span>
+<span class="st">  </span>
 <span class="st">  </span><span class="kw">fx_default</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>
 <span class="st">  </span><span class="co"># The function responsible for the default value is fx_default_fxGeom_class. </span>
 <span class="st">  </span><span class="co"># It accepts as an argument a function that changes these classes.</span>
 <span class="st">  </span><span class="co"># Its first argument is the data frame itself.</span>
+<span class="st">  </span>
 <span class="st">  </span><span class="kw">mutate_mf</span>(
     <span class="dt">fxGeom_class =</span> <span class="kw">fx_default_fxGeom_class</span>(., <span class="dt">custom_fun =</span> year_is_time), 
     <span class="dt">fxGeom_assoc_vars =</span> purrr<span class="op">::</span><span class="kw">map</span>(
@@ -288,16 +349,25 @@ df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
         <span class="kw">aes</span>()
       }
     )
+  
     <span class="co"># The second variable specifies which observations should be viewed as a instances of a </span>
     <span class="co"># coherent unit, i. e. be connected by lines.</span>
+  
   ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem))</code></pre></div>
-<p><img src="bachelor-thesis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">fx_ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> v2x_libdem)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>my_theme</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:3-10"></span>
+<img src="bachelor-thesis_files/figure-html/3-10-1.png" alt="fx_ggplot prevents overfitting in time series" width="50%" />
+<p class="caption">
+Figure 3.8: <code>fx_ggplot</code> prevents overfitting in time series
+</p>
+</div>
+
 </div>
 <div id="summary" class="section level2">
 <h2><span class="header-section-number">3.3</span> Summary</h2>
 <p>The ability to modify the default values is a crucial feature of <code>tectr</code> and I will discuss the broader background of these considerations in the next chapter.</p>
-<p>At the end of this chapter, let me summarize the depicted workflow:</p>
+<p>Summarizing the depicted workflow:</p>
 <ul>
 <li><p>at first, we were interested in different visualizations and we approximated this by specifying aesthetics</p></li>
 <li><p>the first visualizations broadly matched our idea and we saw no need to adapt the plots</p></li>
@@ -309,7 +379,7 @@ df_vdem <span class="op">%&gt;%</span><span class="st"> </span>
 <li><p>When the user needs to change something, make it <em>easy and permanent</em>.</p></li>
 </ol>
 <p>These are, of course, very general principles. When applied to <code>tectr</code>, however, it becomes evident in what way they would not be of use in other packages.</p>
-<p>Take, for instance, the scale transformations. While they will be discussed in more detail, below, the default assumes certain transformations for particularly skewed data. This would be completely unsuitable in the case of the underlying package <code>ggplot2</code>. Imputed transformations introduce uncertainty as the user is unsure what exactly he will produce unless he specifies a lot of parameters. In most cases <em>easy defaults</em> are therefore more sensible than <em>strong defaults</em>. Only the second priority makes them useful; if they could not reliably and permanently be changed, they would constitute a constant burden. With these two priorities, however, they are more likely to fulfill their intended purpose of decreasing the cognitive cost of the user.</p>
+<p>Take, for instance, the scale transformations. While they will be discussed in more detail, below, the default assumes certain transformations for particularly skewed data. This would be completely unsuitable in the case of the underlying package <code>ggplot2</code>. Imputed transformations introduce uncertainty as the users are unsure what exactly they will produce unless they specify a lot of parameters. In most cases, <em>easy defaults</em> are therefore more sensible than <em>strong defaults</em>. Only the second priority makes them useful; if they could not reliably and permanently be changed, they would constitute a constant burden. With these two priorities, however, they are more likely to fulfill their intended purpose of decreasing the cognitive cost of the user.</p>
 
 </div>
 </div>

@@ -47,7 +47,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -184,7 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.1</span> V-Dem</h2>
 <div id="introduction-to-the-database" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Introduction to the database</h3>
-<p>The Varieties of Democracy Institute is concerned with measuring different aspects of democracy. It distinguishes between seven high-level principles: electoral, liberal, participatory, deliberative, egalitarian, majoritarian and consensual. These are measured by a variable in the interval <span class="math inline">\([0,1]\)</span> and each consists of several mid- and low-level indices. The low-level indices are coded with the help of several country experts who answer a detailed questionnaire. Most questions can be answered by an ordinal scale of five alternatives. Consider, as an example, the variable “Disclosure of campaign donations”:</p>
+<p>The Varieties of Democracy Institute is concerned with measuring different aspects of democracy. It distinguishes between seven high-level principles: electoral, liberal, participatory, deliberative, egalitarian, majoritarian and consensual. These are measured by a variable in the interval <span class="math inline">\([0,1]\)</span> and each consists of several mid-level indices in the interval <span class="math inline">\([0,1]\)</span> and low-level indices in the domain <span class="math inline">\([0,4]\)</span> on. The low-level indices are coded with the help of several country experts who answer a detailed questionnaire. Most questions can be answered by an ordinal scale of five alternatives. Consider, as an example, the variable “Disclosure of campaign donations”:</p>
 <blockquote>
 <p><strong>Are there disclosure requirements for donations to national election campaigns?</strong></p>
 <p>0: No. There are no disclosure requirements.</p>
@@ -203,15 +202,13 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <p>The package contains three datasets:</p>
 <ul>
 <li><code>df_vdem</code>: This dataset contains all variables from the varieties of democracy dataset where interval variables are numeric and categorical variables are saved as factors or ordered factors where appropriate.</li>
-<li><code>vdem_spatial</code>: This <em>simple features</em> object <span class="citation">(Pebesma <a href="#ref-sf">2018</a>)</span> contains the polygon shapes of the different countries for every year between 1945 and 2017. The borders in 2017 can be seen in <a href="methods.html#fig:vdem-spatial">2.1</a>. I have used the CShapes dataset <span class="citation">(Weidmann, Kuse, and Gleditsch <a href="#ref-Weidmann2010">2010</a>, <span class="citation">Weidmann and Gleditsch (<a href="#ref-Weidmann2010a">2010</a>)</span>)</span>, sovereignty- and state-level maps data from <a href="www.naturalearthdata.com">Natural Earth</a> and the details from the document on country coding units from V-Dem <span class="citation">(Coppedge, Gerring, Knutsen, et al. <a href="#ref-Coppedge2018">2018</a>)</span>. Note that the coded country borders by V-Dem do not constitute an endorsement of controversial entities such as Zanzibar. The function <code>vdem_geocode</code> makes it possible to join the shapes polygons to a data frame as long as the columns <code>country_name</code> and <code>year</code> exist.</li>
-</ul>
+<li><code>vdem_spatial</code>: This <em>simple features</em> object <span class="citation">(Pebesma <a href="#ref-sf">2018</a>)</span> contains the polygon shapes of the different countries for every year between 1945 and 2017. The borders in 2017 can be seen in <a href="methods.html#fig:vdem-spatial">2.1</a>. I have used the CShapes dataset <span class="citation">(Weidmann, Kuse, and Gleditsch <a href="#ref-Weidmann2010">2010</a>, <span class="citation">Weidmann and Gleditsch (<a href="#ref-Weidmann2010a">2010</a>)</span>)</span>, sovereignty- and state-level maps data from <a href="www.naturalearthdata.com">Natural Earth</a> and the details from the document on country coding units from V-Dem <span class="citation">(Coppedge, Gerring, Knutsen, et al. <a href="#ref-Coppedge2018">2018</a>)</span>. Note that the coded country borders by V-Dem do not constitute an endorsement of controversial entities such as Zanzibar. The function <code>vdem_geocode</code> makes it possible to join the shapes polygons to a data frame as long as the columns <code>country_name</code> and <code>year</code> exist.
 <div class="figure"><span id="fig:vdem-spatial"></span>
 <img src="bachelor-thesis_files/figure-html/vdem-spatial-1.png" alt="Country borders in 2017 in the V-Dem database" width="672" />
 <p class="caption">
 Figure 2.1: Country borders in 2017 in the V-Dem database
 </p>
-</div>
-<ul>
+</div></li>
 <li><code>vdem</code> which contains the variables from <code>df_vdem</code>, the country shapes from <code>vdem_spatial</code> and further metainformation (see <a href="#application">below</a>)</li>
 </ul>
 <p>Details on these datasets and the reproducible code can be found in the folder “data-raw” in the package.</p>

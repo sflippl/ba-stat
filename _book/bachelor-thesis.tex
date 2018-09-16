@@ -261,11 +261,10 @@ on the specific domain of statistical analysis for which R was created:
   \texttt{read.table} contains the parameter \texttt{na.strings} that
   allows the user to specify values that encode \texttt{NA}s. However,
   in most cases, \texttt{NA}s are encoded by the string \texttt{NA} or a
-  missing value \footnote{The latter is only implemented in
-    \texttt{read\_delim} from the package \texttt{readr} but the
-    advantage of default values remains valid nevertheless.}. By setting
-  default values, the user only needs to think about this parameter when
-  the file structure is out of the ordinary.
+  missing value \footnote{In some cases, these modifications are so
+    simple that they happen in the fx function and the fxi function is
+    omitted.}. By setting default values, the user only needs to think
+  about this parameter when the file structure is out of the ordinary.
 \end{itemize}
 
 These advantages are certainly not unique to R. They are designed to
@@ -274,12 +273,12 @@ decisions while maintaining easy reproducibility of his work. On the
 other hand, if there are more complicated tasks to undertake, a
 consistent interface allows the user to do that, as well.
 
-A good example for this concept, in my mind, is the package
-\texttt{stringr} \citep{stringr}. Functions like \texttt{str\_trim}
-(trim whitespace) or \texttt{str\_to\_title} (capitalize) make special
-use cases easily accessible. On the other hand, \texttt{str\_replace}
-allows more complicated operations with regular expressions using the
-same consistent interface.
+A good example for this concept is the package \texttt{stringr}
+\citep{stringr}. Functions like \texttt{str\_trim} (trim whitespace) or
+\texttt{str\_to\_title} (capitalize) make special use cases easily
+accessible. On the other hand, \texttt{str\_replace} allows more
+complicated operations with regular expressions using the same
+consistent interface.
 
 Things, however, start to fall apart when one attempts to modify default
 values. This is sometimes possible by setting the global options in R;
@@ -287,15 +286,16 @@ however, relying on these makes reproducibility harder. On the other
 hand, one could write new functions to solve this problem. This is,
 however, more laborious than such an endeavour needs to be.
 
-A good example of this are datasets with many variables as they occur in
-the social sciences. As an example, I will consider the Varieties of
-Democracy (\href{v-dem.net}{V-Dem}) dataset which produces indicators of
-democracy \citep[\citet{Pemstein2018}]{vdem2018}. It contains many
-variables on different aspects of democracy with values per country and
-year. If one wishes to visualize the development of this variable over
-time, a simple line plot often makes sense. Consider, for instance, the
-variable which characterizes the freedom of religion on a scale between
-0 and 4 for Germany in figure \ref{fig:ex1}.
+The need to modify default values arises, for instance, in the analysis
+datasets with many variables as they occur in the social sciences. As an
+example, I will consider the Varieties of Democracy
+(\href{v-dem.net}{V-Dem}) dataset which produces indicators of democracy
+\citep[\citet{Pemstein2018}]{vdem2018}. It contains many variables on
+different aspects of democracy with values per country and year. If one
+wishes to visualize the development of this variable over time, a simple
+line plot often makes sense. Consider, for instance, the variable which
+characterizes the freedom of religion on a scale between 0 and 4 for
+Germany in figure \ref{fig:ex1}.
 
 \begin{figure}
 
@@ -332,13 +332,13 @@ standardized to depict the entire range between 0 and 4.
 
 In summary, there are many considerations one needs to regard in such a
 visualization. Therefore, every time the statistician needs to implement
-such a visualization, she needs to think about these questions again,
+such a visualization, they need to think about these questions again,
 which is time expensive and makes interactive user interfaces
 impossible. This problem is not limited to visualization; another
 example would be descriptive tables of a linear model or a report
 summarizing all covariates that have been used.
 
-In summary, R provides amazing opportunities to outsource everyday
+In summary, R provides powerful opportunities to outsource everyday
 thought processes in data analysis. However, adapting these mechanisms
 for application-specific thought processes is expensive and difficult. A
 broad framework for such an adaptation would enable researchers to think
@@ -348,7 +348,7 @@ colleagues who might not need to think about this at all would benefit
 from this.
 
 In this Bachelor's Thesis, I describe such a framework, implement it as
-the package \texttt{tectr} in R and apply it to the V-DEM dataset. The
+the package \texttt{tectr} in R and apply it to the V-Dem dataset. The
 \protect\hyperlink{methods}{next chapter} discusses some details
 regarding the package construction and the dataset before we get a
 \protect\hyperlink{example}{first look} in the third chapter. The
@@ -373,8 +373,9 @@ The Varieties of Democracy Institute is concerned with measuring
 different aspects of democracy. It distinguishes between seven
 high-level principles: electoral, liberal, participatory, deliberative,
 egalitarian, majoritarian and consensual. These are measured by a
-variable in the interval \([0,1]\) and each consists of several mid- and
-low-level indices. The low-level indices are coded with the help of
+variable in the interval \([0,1]\) and each consists of several
+mid-level indices in the interval \([0,1]\) and low-level indices in the
+domain \([0,4]\) on. The low-level indices are coded with the help of
 several country experts who answer a detailed questionnaire. Most
 questions can be answered by an ordinal scale of five alternatives.
 Consider, as an example, the variable ``Disclosure of campaign
@@ -444,17 +445,7 @@ The package contains three datasets:
   as Zanzibar. The function \texttt{vdem\_geocode} makes it possible to
   join the shapes polygons to a data frame as long as the columns
   \texttt{country\_name} and \texttt{year} exist.
-\end{itemize}
-
-\begin{figure}
-\centering
-\includegraphics{bachelor-thesis_files/figure-latex/vdem-spatial-1.pdf}
-\caption{\label{fig:vdem-spatial}Country borders in 2017 in the V-Dem
-database}
-\end{figure}
-
-\begin{itemize}
-\tightlist
+  \includegraphics{bachelor-thesis_files/figure-latex/vdem-spatial-1.pdf}
 \item
   \texttt{vdem} which contains the variables from \texttt{df\_vdem}, the
   country shapes from \texttt{vdem\_spatial} and further metainformation
@@ -474,8 +465,8 @@ written with \texttt{bookdown} \citep[\citet{bookdown-2}]{bookdown-1}.
 \chapter{First look}\label{first-look}
 
 This chapter is devoted to first applied example of the package before
-the \href{fourth\%20chapter}{\#concept} introduces the concepts of
-\texttt{tectr} in a more comprehensive way.
+the \protect\hyperlink{concept}{fourth chapter} introduces the concepts
+of \texttt{tectr} in a more comprehensive way.
 
 As an example, we will consider the V-Dem database that has been
 introduced in the preceding chapter. We will focus on the function
@@ -486,39 +477,64 @@ to produce visualizations. \citep{ggplot}
 \section{\texorpdfstring{\texttt{fx\_ggplot}:
 Basics}{fx\_ggplot: Basics}}\label{fx_ggplot-basics}
 
+In the following, I will present different example applications of
+\texttt{fx\_ggplot}.
+
 We will at first consider the electoral democracy index and its
-distribution:
+distribution. The result is depicted in figure \ref{fig:3-1}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme }\CommentTok{# my_theme makes the text larger}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-2-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-1-1} 
+
+}
+
+\caption{Visualization of v2x\_polyarchy with \texttt{fx\_ggplot}}\label{fig:3-1}
+\end{figure}
+
+
 
 This plot is evidently a histogram. However there are several
-differences to the ordinary call:
+differences to the ordinary call in figure \ref{fig:3-2}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(df_vdem, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(df_vdem, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-3-1.pdf}
+\begin{figure}
 
-Namely, the axis title lists the number of NAs and the x-axis has been
-log transformed. This is because \texttt{tectr} attempts to guess
-reasonable default values which yield more informative plots than the
-default values of \texttt{ggplot}. It is able to do so because these
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-2-1} 
+
+}
+
+\caption{Ordinary histogram of v2x\_polyarchy}\label{fig:3-2}
+\end{figure}
+
+
+
+Namely, the axis title lists the number of missing values and the x-axis
+has been log transformed. This is because \texttt{tectr} attempts to
+guess reasonable default values which yield more informative plots than
+the default values of \texttt{ggplot}. It is able to do so because these
 default values can flexibly be changed.
 
 Behind the scenes, the function calls \texttt{fx\_default} which sets
 several default values for every column and saves them in a
-\emph{metaframe} which is stored as an attribute of the data frame.
+\emph{metaframe} which is stored as an attribute of the data frame. The
+result can be seen in \ref{tab:3-3}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -536,89 +552,113 @@ several default values for every column and saves them in a
 \StringTok{  }\NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{(}\DataTypeTok{columns =}\NormalTok{ fx_ggplot_columns)}
-\KeywordTok{metaframe}\NormalTok{(data) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{digits =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-name
+\begin{table}
 
-fxGeom\_class
+\caption{\label{tab:3-3}The default metaframe of v2x\_polyarchy.}
+\centering
+\begin{tabular}[t]{lllll}
+\toprule
+name & fxGeom\_class & fxGeom\_limits & fxGeom\_trans & fxInfo\_name\\
+\midrule
+v2x\_polyarchy & Continuous & c(0.007, 0.94) & log10 & v2x polyarchy\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-fxGeom\_limits
 
-fxGeom\_trans
 
-fxInfo\_name
-
-v2x\_polyarchy
-
-Continuous
-
-c(0.00728491658127784, 0.939980764975532)
-
-log10
-
-v2x polyarchy
-
-In `fxGeom\_class´, for instance, the class of the variable is listed
-which has an influence on the defined graphics and is used to influence
-a lot of other default values.
+In \texttt{fxGeom\_class}, for instance, the class of the variable is
+listed which has an influence on the defined graphics and is used to
+influence a lot of other default values.
 
 \texttt{fx\_ggplot} itself attempts to infer the appropriate
 visualization from the specification of aesthetics and the class of the
 data. Thus, we receive a different plot if we specify the y variable, as
 well. Let us first consider the relationship between the electoral and
-the liberal democracy index in the 2017:
+the liberal democracy index in the 2017 which can be seen in
+\ref{fig:3-4}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2017}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-5-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-4-1} 
+
+}
+
+\caption{Scatter plot with \texttt{fx\_ggplot}}\label{fig:3-4}
+\end{figure}
+
+
 
 In this case, the scatter plot is a sensible choice. On the other hand,
 if we wish to visualize the entire database (which consists of 26537
 observations), an ordinary scatter plot would lead to severe
 overplotting. \texttt{fx\_ggplot} recognizes this and chooses a more
-appropriate graphic:
+appropriate graphic in figure \ref{fig:3-5}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-6-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-5-1} 
+
+}
+
+\caption{\texttt{fx\_ggplot} prevents overplotting}\label{fig:3-5}
+\end{figure}
+
+
 
 This choice is flexible, as well; should we, for instance, wish to use
 the colour aesthetics to represent the year of the observation, the plot
-adapts:
+adapts, as can be seen in \ref{fig:3-6}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem, year) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ year))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ year)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-7-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-6-1} 
+
+}
+
+\caption{\texttt{fx\_ggplot} with three variables}\label{fig:3-6}
+\end{figure}
+
+
 
 The increased transparency of the points improves oversight over the
 plot. Note that \texttt{fx\_ggplot} is not intended to protect the user
 from specifications within \texttt{aes} that do not make sense but
 rather intends to build the best plot for the specified aesthetics.
-Adding the size of the points as an additional aesthetic would render
-the plot rather useless. This is, however, not the scope of
-\texttt{fx\_ggplot} - I will discuss this point further in chapter 4.
+Adding the size of the points as an additional aesthetic would make the
+plot confusing. This is, however, not the scope of \texttt{fx\_ggplot}.
+I will discuss this point further in chapter 4.
 
 \section{Modifying the default
 values}\label{modifying-the-default-values}
@@ -626,18 +666,28 @@ values}\label{modifying-the-default-values}
 The default values which the plot uses may be changed by modifying the
 metaframe in which they are stored. Consider, as an example, the
 development of the liberal democracy index in Germany and Afghanistan
-over time.
+over time (figure \ref{fig:3-8}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"Afghanistan"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(year, v2x_libdem, country_name) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ country_name))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-8-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-8-1} 
+
+}
+
+\caption{Time series with fx\_ggplot}\label{fig:3-8}
+\end{figure}
+
+
 
 This is evidently not a very useful plot; although we are able to
 extrapolate the developments in both countries, a line plot would be
@@ -649,43 +699,64 @@ is ``Time''. We can modify the metaframe accordingly.
 \begin{Highlighting}[]
 \CommentTok{# To modify default values, we need to define a function that changes the fxGeom_class of }
 \CommentTok{# the questionable names and returns that (modified or unmodified) argument.}
+
 \NormalTok{year_is_time <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(fxGeom_class, name) \{}
   \ControlFlowTok{if}\NormalTok{(name }\OperatorTok{==}\StringTok{ "year"}\NormalTok{) }\KeywordTok{return}\NormalTok{(}\StringTok{"Time"}\NormalTok{)}
 \NormalTok{  fxGeom_class}
 \NormalTok{\}}
+
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"Afghanistan"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(year, v2x_libdem, country_name) }\OperatorTok{%>%}\StringTok{ }
+
 \StringTok{  }\CommentTok{# If called without an argument, fx_default simply instantiates the metaframe with the names.}
+
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }
 \StringTok{  }\CommentTok{# The function responsible for the default value is fx_default_fxGeom_class. }
-\StringTok{  }\CommentTok{# It accepts as an argument a function that changes these classes.}
-\StringTok{  }\CommentTok{# Its first argument is the data frame itself.}
+\StringTok{  }\CommentTok{# It accepts as an argument a function that changes the default classes.}
+\StringTok{  }
 \StringTok{  }\KeywordTok{mutate_mf}\NormalTok{(}
     \DataTypeTok{fxGeom_class =} \KeywordTok{fx_default_fxGeom_class}\NormalTok{(., }\DataTypeTok{custom_fun =}\NormalTok{ year_is_time), }
     \DataTypeTok{fxGeom_assoc_vars =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{group =}\NormalTok{ country_name) }
+  
     \CommentTok{# The second variable specifies which observations should be viewed as a instances of a }
     \CommentTok{# coherent unit, i. e. be connected by lines.}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ country_name))}
+  
+\NormalTok{    ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-9-1.pdf}
+\begin{figure}
 
-Now, the expected line plot is displayed. The time class is able to
-prevent overplotting, as well. Suppose that we now consider all
-observations:
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-9-1} 
+
+}
+
+\caption{Time series with modified metaframe}\label{fig:3-9}
+\end{figure}
+
+
+
+In the resulting figure \ref{fig:3-9}, the expected line plot is
+displayed. The time class is able to prevent overplotting, as well.
+Suppose that we now consider all observations:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(year, v2x_libdem, country_name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }
 \StringTok{  }\CommentTok{# If called without an argument, fx_default simply instantiates the metaframe with the names.}
+\StringTok{  }
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }
 \StringTok{  }\CommentTok{# The function responsible for the default value is fx_default_fxGeom_class. }
 \StringTok{  }\CommentTok{# It accepts as an argument a function that changes these classes.}
 \StringTok{  }\CommentTok{# Its first argument is the data frame itself.}
+\StringTok{  }
 \StringTok{  }\KeywordTok{mutate_mf}\NormalTok{(}
     \DataTypeTok{fxGeom_class =} \KeywordTok{fx_default_fxGeom_class}\NormalTok{(., }\DataTypeTok{custom_fun =}\NormalTok{ year_is_time), }
     \DataTypeTok{fxGeom_assoc_vars =}\NormalTok{ purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}
@@ -695,14 +766,26 @@ observations:
         \KeywordTok{aes}\NormalTok{()}
 \NormalTok{      \}}
 \NormalTok{    )}
+  
     \CommentTok{# The second variable specifies which observations should be viewed as a instances of a }
     \CommentTok{# coherent unit, i. e. be connected by lines.}
+  
 \NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem))}
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-10-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/3-10-1} 
+
+}
+
+\caption{\texttt{fx\_ggplot} prevents overfitting in time series}\label{fig:3-10}
+\end{figure}
+
+
 
 \hypertarget{summary}{\section{Summary}\label{summary}}
 
@@ -710,7 +793,7 @@ The ability to modify the default values is a crucial feature of
 \texttt{tectr} and I will discuss the broader background of these
 considerations in the next chapter.
 
-At the end of this chapter, let me summarize the depicted workflow:
+Summarizing the depicted workflow:
 
 \begin{itemize}
 \item
@@ -747,14 +830,14 @@ Take, for instance, the scale transformations. While they will be
 discussed in more detail, below, the default assumes certain
 transformations for particularly skewed data. This would be completely
 unsuitable in the case of the underlying package \texttt{ggplot2}.
-Imputed transformations introduce uncertainty as the user is unsure what
-exactly he will produce unless he specifies a lot of parameters. In most
-cases \emph{easy defaults} are therefore more sensible than \emph{strong
-defaults}. Only the second priority makes them useful; if they could not
-reliably and permanently be changed, they would constitute a constant
-burden. With these two priorities, however, they are more likely to
-fulfill their intended purpose of decreasing the cognitive cost of the
-user.
+Imputed transformations introduce uncertainty as the users are unsure
+what exactly they will produce unless they specify a lot of parameters.
+In most cases, \emph{easy defaults} are therefore more sensible than
+\emph{strong defaults}. Only the second priority makes them useful; if
+they could not reliably and permanently be changed, they would
+constitute a constant burden. With these two priorities, however, they
+are more likely to fulfill their intended purpose of decreasing the
+cognitive cost of the user.
 
 \hypertarget{concept}{\chapter{\texorpdfstring{Description of
 \texttt{tectr}}{Description of tectr}}\label{concept}}
@@ -762,54 +845,55 @@ user.
 \section{Effective Explicitness: A perspective of
 knowledge}\label{effective-explicitness-a-perspective-of-knowledge}
 
-Let us revisit the introduction: specified functions and default values
-render R a powerful programming language for statistical analysis. These
-concepts are so useful because they constitute crystallized knowledge:
-when the user calls the function \texttt{read.csv}, he effectively uses
-the programmer's knowledge of how to read in csv-files and therefore
-lightens his own cognitive load. Of course, this also applies if she has
-written the function herself; in this case, by externalizing the
-knowledge she does not need to think about the specifics anymore. There
-are therefore two main advantages of externalizing knowledge. Other
-users benefit from the user's knowledge and the user himself benefits
-from its automization.
+Let us revisit the introduction: specialized functions and default
+values render R a powerful programming language for statistical
+analysis. These concepts are so useful because they constitute
+crystallized knowledge: when the user calls the function
+\texttt{read.csv}, he effectively uses the programmer's knowledge of how
+to read in csv-files and therefore lightens his own cognitive load. Of
+course, this also applies if he has written the function himself; in
+this case, by externalizing the knowledge he needs not think about the
+specifics anymore. There are therefore two main advantages of
+externalizing knowledge. Other users benefit from the user's knowledge
+and the user himself benefits from its automation.
 
 Normally, these default values cannot be particularly fancy as the user
-needs to understand what the function yields under all circumstances --
+needs to understand under all circumstances what the function yields --
 even if this result is not ideal. This is the restriction that will be
-loosened for \texttt{tectr}. The intention behind this is to automize
-\emph{more} knowledge.
+loosened for \texttt{tectr}. The intention behind this is to automate
+more knowledge.
 
-How does this work? Let us briefly consider a hypothetical statistician
-who looks at a dataset. He might at first want to look at the
-distribution and a few summary statistics of the variable.
-Simultaneously, he learns the name and the definition of a variable. He
-might look at relationships between several variables. During all that
-time, he will create internal knowledge concerning a proper form of the
-statistical summary or a certain visualization, dependent on different
-aspects; for instance, he might determine a better axis title than
-\texttt{v2x\_polyarchy} or find it helpful to denote the mean of the
-variable on the axis. He might also, for instance determine that a line
-plot is a better fit than a scatter plot in this case or find that a
-certain variable transformation is helpful.
+How does this work? Consider a hypothetical statistician who looks at a
+dataset. He might begin by plotting the distribution and a few summary
+statistics of the variable. Simultaneously, he learns the name and the
+definition of a variable. He might look at relationships between several
+variables. Thereby, he creates internal knowledge concerning a proper
+form of the statistical summary or a certain visualization. This
+internal knowledge accounts for different aspects; for instance, he
+might determine a better axis title than \texttt{v2x\_polyarchy} or find
+it helpful to denote the mean of the variable on the axis. He might
+also, for instance determine that a line plot is a better fit than a
+scatter plot in this case or find that a certain variable transformation
+is helpful.
 
 This knowledge is seldomly notated which leads to a less efficient
 workflow. After all, this means that while exploring the data, the
-statistician will think about every modification of the plot. As a
-by-product, any non-crucial change will be left out, even though she
-might actually benefit from a more descriptive axis title. More
-severely, when she wants to communicate her results, she needs to
-reproduce all the internally held knowledge; if she creates a certain
-visualization she needs to modify the axis title, in a table describing
-the variables, she needs to replace the non-descriptive variable names.
-If she would like an interactive visualization of the statistical
-analysis, the problem becomes even bigger; in this case, she needs to
-externalize her knowledge after the fact.
+statistician will need to think about every modification of the plot
+which deviates from the default value. As a by-product, any non-crucial
+change will be left out, even though the statistician might actually
+benefit from a more descriptive axis title. More severely, when he wants
+to communicate his results, he needs to reproduce the internally held
+knowledge; if he creates a certain visualization, he needs to modify the
+axis title, in a table describing the variables he needs to replace the
+non-descriptive variable names. If he would like an interactive
+visualization of the statistical analysis, the problem becomes even
+bigger; in this case, he needs to externalize his knowledge after the
+fact.
 
 In order to resolve these issues, \texttt{tectr} attempts to track these
-decisions \emph{while they are being made}. The program does that by
-asking the user to be \emph{explicit} about his knowledge -- which is
-usually only represented internally.
+decisions while they are being made. The program does that by asking the
+user to be \emph{explicit} about his knowledge -- which is usually only
+represented internally.
 
 If \texttt{tectr} used default values of a similar kind as other
 functions, this would lead to a severe burden on the user as it is time
@@ -817,39 +901,39 @@ expensive to externalize knowledge. \texttt{tectr} therefore uses more
 flexible default values that attempt to approximate the statistician's
 thought process. The user therefore mainly has to intervene when
 something does not adhere to canonical assumptions. As he is more likely
-to think about these situations explicitly, the burden seems likely to
-decrease even considering that under usual circumstances, the users will
-be forced to make these explicit decisions several times.
+to think about these situations explicitly anyway, the burden might even
+decrease considering that under usual circumstances, the users will be
+forced to make these explicit decisions several times.
 
 I will call this concept \emph{effective explicitness} and it is central
-to \texttt{tectr}. To emphasize that, the keyword guides the semantics
-of \texttt{tectr}: those functions and objects which support effective
-explicitness will be preceded by \emph{fx} (e\textbf{f}fective
+to \texttt{tectr}. To emphasize that, this term guides the semantics of
+\texttt{tectr}: those functions and objects which support effective
+explicitness will be preceded by \texttt{fx} (e\textbf{f}fective
 e\textbf{x}plicitness, pronounced: effex).
 
 The notion of explicitness is clear in this context; if the user gains
-new knowledge that is not represented in the metaframe he should be
+new knowledge that is not represented within the metaframe, he should be
 explicit about it. This applies to visualizations as well as general
 observations which he may notate in a comments field. This process
 should be effective in two ways: firstly, the metaframe needs to imitate
 the statistical thought process closely enough that many of its
 approximations are valid; secondly, if adaptations need to be made, they
-should be scalable. Consider, as an example, they variable year in the
-previous chapter. The immediate assumption of the program that this was
-an ordinary continuous variable was wrong. In order to correct the
-assumptions, it was sufficient to make explicit that the variable
-referred to time and tracked the development for different countries. On
-the other hand, the variable could also have been so individual that
-these little changes would not have sufficed. In these cases, it should
-be possible to make broader changes. The remaining chapter will present
-a pilot implementation of this more general philosophy. Before going on
-to discuss specific functions, I will present the underlying concepts
-which power these functions. In order to properly discuss the functions,
-I will focus on the following aspects:
+should be scalable. Consider, as an example, the variable year in the
+previous chapter. The program's assumption that this was an ordinary
+continuous variable was wrong. In order to correct this, it was
+sufficient to make explicit that the variable referred to time and
+tracked the development for different countries. On the other hand, the
+variable could have been so unique that these little changes would not
+have sufficed. In these cases, it should be possible to make broader
+changes. The remaining chapter will present a pilot implementation of
+this more general philosophy. Before going on to discuss specific
+functions, I will present the underlying concepts which power these
+functions. In order to properly discuss the functions, I will focus on
+the following aspects:
 
 \begin{itemize}
 \item
-  How is communicated what the functions should yield?
+  What do the functions return?
 \item
   How does the function allow the user to be explicit?
 \item
@@ -892,15 +976,15 @@ names that fulfill specific functions. The \texttt{name} column refers
 to the corresponding variable name. The remaining information is
 preceded by a keyword to make clear what the variable refers to. More
 specifically, those variables that refer to semantic information are
-preceded by \texttt{fxInfo} (e. g. the name of variable
+preceded by \texttt{fxInfo} (e. g. the ``proper'' name of the variable
 \texttt{fxInfo\_name}) and those variables that give information on the
 visualization are preceded by \texttt{fxGeom}.
 
-For details on metaframes, how to set or change them see the
-documentation. In my opinion the best workflow is provided by
-instantiating the metaframe with \texttt{fx\_default} and then adding
-columns via \texttt{mutate\_mf}. This allows you to only use the data
-frame itself as an attribute and provides a concise terminology:
+For details on metaframes, how to set or change them, see the
+documentation. In my opinion, the best workflow is instantiating the
+metaframe with \texttt{fx\_default} and then adding columns via
+\texttt{mutate\_mf}. This allows you to only use the data frame itself
+as a function argument and provides a concise terminology:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -912,10 +996,18 @@ frame itself as an attribute and provides a concise terminology:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##   name fxInfo_name
-## 1   ht      Height
-\end{verbatim}
+\begin{table}
+
+\caption{\label{tab:1st-mf}A simple metaframe}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+name & fxInfo\_name\\
+\midrule
+ht & Height\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Extending fx functions}\label{extending-fx-functions}
 
@@ -924,14 +1016,16 @@ frame itself as an attribute and provides a concise terminology:
 Whereas in most cases, modifying the parameters to the functions should
 be sufficient, there are also many applications where a more extensive
 modification is necessary -- or at least more effective. \texttt{tectr}
-uses method dispatch to structure these extension. In certain occasions,
-S4 classes are necessary. As long as S3 class suffice, they are
-utilized.
+uses method dispatch to coordinate these extension. In certain
+occasions, S4 classes are necessary. As long as S3 class suffice, they
+are utilized.
 
-It is important to emphasize that the fx function themselves are not
+It is important to emphasize that the fx functions themselves are not
 generics. Internally, every fx function calls an \texttt{fxi} (short for
 fx \emph{internal}) function which modifies its arguments to make
-dispatch possible. I will elaborate on the particular mechanism in the
+dispatch possible \footnote{In some cases, these modifications are so
+  simple that they happen in the fx function and the fxi function is
+  omitted.}. I will elaborate on the particular mechanism in the
 following sections. By defining dummy classes, the calls to so called
 \texttt{fxe} (short for fx \emph{extendible}) functions employ dispatch
 and can be extended. The metaframe information of the current variable
@@ -987,12 +1081,11 @@ This mechanism provides a better overview over all possible classes.
 However, it is necessary to explicitly define every task and every
 subclass. Normally, the \texttt{fxd} mechanism should be preferred. S4
 dummy classes are mainly employed when multiple dispatch becomes
-necessary, see \texttt{fx\_ggplot}.
+necessary (see \protect\hyperlink{fx-ggplot}{\texttt{fx\_ggplot}}).
 
 \subsection{Other concepts}\label{other-concepts}
 
-I have defined a few other objects that come in useful. I will shortly
-elaborate on them here.
+I have defined a few other objects that can be useful.
 
 \subsubsection{Filepaths}\label{filepaths}
 
@@ -1023,16 +1116,16 @@ As in many cases, the default values are modified, for every column
 there is a function
 \texttt{fx\_default\_\textless{}colname\textgreater{}} (e. g.
 \texttt{fx\_default\_fxInfo\_name}) which allows the user to access the
-default values separate from the internal mechanism of
+default values separately from the internal mechanism of
 \texttt{fx\_default}.
 
 A call to \texttt{fx\_default} specifies the columns to be imputed. By
-default, if the data frame has not metaframe, it creates the metaframe
+default, if the data frame has no metaframe, it creates the metaframe
 with one observation for every variable name.
 
 \subsection{Extensions}\label{extensions}
 
-Extensions can be provided via S3 method dispatch over the function
+Extensions may be provided via S3 method dispatch over the function
 \texttt{fxe\_default} and the class
 \texttt{fxd\_default\_\textless{}colname\textgreater{}}. The function
 may depend on the data and on its metaframe. If possible, it is
@@ -1049,27 +1142,27 @@ function for \texttt{fxGeom\_class}:
 \begin{verbatim}
 ## function(data, mf, col, ...)
 ##   fx_default_fxGeom_class(data, mf)
-## <bytecode: 0x00000000462c01a8>
+## <bytecode: 0x0000000046321528>
 ## <environment: namespace:tectr>
 \end{verbatim}
 
 Internally, it calls the more accessible function
-\texttt{fx\_default\_fxGeom\_class} which does the work
-(\href{\%60fx_ggplot\%60}{\#fx-ggplot} will explain how the default
-value is determined).
+\texttt{fx\_default\_fxGeom\_class} which does the work (for details,
+see the documentation).
 
 \subsection{Alternative
 implementations}\label{alternative-implementations}
 
-As with default values in functions in R, there are essentially two
-possible implementations: either the default is specified in the head or
-the function recognizes that the default is needed if the argument has
-the value \texttt{NULL}. Which mechanism is preferable, depends strongly
-on the context. It is recommended that parameters that are specific to
-one function and have a very simple default value (for instance, a
-constant numerical value) are marked via \texttt{NULL} whereas broadly
+Like with respect to general functions in R, there are essentially two
+possible implementations of default values in \texttt{tectr}: either the
+default is specified in the head or the function recognizes that the
+default is needed if the argument has the value \texttt{NULL}. Which
+mechanism is preferable, depends strongly on the context. It is
+recommended that parameters that are specific to one function and have a
+very simple default value (for instance, a constant numerical value) are
+marked via \texttt{NULL} whereas the user may want to access broadly
 applicable parameters that employ a more elaborate inference mechanism
-may be of use for the user and should therefore be implemented via an
+directly. These should therefore be implemented via an
 \texttt{fx\_default} function.
 
 \subsection{Lifecycle}\label{lifecycle}
@@ -1089,7 +1182,8 @@ user. Examples for this information would be
 \begin{itemize}
 \tightlist
 \item
-  the name of the variable which differs from its internal name
+  the name of the variable (which is often different from its internal
+  name)
 \item
   the description or definition of the variable
 \item
@@ -1162,7 +1256,8 @@ are evaluated via \texttt{do.call}, functions are called directly. If
 you specify a function, you should allow for arbitrary parameters via
 \texttt{...} as a function will receive the columns of the metaframe as
 input. A function's first argument should be the corresponding column of
-the data frame. Consider the following example:
+the data frame. Consider the following example, in which the number of
+digits of the computed mean depends on the information in the metaframe:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1189,7 +1284,7 @@ the data frame. Consider the following example:
 
 \subsection{Extensions}\label{extensions-1}
 
-Extensions can be provide via dispatch over \texttt{fxe\_info}. The
+Extensions can be provided via dispatch over \texttt{fxe\_info}. The
 dummy class for a certain topic will be provided by
 \texttt{fxd("info",\ \textless{}topic\textgreater{})}, e. g.
 
@@ -1218,7 +1313,7 @@ development.
 \subsection{General purpose}\label{general-purpose-2}
 
 This function makes \texttt{fx\_info} immediately applicable in a wide
-variety of applications. It renders the data frame returned by
+variety of applications. It transforms the data frame returned by
 \texttt{fx\_info} into a certain \emph{form}. In this case, a sparse
 wrapper around a function from another package often suffices.
 \texttt{fx\_info} may return different formats. Currently, the supported
@@ -1341,7 +1436,8 @@ with the topic ``output''.
 \texttt{fx\_output} is stable and the next step will be to refine and
 extend the output forms. In particular, the next version will provide an
 output form ``report'' which creates a dynamical report of the kind
-which we will render in the \href{fifth\%20chapter}{\#application}.
+which we will render in the \protect\hyperlink{application}{fifth
+chapter}.
 
 \section{\texorpdfstring{\texttt{fx\_write}}{fx\_write}}\label{fx_write}
 
@@ -1350,14 +1446,14 @@ which we will render in the \href{fifth\%20chapter}{\#application}.
 Besides providing summary tables, the main purpose of \texttt{fx\_info}
 is to make information about the variable accessible. The foundation of
 this information can often be imported from a codebook of some form (see
-the \href{application}{\#application}). Adding and editing this
-information -- e. g. correcting typos -- is, however, an awkward
-endeavour in R. A text editor of some sort would be more suitable. The
-\texttt{fx\_write} family of functions attempts to adress this by
-allowing you to export the semantic data to human-readable documents
-which can then be modified. As it returns the data frame with a
-\texttt{filepath} column which refers to the export file, it can be
-easily read in -- this functionality is provided by \texttt{fx\_read}.
+the {[}application{]}). Adding and editing this information -- e. g.
+correcting typos -- is, however, an awkward endeavour in R. A text
+editor of some sort would be more suitable. The \texttt{fx\_write}
+family of functions attempts to adress this by allowing you to export
+the semantic data to human-readable documents which can then be
+modified. As it returns the data frame with a \texttt{filepath} column
+which refers to the export file, it can easily be read in -- this
+functionality is provided by \texttt{fx\_read}.
 
 Currently, only one \texttt{fx\_write} function is implemented:
 \texttt{fx\_write\_json}. This function creates several files in
@@ -1393,27 +1489,27 @@ best alternative.
 This function is at the moment very unstable and should be used with
 caution.
 
-\section{\texorpdfstring{\texttt{fx\_ggplot}}{fx\_ggplot}}\label{fx-ggplot}
+\hypertarget{fx-ggplot}{\section{\texorpdfstring{\texttt{fx\_ggplot}}{fx\_ggplot}}\label{fx-ggplot}}
 
 At last, I present the fx function which has the most extensive
-implementation so far: \texttt{fx\_ggplot} which is concerned with the
-visualization of the data frame. This functions makes a more extensive
+implementation so far: \texttt{fx\_ggplot}, which is concerned with the
+visualization of variables. This functions makes a more extensive
 introduction necessary. The first section will discuss the general
 concept behind \texttt{fx\_ggplot}. We will then discuss the
 implementation in \texttt{tectr} and how it may be extended. The fourth
-section discusse3s possible alternatives and the fifth section
-elaborates how development of the function will progress.
+section discusses possible alternatives and the fifth section elaborates
+how development of the function will progress.
 
 \subsection{\texorpdfstring{Concept of
 \texttt{fx\_ggplot}}{Concept of fx\_ggplot}}\label{concept-of-fx_ggplot}
 
 This function intends to provide a flexible visualization. As an input,
-it accepts aesthetics and then attempts to provide the best
+it accepts aesthetics and then attempts to produce the best
 visualization that is compatible with the specified aesthetics.
 Therefore, it does not answer the question ``What should I know about
 these five variables?''. More specifically, it does not prevent you from
-overplotting, non-sensical aesthetics etc. In my opinion, it is best
-applied by a person who approximately knows what she wants. In this
+overplotting, nonsensical aesthetics etc. In my opinion, it is best
+applied by a person who has an idea of the expected results. In this
 case, it is especially adept at flexible, interactive visualizations
 (see below). For instance, if a statistician is interested in several
 time series of different variables, these should be differently
@@ -1421,28 +1517,28 @@ visualized depending on the available information.
 
 While I will discuss this concept below, I will assume, for now, that
 this method is valid and consider the following question: How do we
-infer the best visualization from a given set of variables? As the
+infer the best visualization from a given set of aesthetics? As the
 function is created within the syntax of \texttt{ggplot2}, our task is
-to infer the set of layers which constructs the plot. These layers fall
-in two categories: \emph{dependent} and \emph{independent} layers.
+to infer the set of elements which constructs the plot. These elements
+belong to two categories: \emph{dependent} and \emph{independent}.
 
-\textbf{Independent} layers will be added for a certain specified
-aesthetics regardless of the other aesthetics. An example would be the x
-axis title. This title only depends on the x aesthetic. The y aesthetic
-has no influence on this layer.
+\textbf{Independent} elements will be added for a certain specified
+aesthetics regardless of the other aesthetics, e. g. the title of the x
+axis. This title only depends on the x aesthetic. The y aesthetic has no
+influence on this layer.
 
 On the other hand, the y aesthetic has a big influence on the question
 what geometry we should add, as the suitable geometry depends on all
-aesthetics. Such layers are therefore called \textbf{dependent layers}.
+aesthetics. Such elements are therefore called \textbf{dependent}.
 
-The determination of independent layers is relatively clear and simple;
-it only depends on one aesthetic and it is therefore easy to define a
-function which depends on certain parameters of the variable and yields
-a layer. On the other hand, the determination of dependent layers is
-messier, as we will se shortly.
+The determination of independent elements is relatively clear and
+simple; it only depends on one aesthetic and it is therefore easy to
+define a function which depends on certain parameters of the variable
+and yields a layer. On the other hand, the determination of dependent
+layers is messier, as we will see below.
 
 For that purpose, I will first present the original concept I had
-implemented for dependent layers: a strictly rule based structure which
+implemented for dependent layers: a strictly rule-based structure which
 specifies, for any combination of relevant aesthetics which layers this
 would yield. For instance, this structure included:
 
@@ -1465,8 +1561,9 @@ rules, the resulting massive dispatch was likely to end in a lot of
 confusion and an unmanageable code base.
 
 I have therefore developed an alternative approach which implements a
-voting system for the dependent layers. As a brief overview this process
-consists of three phases:
+\emph{voting system} for the dependent layers. (In contrast, I will
+refer to my initial idea as a rule-based system.) As a brief overview,
+the voting system consists of three phases:
 
 \begin{itemize}
 \tightlist
@@ -1488,21 +1585,30 @@ consists of three phases:
 This approach may appear unconventional, at first, and I will adress
 some counterarguments below. But before that, I will present the
 implementation and process of extension for both the independent and the
-dependent layers. I will elaborate on the implementation of the
-independent layers in the fourth subsection.
+dependent layers.
 
 I will introduce the implementation with a simple example from the
-diamonds dataset: we will consider as \texttt{x} aesthetic the weight in
-\texttt{carat} and as \texttt{y} aesthetic the \texttt{price}. In the
-end, we will have created the following plot:
+diamonds dataset: we will consider as x aesthetic the weight in carat
+and as y aesthetic the price. In the end, we will have created figure
+\ref{fig:bsp}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{fx_ggplot}\NormalTok{(diamonds, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price))}
+\KeywordTok{fx_ggplot}\NormalTok{(diamonds, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-23-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/bsp-1} 
+
+}
+
+\caption{Example for \texttt{fx\_ggplot}}\label{fig:bsp}
+\end{figure}
+
+
 
 The first step is to infer the default values of the metaframe. All
 required columns for \texttt{fx\_ggplot} are stored in the vector
@@ -1514,41 +1620,25 @@ required columns for \texttt{fx\_ggplot} are stored in the vector
 \StringTok{  }\NormalTok{diamonds }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(carat, price) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{(}\DataTypeTok{columns =}\NormalTok{ fx_ggplot_columns)}
-\KeywordTok{metaframe}\NormalTok{(fx_diamonds) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{kableExtra}\OperatorTok{::}\KeywordTok{kable_styling}\NormalTok{()}
+\KeywordTok{metaframe}\NormalTok{(fx_diamonds)}
 \end{Highlighting}
 \end{Shaded}
 
-name
+\begin{table}
 
-fxGeom\_class
+\caption{\label{tab:fx-diamonds}The default metaframe for \texttt{fx\_ggplot}.}
+\centering
+\begin{tabular}[t]{lllll}
+\toprule
+name & fxGeom\_class & fxGeom\_limits & fxGeom\_trans & fxInfo\_name\\
+\midrule
+carat & Continuous & c(0.2, 5.01) & log10 & carat\\
+price & Continuous & c(326, 18823) & log10 & price\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-fxGeom\_limits
 
-fxGeom\_trans
-
-fxInfo\_name
-
-carat
-
-Continuous
-
-c(0.2, 5.01)
-
-log10
-
-carat
-
-price
-
-Continuous
-
-c(326, 18823)
-
-log10
-
-price
 
 \subsection{Implementation of the independent
 layers}\label{implementation-of-the-independent-layers}
@@ -1561,32 +1651,34 @@ Therefore, the function is once called for the class
 \texttt{fxGeomContinuous} and \texttt{xAesName} and once for the class
 \texttt{fxGeomContinuous} and \texttt{yAesName}. The data frame itself
 is passed to the extendible function as well. The default method will
-simply put together the results of two underlying functions,
-\texttt{fxe\_layer\_scale} and \texttt{fxe\_layer\_other} of which the
+simply concatenate the results of two underlying functions:
+\texttt{fxe\_layer\_scale} and \texttt{fxe\_layer\_other}, of which the
 former is usually more important. \texttt{fxe\_layer\_scale} depends on
 almost all arguments (each with the prefix ``fxGeom\_'') which can be
-provided to a scale. If none are specified the default values will be
-used. Normally, at least the transformation and the limits will be
-specified by \texttt{fx\_default}. In this case, the limits correspond
-to the range of the data and therefore to the default of the scale, as
-well. However, both the x and the y scale are logarithmized.
+provided to a scale in \texttt{ggplot2}. If none are specified the
+default values will be used. Normally, at least the transformation and
+the limits will be inferred by \texttt{fx\_default}. In this case, the
+limits correspond to the range of the data and therefore to the default
+of the scale, as well. However, both the x and the y scale are
+logarithmized in this case.
 
 Whereas the remaining scale arguments are relatively evident and may be
-looked up in the documentation, I will explain for a little bit how the
-transformation is determined. The transformation is inferred by the
-function \texttt{fx\_default\_fxGeom\_trans} which depends on two
-additional parameters: \texttt{fxGeom\_trans\_simple}, a boolean, and
+looked up in the documentation, automatically determining the
+transformation is a bit more complex. It is inferred by the function
+\texttt{fx\_default\_fxGeom\_trans} which depends on two additional
+parameters: \texttt{fxGeom\_trans\_simple}, a boolean, and
 \texttt{fxGeom\_trans\_p.threshold}, a numerical value between 0 and 1.
-\texttt{fxGeom\_trans\_simple} determines how complicated the allowed
-transformations may be. If it is false (the default), the function only
-chooses between three transformations: identity, square root and log. It
-determines the skewness as implemented in the \texttt{moments} package
-\citep{moments} and chooses the transformation with the least absolute
-skewness. To ensure well-definedness, this only applies to positive
-values. In the other case, the identity is chosen by default. On an
-exploratory basis, this rule yielded good results. In the case of the
-weight and price of diamonds, a log-transformed scale is a sensible
-choice, as well.
+\texttt{fxGeom\_trans\_simple} determines how complicated the
+transformations are allowed to be. If it is true (the default), the
+function only chooses between three transformations: identity, square
+root and log. It determines the variable's skewness as implemented in
+the \texttt{moments} package \citep{moments} and chooses the
+transformation with the least absolute skewness. To ensure
+well-definedness, this only applies to positive values. In the case of
+nonpositive values, the identity is chosen by default. On an exploratory
+basis, this rule yielded good results. In the case of the weight and
+price of diamonds, a log-transformed scale is a sensible choice, as
+well.
 
 The aforementioned three transformations are special cases of the more
 general \emph{boxcox-transformations} which have first been proposed by
@@ -1596,12 +1688,14 @@ parameter \(\lambda>=0\) and take the following form:
 \[y^{(\lambda)}=\begin{cases}\frac{y^{\lambda}-1}{\lambda}&\text{ if }\lambda > 0\\\ln y&\text{ if }\lambda = 0\end{cases}\]
 
 Thus, the log transformation is given for \(\lambda=0\), the square root
-transformation by \(\lambda =0.5\) and the identity by \(\lambda=1\).
-These transformation can now be further generalized to allow that \(y\)
-is previously transformed by an offset in order to adapt the
-transformation to negative values, as well. This
+transformation by \(\lambda =0.5\) and the identity by
+\(\lambda=1\).\footnote{More precisely, they are affine transformations
+  of these functions and scale transformations are invariant in affine
+  functions.} These transformation can now be further generalized to
+allow that \(y\) is previously shifted by an offset in order to adapt
+the transformation to negative values, as well. This
 \emph{boxcox-transformation with offset} is employed by the non-simple
-inference mechanism.
+inference mechanism (i. e. \texttt{fxGeom\_trans\_simple\ =\ FALSE}.
 
 The function first uses the Agostino-test as implemented in
 \texttt{moments} as a heuristic whether the data is skewed. If the
@@ -1617,20 +1711,22 @@ heuristic as, for large datasets, it essentially always denies the null
 hypothesis, even if the data is only slightly skewed and the identity
 transformation is still suitable. These leads to many general boxcox
 transformation which do not adhere to common first analyses whereas a
-log- or square root-scale is employed rather frequently. Finally, in
-some instances, the boxcoxfit function does not converge resulting in an
+log- or square root-scale is employed more frequently. Finally, in some
+instances, the boxcoxfit function does not converge resulting in an
 error.
 
-These are the reasons why the simple transformation inference is the
-default.
+These are the reasons why the simple transformation inference is set as
+the default.
 
-Therefore, both scales return a scale with a log transformation.
+Due to the large skewness, both scales therefore return a scale with a
+log transformation.
 
 It might also be interesting to see that \texttt{fx\_info} is applied at
 this stage - this is how the number of missing values was displayed in
 the plots in chapter three. The relevant topic is the ``title'' which
 can be modified by parameters such a \texttt{fxInfo\_title\_na.show} or,
-more generally, \texttt{fxInfo\_title\_stats}. Consider, for instance:
+more generally, \texttt{fxInfo\_title\_stats}. Consider the following
+example with modified statistics and a unit on the y axis.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1643,110 +1739,87 @@ more generally, \texttt{fxInfo\_title\_stats}. Consider, for instance:
             \DataTypeTok{fxInfo_title_stats =} \StringTok{"mean"}\NormalTok{, }
             \DataTypeTok{fxInfo_unit =}\NormalTok{ purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(name, }\OperatorTok{~}\StringTok{ }\ControlFlowTok{if}\NormalTok{(. }\OperatorTok{==}\StringTok{ "price"}\NormalTok{) }\StringTok{"$"} \ControlFlowTok{else} \OtherTok{NULL}\NormalTok{), }
             \DataTypeTok{fxInfo_title_unit.show =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{fx_diamonds }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{metaframe}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{kableExtra}\OperatorTok{::}\KeywordTok{kable_styling}\NormalTok{()}
+\KeywordTok{metaframe}\NormalTok{(fx_diamonds) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(name, }\KeywordTok{starts_with}\NormalTok{(}\StringTok{"fxInfo"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-name
+\begin{table}
 
-fxGeom\_class
-
-fxGeom\_limits
-
-fxGeom\_trans
-
-fxInfo\_name
-
-fxInfo\_title\_na.show
-
-fxInfo\_title\_n.show
-
-fxInfo\_title\_stats
-
-fxInfo\_unit
-
-fxInfo\_title\_unit.show
-
-carat
-
-Continuous
-
-c(0.2, 5.01)
-
-log10
-
-carat
-
-FALSE
-
-TRUE
-
-mean
-
-NULL
-
-TRUE
-
-price
-
-Continuous
-
-c(326, 18823)
-
-log10
-
-price
-
-TRUE
-
-TRUE
-
-mean
-
-\$
-
-TRUE
+\caption{\label{tab:title-ex}Metaframe of diamonds with modified parameters}
+\centering
+\begin{tabular}[t]{lllllll}
+\toprule
+name & fxInfo\_name & fxInfo\_title\_na.show & fxInfo\_title\_n.show & fxInfo\_title\_stats & fxInfo\_unit & fxInfo\_title\_unit.show\\
+\midrule
+carat & carat & FALSE & TRUE & mean & NULL & TRUE\\
+price & price & TRUE & TRUE & mean & \$ & TRUE\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 This modified metaframe results in the following plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{fx_ggplot}\NormalTok{(fx_diamonds, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price))}
+\KeywordTok{fx_ggplot}\NormalTok{(fx_diamonds, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-26-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{bachelor-thesis_files/figure-latex/title-1} 
+
+}
+
+\caption{Visualization with metaframe parameters as in table
+\ref{tab:title-ex}}\label{fig:title}
+\end{figure}
+
+
+
 
 I refer to the documentation for more details.
 
 Another independent layer function is given by \texttt{fxi\_labeller}
 which provides the labeller for a facetting variable. Facetting
 variables are specified in the argument \texttt{facet\_vars} and need to
-be captured by the function \texttt{vars()}:
+be captured by the function \texttt{vars()}. An example can be seen in
+figure \ref{fig:facets}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{diamonds }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(color }\OperatorTok{%in%}\StringTok{ }\NormalTok{LETTERS[}\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{]) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price), }\DataTypeTok{facet_vars =} \KeywordTok{vars}\NormalTok{(color)) }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carat, }\DataTypeTok{y =}\NormalTok{ price), }\DataTypeTok{facet_vars =} \KeywordTok{vars}\NormalTok{(color)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bachelor-thesis_files/figure-latex/unnamed-chunk-27-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{bachelor-thesis_files/figure-latex/facets-1} 
+
+}
+
+\caption{Facetting in \texttt{fx\_ggplot}}\label{fig:facets}
+\end{figure}
+
+
 
 \subsection{Implementation of the voting
 system}\label{implementation-of-the-voting-system}
+
+\subsubsection{Nomination}\label{nomination}
 
 The dependent layers are determined by the internal function
 \texttt{fxi\_layer\_complete}. The nominations are handled by
 \texttt{fxe\_layer\_complete\_nominate}, which is dispatched over
 \texttt{fx\_geom} and \texttt{aes\_name}, as well. The function accepts
 the parameter \texttt{fxGeom\_nominations} which may provide additional
-nominations. As these are absence, however, only the default nominations
-are provided.
+nominations. As these are absent, only the default nominations are
+provided.
 
 These are handled by the S3 class \texttt{nominations} which returns,
 depending on the access function, all layers, scales, facets, coordinate
@@ -1779,25 +1852,29 @@ nominations:
 \end{itemize}
 
 Evidently, these layers are suitable for very different plots. If you
-consider which layers to nominate, you can simply choose all that make
-sense in some combination. Votes and vetos will take care of the rest.
+consider which layers to nominate, you can simply choose all those that
+make sense for any combination that includes this aesthetic and
+\texttt{fxGeom\_class}. Votes and vetos will take care of the rest.
 
 Besides supplying additional nominations via
 \texttt{fxGeom\_nominations}, you can extend the function by importing
 the S4 generic and defining a new method.
 
+\subsubsection{Vetoes}\label{vetoes}
+
 Going on, the function \texttt{fxe\_layer\_complete\_veto} is
 responsible for the vetoes. Its structure is
 
 \begin{verbatim}
-fxe_layer_complete_veto(nomination, fx_geom, aes_name, data, ...)
+fxe_layer_complete_veto(nomination, fx_geom, aes_name, data, ..., fxGeom_veto = NULL)
 \end{verbatim}
 
-and it dispatches over \texttt{fx\_geom} and \texttt{aes\_name}. The
-internal function calls the appopriate method for every nomination. The
-method simply returns a boolean where \texttt{FALSE} causes no action
-and \texttt{TRUE} indicates that the nomination ought to be removed.
-Consider, for instance, the call below:
+and it dispatches over \texttt{fx\_geom} and \texttt{aes\_name}.
+\texttt{fxGeom\_veto} can specify a function which vetoes additional
+nominations. The internal function calls the appopriate method for every
+nomination. The method simply returns a boolean where \texttt{FALSE}
+causes no action and \texttt{TRUE} indicates that the nomination ought
+to be removed. Consider, for instance, the call below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1809,20 +1886,23 @@ Consider, for instance, the call below:
 ## [1] TRUE
 \end{verbatim}
 
-This aesthetic vetoes a density plot because this would require a
-missing y aesthetic. Consequently, only the scatter plot and the
+This aesthetic vetoes a density plot because it is incompatible with an
+existing y aesthetic. Consequently, only the scatter plot and the
 hexagonal heatmap remain as valid options (all other nominations from
 the y aesthetic have been vetoed, as well).
+
+\subsubsection{Votes}\label{votes}
 
 Finally, the following function casts the votes:
 
 \begin{verbatim}
-fxe_layer_complete_vote(nomination, fx_geom, aes_name, data, ...)
+fxe_layer_complete_vote(nomination, fx_geom, aes_name, data, ..., fxGeom_vote)
 \end{verbatim}
 
-It dispatches over the same arguments and returns, for a given
-nomination an integer which represents the votes for a certain
-nomination. In this case, we observe:
+\texttt{fxGeom\_vote} can specify a function which may cast additional
+votes. \texttt{fxe\_layer\_complete\_vote} dispatches over the same
+arguments and returns, for a given nomination, an integer which
+represents the votes for a certain nomination. In this case, we observe:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1847,7 +1927,8 @@ nomination. In this case, we observe:
 The same applies to the y aesthetic. Why does the heatmap receive more
 votes? The reason lies in the large amount of data -- the threshold at
 which the heatmap receives the majority of votes can be determined by
-the parameter \texttt{fxGeom\_hex.threshold}.
+the parameter \texttt{fxGeom\_hex.threshold} and its default is set to
+1000.
 
 The hexagonal heatmap therefore receives 4 votes whereas its only rival,
 the scatter plot, receives 0 votes. From these steps, the above pictured
@@ -1864,12 +1945,12 @@ lists advantages and adresses possible disadvantages.
 The partition of the \texttt{fx\_ggplot} functionality into these
 partial functions allows the user to build a complex visualization by
 many very simple steps; he only needs to think about one scale, one
-possible resp. impossible visualization at a time. If a visualization
-does not correspond to the user's need, it is simple enough to fix it;
-she needs not define an entire new class but only modify certain
-parameters and, if a the need for a new class arises, its definition is
-both shorter and easier. This corresponds to the philosophy of
-\texttt{tectr} that it should be easy to integrate into the common
+possible (resp. impossible) visualization and so on at a time. If a
+visualization does not correspond to the user's need, it is simple
+enough to fix it; she needs not define an entire new class but only
+modify certain parameters and if the need for a new class arises, its
+definition is both shorter and easier. This corresponds to the guideline
+of \texttt{tectr} that it should be easy to integrate into the common
 explorative process of a statistician.
 
 \subsubsection{High flexibility}\label{high-flexibility}
@@ -1889,25 +1970,28 @@ A possible argument against the voting system might be the following:
 \begin{quote}
 It is very intransparent what arguments will result in which plot. All
 these different functions occlude what could better be solved by an
-independent and a dependent layer function where the independent layer
-function is simply a rule-based process. The amount of time such
-detailedness would cost is easily exceeded by the follow-up process
-regarding an unsuitable visualization in the voting system where the
-user needs to consider three different functions and identify a suitable
-solution which he then needs to validate by some kind of testing.
-Finally, even when he has found a solution, changes in the functions of
-another aesthetic might result in an unsuitable plot once again. The
-voting system arises from laziness in the wrong domain and required a
-higher effort for an equally good result than a rule-based system.
+independent and a dependent element function where the independent
+element function is simply a rule-based process.
+
+The amount of time such detailedness would require is easily exceeded by
+the follow-up process regarding an unsuitable visualization in the
+voting system. The user then needs to consider three different functions
+and identify a suitable solution which he must validate by some kind of
+testing. Finally, even when he has found a solution, changes in the
+functions of another aesthetic might result in an unsuitable plot once
+again.
+
+The voting system arises from laziness in the wrong domain and requires
+a higher effort than a rule-based system for a coequal result.
 \end{quote}
 
 As applies to most arguments with regards to programs in such early
 stages of development, the most reliable answer would be to wait and see
-which system works best. However, I would argue for a few heuristics
-that are on my side. Firstly, I would argue that the amount of time for
-such an adaptation is limited, as the user can basically follow a -step
-program: let us assume that the dependent elements x are shown but the
-user would like to see the elements y.
+which system works best. However, I would argue in favor of a few
+heuristics that are on my side. Firstly, I would argue that the amount
+of time for such an adaptation is limited, as the user can basically
+follow a -step program: let us assume that the dependent elements x are
+shown but the user would like to see the elements y.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1922,8 +2006,8 @@ user would like to see the elements y.
   See if x should be vetoed. If it should, implement the veto and see if
   the plot changes.
 \item
-  See where x and where y gathers its vote. Change the voter attribution
-  at the appropriate place.
+  See where x and y gather their vote. Change the voting patterns at the
+  appropriate place.
 \end{enumerate}
 
 At any step, it might become useful to define a new class. However, this
@@ -1932,10 +2016,10 @@ definitions whereas the rigidity of the rule-based system appears to me
 more vulnerable to modifications.
 
 This also applies to the second part of the argument. Of course, changes
-might affect certain plots. However, such a change is, in my estimate,
-more likely in a rule-based system, as the voting system cuts the
-function some slack and allows the user to demonstrate the importance of
-a certain nomination.
+might affect certain plots. However, such a negative change is, in my
+estimate, more likely in a rule-based system, as the voting system cuts
+the function some slack and allows the user to demonstrate the
+importance of a certain nomination in a flexible manner.
 
 \subsubsection{What about numbers?}\label{what-about-numbers}
 
@@ -1943,7 +2027,7 @@ This is, of course, a good starting point for a new criticism. It is
 actually a special case of the intransparency argument:
 
 \begin{quote}
-Even if these numbers, if applied properly, supported a useful
+Even if these numbers, if applied properly, support a useful
 visualization system, it is too hard to apply them properly. Humans are
 not good at handling arbitrary numbers and in a complex system, the
 effect of these numbers is completely intransparent.
@@ -1955,38 +2039,38 @@ employing a rule-based system but rather to make these numbers less
 arbitrary by agreeing on certain standards. After a few application,
 analysis of the resulting problems might yield a good guideline.
 Complementary to such an approach, an automated system might be able to
-compensate human inability. The statistician might be suggested
-different corresponding plots for certain variable combination and can
-then choose the best among those plots. Following a certain heuristic,
-the automated system could infer the appropriate voting patterns.
+compensate for human inability. For instance, an automate system might
+infer appropriate voting patterns by letting the statistician rank
+different plots which correspond to certain specified aesthetics.
 
 \subsubsection{What about letting it
 go?}\label{what-about-letting-it-go}
 
 \begin{quote}
-I agree that the voting system seems to more suitable for automatic
+I agree that the voting system appears more suitable for automatic
 visualization than a rule-based process. Regardless, these automatic
 visualizations are a fruitless endeavour. The independent elements yield
 a good adpatation of the plot but the dependent elements adress a
-problem in a very complicated manner that does not arise as much. In
-most cases there are only a few different kinds of plots that are
+problem in a very complicated manner that does not arise as much.
+
+In most cases there are only a few different kinds of plots that are
 employed and it is easier to define them directly and from case to case
 manually. Such a definition would be improved by integrating independent
 elements.
 \end{quote}
 
-Again, the most reliable response to this is to try both methods out and
-compare the results. However, I would like to raise a different point at
-this place: the definition of the dependent elements could very well
-occur with the aim of building a few kinds of visualizations. This would
-rather be a good heuristic from which to start. After building such a
-model, whenever the need of a new visualization arises it should become
-increasingly simple to adapt the system such that the new combinations
-fit together. Therefore, the very situation that has been described in
-the counterargument might also serve as a suitable situation for the
-implementation of a voting system.
+Again, the most reliable response to this is to implement both methods,
+apply them and compare the results. However, I would like to raise a
+different point at this place: the definition of the dependent elements
+could very well occur with the aim of building a few kinds of
+visualizations. This might even be a good starting point for a
+heuristic. After building such a model, whenever the need of a new
+visualization arises it should become increasingly simple to adapt the
+system such that the new combinations fit together. Therefore, the
+situation that has been described in the counterargument might also
+serve as a suitable situation for the implementation of a voting system.
 
-Nevertheless, the answer to this counter-arguments needs not be binary.
+Nevertheless, the answer to this counter-argument needs not be binary.
 We might very well employ dependent elements with voting system in
 certain contexts whereas a simpler solution might be suitable in other
 applications.
@@ -1995,21 +2079,23 @@ applications.
 development}\label{lifecycle-and-further-development}
 
 As I have repeatedly remarked in the previous paragraphs, I believe
-further validation of the current approach to be crucial. Thus, I
-believe \texttt{fx\_ggplot} in its current implementation to be
-potentially useful but far from stable. In particular, the internal
-nomination and investigation of the plot elements are a bit awkward and
-I can imagine that these functionalities should be properly nested in
-the \texttt{ggproto} system of \texttt{ggplot2}. However, determining
-this need and a suitable implementation requires more practical
-experience with the voting system.
+further validation of the current approach to be crucial. Thus,
+\texttt{fx\_ggplot} in its current implementation is potentially useful
+but far from stable. In particular, the internal nomination process and
+investigation of the plot elements are a bit awkward. A proper
+implementation within the \texttt{ggproto} system of \texttt{ggplot2}
+might alleviate these problems. However, determining this need and a
+suitable implementation requires more practical experience with the
+voting system.
 
 I will therefore apply the voting system to more databases to determine
 its strengths and weaknesses. In particular, I will consider possible
 voting pattern standards and a more suitable implementations of the
-internals.
-
-Indeed, a first application can be found in the next chapter.
+internals. Another important question in this regard has already been
+raised in the last chapter: perhaps, aesthetics are not optimally suited
+to specify the desired plot. For instance, the question whether a
+certain variable is represented by fill or colour is largely dependent
+on the layer. Perhaps another mapping would provide better results.
 
 \chapter{Final Words}\label{final-words}
 
