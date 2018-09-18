@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+<meta name="author" content="Samuel Lippl">
+
+
+<meta name="date" content="2018-09-18">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="packages.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A user interface for complex datsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#note"><i class="fa fa-check"></i>Note</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methodology</a><ul>
+<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#v-dem"><i class="fa fa-check"></i><b>2.1</b> V-Dem</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="methods.html"><a href="methods.html#introduction-to-the-database"><i class="fa fa-check"></i><b>2.1.1</b> Introduction to the database</a></li>
+<li class="chapter" data-level="2.1.2" data-path="methods.html"><a href="methods.html#vdem.tectr"><i class="fa fa-check"></i><b>2.1.2</b> <code>vdem.tectr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="methods.html"><a href="methods.html#package-construction"><i class="fa fa-check"></i><b>2.2</b> Package construction</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>3</b> First look</a><ul>
+<li class="chapter" data-level="3.1" data-path="example.html"><a href="example.html#fx_ggplot-basics"><i class="fa fa-check"></i><b>3.1</b> <code>fx_ggplot</code>: Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="example.html"><a href="example.html#modifying-the-default-values"><i class="fa fa-check"></i><b>3.2</b> Modifying the default values</a></li>
+<li class="chapter" data-level="3.3" data-path="example.html"><a href="example.html#summary"><i class="fa fa-check"></i><b>3.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="concept.html"><a href="concept.html"><i class="fa fa-check"></i><b>4</b> Description of <code>tectr</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="concept.html"><a href="concept.html#effective-explicitness-a-perspective-of-knowledge"><i class="fa fa-check"></i><b>4.1</b> Effective Explicitness: A perspective of knowledge</a></li>
+<li class="chapter" data-level="4.2" data-path="concept.html"><a href="concept.html#underlying-structure"><i class="fa fa-check"></i><b>4.2</b> Underlying structure</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="concept.html"><a href="concept.html#the-metaframe"><i class="fa fa-check"></i><b>4.2.1</b> The metaframe</a></li>
+<li class="chapter" data-level="4.2.2" data-path="concept.html"><a href="concept.html#extending-fx-functions"><i class="fa fa-check"></i><b>4.2.2</b> Extending fx functions</a></li>
+<li class="chapter" data-level="4.2.3" data-path="concept.html"><a href="concept.html#other-concepts"><i class="fa fa-check"></i><b>4.2.3</b> Other concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="concept.html"><a href="concept.html#fx_default"><i class="fa fa-check"></i><b>4.3</b> <code>fx_default</code></a><ul>
+<li class="chapter" data-level="4.3.1" data-path="concept.html"><a href="concept.html#general-purpose"><i class="fa fa-check"></i><b>4.3.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.3.2" data-path="concept.html"><a href="concept.html#extensions"><i class="fa fa-check"></i><b>4.3.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.3.3" data-path="concept.html"><a href="concept.html#alternative-implementations"><i class="fa fa-check"></i><b>4.3.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.3.4" data-path="concept.html"><a href="concept.html#lifecycle"><i class="fa fa-check"></i><b>4.3.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="concept.html"><a href="concept.html#fx_info"><i class="fa fa-check"></i><b>4.4</b> <code>fx_info</code></a><ul>
+<li class="chapter" data-level="4.4.1" data-path="concept.html"><a href="concept.html#general-purpose-1"><i class="fa fa-check"></i><b>4.4.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.4.2" data-path="concept.html"><a href="concept.html#extensions-1"><i class="fa fa-check"></i><b>4.4.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.4.3" data-path="concept.html"><a href="concept.html#lifecycle-1"><i class="fa fa-check"></i><b>4.4.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="concept.html"><a href="concept.html#fx_output"><i class="fa fa-check"></i><b>4.5</b> <code>fx_output</code></a><ul>
+<li class="chapter" data-level="4.5.1" data-path="concept.html"><a href="concept.html#general-purpose-2"><i class="fa fa-check"></i><b>4.5.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.5.2" data-path="concept.html"><a href="concept.html#extensions-2"><i class="fa fa-check"></i><b>4.5.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.5.3" data-path="concept.html"><a href="concept.html#lifecycle-2"><i class="fa fa-check"></i><b>4.5.3</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="concept.html"><a href="concept.html#fx_write"><i class="fa fa-check"></i><b>4.6</b> <code>fx_write</code></a><ul>
+<li class="chapter" data-level="4.6.1" data-path="concept.html"><a href="concept.html#general-purpose-3"><i class="fa fa-check"></i><b>4.6.1</b> General purpose</a></li>
+<li class="chapter" data-level="4.6.2" data-path="concept.html"><a href="concept.html#extensions-3"><i class="fa fa-check"></i><b>4.6.2</b> Extensions</a></li>
+<li class="chapter" data-level="4.6.3" data-path="concept.html"><a href="concept.html#alternative-implementations-1"><i class="fa fa-check"></i><b>4.6.3</b> Alternative implementations</a></li>
+<li class="chapter" data-level="4.6.4" data-path="concept.html"><a href="concept.html#lifecycle-3"><i class="fa fa-check"></i><b>4.6.4</b> Lifecycle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="concept.html"><a href="concept.html#fx-ggplot"><i class="fa fa-check"></i><b>4.7</b> <code>fx_ggplot</code></a><ul>
+<li class="chapter" data-level="4.7.1" data-path="concept.html"><a href="concept.html#concept-of-fx_ggplot"><i class="fa fa-check"></i><b>4.7.1</b> Concept of <code>fx_ggplot</code></a></li>
+<li class="chapter" data-level="4.7.2" data-path="concept.html"><a href="concept.html#implementation-of-the-independent-layers"><i class="fa fa-check"></i><b>4.7.2</b> Implementation of the independent layers</a></li>
+<li class="chapter" data-level="4.7.3" data-path="concept.html"><a href="concept.html#implementation-of-the-voting-system"><i class="fa fa-check"></i><b>4.7.3</b> Implementation of the voting system</a></li>
+<li class="chapter" data-level="4.7.4" data-path="concept.html"><a href="concept.html#discussion-and-alternatives"><i class="fa fa-check"></i><b>4.7.4</b> Discussion and alternatives</a></li>
+<li class="chapter" data-level="4.7.5" data-path="concept.html"><a href="concept.html#lifecycle-and-further-development"><i class="fa fa-check"></i><b>4.7.5</b> Lifecycle and further development</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="application.html"><a href="application.html"><i class="fa fa-check"></i><b>5</b> Application</a><ul>
+<li class="chapter" data-level="5.1" data-path="application.html"><a href="application.html#the-metaframe-1"><i class="fa fa-check"></i><b>5.1</b> The metaframe</a></li>
+<li class="chapter" data-level="5.2" data-path="application.html"><a href="application.html#fx_info-1"><i class="fa fa-check"></i><b>5.2</b> <code>fx_info</code></a></li>
+<li class="chapter" data-level="5.3" data-path="application.html"><a href="application.html#fx_ggplot"><i class="fa fa-check"></i><b>5.3</b> <code>fx_ggplot</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="example.html"><a href="example.html#summary"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>A</b> Packages</a></li>
+<li class="chapter" data-level="B" data-path="vardescs.html"><a href="vardescs.html"><i class="fa fa-check"></i><b>B</b> Description of the high-level indices</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vardescs" class="section level1">
+<h1><span class="header-section-number">B</span> Description of the high-level indices</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">described_vars &lt;-
+<span class="st">  </span>vdem <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">metaframe</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(part_num <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, chapter_num <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>magrittr<span class="op">::</span><span class="kw">extract2</span>(<span class="st">&quot;name&quot;</span>)
+described_vars</code></pre></div>
+<pre><code>##  [1] &quot;v2x_polyarchy&quot;          &quot;v2x_polyarchy_codehigh&quot;
+##  [3] &quot;v2x_polyarchy_codelow&quot;  &quot;v2x_libdem&quot;            
+##  [5] &quot;v2x_libdem_codehigh&quot;    &quot;v2x_libdem_codelow&quot;    
+##  [7] &quot;v2x_partipdem&quot;          &quot;v2x_partipdem_codehigh&quot;
+##  [9] &quot;v2x_partipdem_codelow&quot;  &quot;v2x_delibdem&quot;          
+## [11] &quot;v2x_delibdem_codehigh&quot;  &quot;v2x_delibdem_codelow&quot;  
+## [13] &quot;v2x_egaldem&quot;            &quot;v2x_egaldem_codehigh&quot;  
+## [15] &quot;v2x_egaldem_codelow&quot;</code></pre>
+<p>We can see that every third variable is a new index. We now print a summary table with the question, the mean and the three middle quantiles at the beginning. Every chapter has the name as a header, the question and the clarification and finally contains a visualization of the distribution and the time series.</p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="50%" />
+<col width="3%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Question</th>
+<th align="right">mean</th>
+<th align="right">quantile: 25%</th>
+<th align="right">quantile: 50%</th>
+<th align="right">quantile: 75%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Electoral democracy index</td>
+<td align="left">To what extent is the ideal of electoral democracy in its fullest sense achieved?</td>
+<td align="right">0.26</td>
+<td align="right">0.06</td>
+<td align="right">0.17</td>
+<td align="right">0.37</td>
+</tr>
+<tr class="even">
+<td align="left">Liberal democracy index</td>
+<td align="left">To what extent is the ideal of liberal democracy achieved?</td>
+<td align="right">0.22</td>
+<td align="right">0.06</td>
+<td align="right">0.12</td>
+<td align="right">0.29</td>
+</tr>
+<tr class="odd">
+<td align="left">Participatory democracy index</td>
+<td align="left">To what extent is the ideal of participatory democracy achieved?</td>
+<td align="right">0.19</td>
+<td align="right">0.04</td>
+<td align="right">0.10</td>
+<td align="right">0.29</td>
+</tr>
+<tr class="even">
+<td align="left">Deliberative democracy index</td>
+<td align="left">To what extent is the ideal of deliberative democracy achieved?</td>
+<td align="right">0.23</td>
+<td align="right">0.04</td>
+<td align="right">0.12</td>
+<td align="right">0.37</td>
+</tr>
+<tr class="odd">
+<td align="left">Egalitarian democracy index</td>
+<td align="left">To what extent is the ideal of egalitarian democracy achieved?</td>
+<td align="right">0.24</td>
+<td align="right">0.07</td>
+<td align="right">0.15</td>
+<td align="right">0.33</td>
+</tr>
+</tbody>
+</table>
+<p>[1] “## Electoral democracy index (NAs: 2422)### Questionwhat extent is the ideal of electoral democracy in its fullest sense achieved?### Clarificationelectoral principle of democracy seeks to embody the core value of making rulers responsive to citizens, achieved through electoral competition for the electorate’s approval under circumstances when suffrage is extensive; political and civil society organizations can operate freely; elections are clean and not marred by fraud or systematic irregularities; and elections affect the composition of the chief executive of the country. In between elections, there is freedom of expression and an independent media capable of presenting alternative views on matters of political relevance. In the V-Dem conceptual scheme, electoral democracy is understood as an essential element of any other conception of representative democracy — liberal, participatory, deliberative, egalitarian, or some other.” [1] “## Liberal democracy index (NAs: 3600)### Questionwhat extent is the ideal of liberal democracy achieved?### Clarificationliberal principle of democracy emphasizes the importance of protecting individual and minority rights against the tyranny of the state and the tyranny of the majority. The liberal model takes a &quot;negative&quot; view of political power insofar as it judges the quality of democracy by the limits placed on government. This is achieved by constitutionally protected civil liberties, strong rule of law, an independent judiciary, and effective checks and balances that, together, limit the exercise of executive power. To make this a measure of liberal democracy, the index also takes the level of electoral democracy into account.” [1] “## Participatory democracy index (NAs: 8699)### Questionwhat extent is the ideal of participatory democracy achieved?### Clarificationparticipatory principle of democracy emphasizes active participation by citizens in all political processes, electoral and non-electoral. It is motivated by uneasiness about a bedrock practice of electoral democracy: delegating authority to representatives. Thus, direct rule by citizens is preferred, wherever practicable. This model of democracy thus takes suffrage for granted, emphasizing engagement in civil society organizations, direct democracy, and subnational elected bodies. To make it a measure of participatory democracy, the index also takes the level of electoral democracy into account.” [1] “## Deliberative democracy index (NAs: 8650)### Questionwhat extent is the ideal of deliberative democracy achieved?### Clarificationdeliberative principle of democracy focuses on the process by which decisions are reached in a polity. A deliberative process is one in which public reasoning focused on the common good motivates political decisions—as contrasted with emotional appeals, solidary attachments, parochial interests, or coercion. According to this principle, democracy requires more than an aggregation of existing preferences. There should also be respectful dialogue at all levels—from preference formation to final decision—among informed and competent participants who are open to persuasion. To make it a measure of not only the deliberative principle but also of democracy, the index also takes the level of electoral democracy into account.” [1] “## Egalitarian democracy index (NAs: 8831)### Questionwhat extent is the ideal of egalitarian democracy achieved?### Clarificationegalitarian principle of democracy holds that material and immaterial inequalities inhibit the exercise of formal rights and liberties, and diminish the ability of citizens from all social groups to participate. Egalitarian democracy is achieved when 1 rights and freedoms of individuals are protected equally across all social groups; and 2 resources are distributed equally across all social groups; 3 groups and individuals enjoy equal access to power. To make it a measure of egalitarian democracy, the index also takes the level of electoral democracy into account.” [1] “”</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["bachelor-thesis.pdf", "bachelor-thesis.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -237,7 +237,7 @@ Further information can be found in the documentation.
 
 ### Lifecycle
 
-`fx_output` is stable and the next step will be to refine and extend the output forms. In particular, the next version will provide an output form "report" which creates a dynamical report of the kind which we will render in the [fifth chapter](#application).
+`fx_output` is stable and the next step will be to refine and extend the output forms. In particular, the next version will provide an output form "report" which creates a dynamical report of all variables.
 
 ## `fx_write`
 
@@ -356,7 +356,7 @@ fx_diamonds <-
             fxInfo_unit = purrr::map(name, ~ if(. == "price") "$" else NULL), 
             fxInfo_title_unit.show = TRUE)
 metaframe(fx_diamonds) %>% 
-  select(name, starts_with("fxInfo"))
+  select(name, fxInfo_name:fxInfo_unit)
 ```
 
 ```{r title-ex, echo = FALSE}
@@ -374,14 +374,14 @@ fx_diamonds %>%
   select(name, starts_with("fxInfo")) %>% 
   kable(
     booktabs = TRUE, 
-    caption = "Metaframe of diamonds with modified parameters"
+    caption = "Metaframe of diamonds with modified parameters (Extract)"
   )
 ```
 
 
 This modified metaframe results in the following plot:
 
-```{r title, fig.cap = "(ref:title)", out.width='70%', fig.align='center'}
+```{r title, fig.cap = "(ref:title)", out.width='50%', fig.align='center'}
 fx_ggplot(fx_diamonds, aes(x = carat, y = price)) + 
   my_theme
 ```

@@ -9,15 +9,15 @@ An important property of this conciseness is that the code is still easy to read
 
 * *Specialized functions:* `read.csv` essentially calls `read.table` with a few modified parameters. Nonetheless, the function immediately makes it clear what this line of code is supposed to achieve.
 
-* *Default values:* The user does not need to specify every single parameter of a function. For instance, it is helpful that `read.table` contains the parameter `na.strings` that allows the user to specify values that encode `NA`s. However, in most cases, `NA`s are encoded by the string `NA` or a missing value [^1]. By setting default values, the user only needs to think about this parameter when the file structure is out of the ordinary.
+* *Default values:* The user does not need to specify every single parameter of a function. For instance, it is helpful that `read.table` contains the parameter `na.strings` that allows the user to specify values that encode `NA`s. However, in most cases, `NA`s are encoded by the string `NA` or a missing value[^1]. By setting default values, the user only needs to think about this parameter when the file structure is out of the ordinary.
 
 [^1]: The latter is only implemented in `read_delim` from the package `readr` but the advantage of default values remains valid nevertheless.
 
-These advantages are certainly not unique to R. They are designed to minimize the expected time a user needs to spend with coding his decisions while maintaining easy reproducibility of his work. On the other hand, if there are more complicated tasks to undertake, a consistent interface allows the user to do that, as well.
+These advantages are certainly not unique to R. They are designed to minimize the expected time a user needs to spend with coding his decisions while maintaining easy reproducibility of his work. If there are more complicated tasks to undertake, a consistent interface allows the user to do that, as well.
 
 A good example for this concept is the package `stringr` [@stringr]. Functions like `str_trim` (trim whitespace) or `str_to_title` (capitalize) make special use cases easily accessible. On the other hand, `str_replace` allows more complicated operations with regular expressions using the same consistent interface.
 
-Things, however, start to fall apart when one attempts to modify default values. This is sometimes possible by setting the global options in R; however, relying on these makes reproducibility harder. On the other hand, one could write new functions to solve this problem. This is, however, more laborious than such an endeavour needs to be.
+Things, however, start to fall apart when one attempts to modify default values. These modifications are sometimes possible by setting the global options in R; however, relying on the global options makes reproducibility harder. On the other hand, one could write new functions to solve this problem. This is, however, more laborious than such an endeavour needs to be.
 
 The need to modify default values arises, for instance, in the analysis datasets with many variables as they occur in the social sciences. As an example, I will consider the Varieties of Democracy ([V-Dem](v-dem.net)) dataset which produces indicators of democracy [@vdem2018, @Pemstein2018]. It contains many variables on different aspects of democracy with values per country and year. If one wishes to visualize the development of this variable over time, a simple line plot often makes sense. Consider, for instance, the variable which characterizes the freedom of religion on a scale between 0 and 4 for Germany in figure \@ref(fig:ex1).
 
@@ -29,7 +29,7 @@ df_vdem %>%
   my_theme
 ```
 
-Although there are considerable changes within a single year, freedom of religion is a continuous value and linear interpolation of this development within a year makes sense.
+Although there are large changes within a single year, freedom of religion is a continuous value and linear interpolation of this development within a year makes sense.
 
 Considering the variable `v2elvotbuy_osp`, however, a line plot makes less sense. This variable captures whether there was evidence of vote buying during a national election and is therefore only present in years where there has been a national election. A step plot as depicted in figure \@ref(fig:ex2) seems more sensible in this case as the current value would always refer to the last election.
 
@@ -50,3 +50,7 @@ In summary, there are many considerations one needs to regard in such a visualiz
 In summary, R provides powerful opportunities to outsource everyday thought processes in data analysis. However, adapting these mechanisms for application-specific thought processes is expensive and difficult. A broad framework for such an adaptation would enable researchers to think about certain decisions (like the visualization of a specific variable) once and then be done with it. Both the researcher himself and his colleagues who might not need to think about this at all would benefit from this.
 
 In this Bachelor's Thesis, I describe such a framework, implement it as the package `tectr` in R and apply it to the V-Dem dataset. The [next chapter](#methods) discusses some details regarding the package construction and the dataset before we get a [first look](#example) in the third chapter. The [fourth chapter](#concept) will present the framework and the implementation in a more specific way. [Chapter five](#application) presents the application of `tectr` to the V-DEM dataset and the [final chapter](#summary) summarizes the thesis and discusses the next steps regarding `tectr`.
+
+## Note {-}
+
+When I consider a statistician as an example, I will refer to them by a singular "they" as I deem this the most inclusive. Regarding the possible objection that this is ungrammatical, I will refer to a blog post [@Soanes2012] which discusses this question.

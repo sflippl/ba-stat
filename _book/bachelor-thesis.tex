@@ -115,7 +115,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-15}
+    \date{2018-09-18}
 
 \usepackage{booktabs, titlesec, blindtext}
 \usepackage[svgnames]{xcolor}
@@ -195,7 +195,7 @@
 %	AUTHOR SECTION
 %----------------------------------------------------------------------------------------
 
-{\Large 30. Juni 2018}\\[1cm]
+{\Large 16. September 2018}\\[1cm]
 \begin{Large}
 \textsc{Author}\\Samuel Lippl\\[1cm]
 \textsc{Supervisor}\\
@@ -216,19 +216,8 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbständig angefertigt, 
 \begin{tabular}{c}
 \\\\\\
 \\\hline
-Samuel Lippl, 15.09.2018
+Samuel Lippl, 16.09.2018
 \end{tabular}
-
-\chapter*{Abstract}\label{abstract}
-
-
-This report will provide an overview over outlier detection in R. It
-starts by discussing some general principles of outlier detection.
-Linear methods and their nonlinear extensions are presented next. Along
-the general methods, examples of application and an appropriate
-methodology in R are introduced. The report will be concluded by a
-discussion of method evaluation as well as a comparison of the different
-introduced algorithms.
 
 \tableofcontents
 
@@ -261,7 +250,7 @@ on the specific domain of statistical analysis for which R was created:
   \texttt{read.table} contains the parameter \texttt{na.strings} that
   allows the user to specify values that encode \texttt{NA}s. However,
   in most cases, \texttt{NA}s are encoded by the string \texttt{NA} or a
-  missing value \footnote{In some cases, these modifications are so
+  missing value\footnote{In some cases, these modifications are so
     simple that they happen in the fx function and the fxi function is
     omitted.}. By setting default values, the user only needs to think
   about this parameter when the file structure is out of the ordinary.
@@ -269,9 +258,9 @@ on the specific domain of statistical analysis for which R was created:
 
 These advantages are certainly not unique to R. They are designed to
 minimize the expected time a user needs to spend with coding his
-decisions while maintaining easy reproducibility of his work. On the
-other hand, if there are more complicated tasks to undertake, a
-consistent interface allows the user to do that, as well.
+decisions while maintaining easy reproducibility of his work. If there
+are more complicated tasks to undertake, a consistent interface allows
+the user to do that, as well.
 
 A good example for this concept is the package \texttt{stringr}
 \citep{stringr}. Functions like \texttt{str\_trim} (trim whitespace) or
@@ -281,10 +270,11 @@ complicated operations with regular expressions using the same
 consistent interface.
 
 Things, however, start to fall apart when one attempts to modify default
-values. This is sometimes possible by setting the global options in R;
-however, relying on these makes reproducibility harder. On the other
-hand, one could write new functions to solve this problem. This is,
-however, more laborious than such an endeavour needs to be.
+values. These modifications are sometimes possible by setting the global
+options in R; however, relying on the global options makes
+reproducibility harder. On the other hand, one could write new functions
+to solve this problem. This is, however, more laborious than such an
+endeavour needs to be.
 
 The need to modify default values arises, for instance, in the analysis
 datasets with many variables as they occur in the social sciences. As an
@@ -306,7 +296,7 @@ Germany in figure \ref{fig:ex1}.
 \caption{Example: Freedom of religion in Germany over time}\label{fig:ex1}
 \end{figure}
 
-Although there are considerable changes within a single year, freedom of
+Although there are large changes within a single year, freedom of
 religion is a continuous value and linear interpolation of this
 development within a year makes sense.
 
@@ -359,6 +349,14 @@ of \texttt{tectr} to the V-DEM dataset and the
 \protect\hyperlink{summary}{final chapter} summarizes the thesis and
 discusses the next steps regarding \texttt{tectr}.
 
+\section*{Note}\label{note}
+
+
+When I consider a statistician as an example, I will refer to them by a
+singular ``they'' as I deem this the most inclusive. Regarding the
+possible objection that this is ungrammatical, I will refer to a blog
+post \citep{Soanes2012} which discusses this question.
+
 \hypertarget{methods}{\chapter{Methodology}\label{methods}}
 
 This chapter introduces the V-Dem dataset and discuss the methodological
@@ -373,9 +371,9 @@ The Varieties of Democracy Institute is concerned with measuring
 different aspects of democracy. It distinguishes between seven
 high-level principles: electoral, liberal, participatory, deliberative,
 egalitarian, majoritarian and consensual. These are measured by a
-variable in the interval \([0,1]\) and each consists of several
+variable in the interval \([0,1]\). Each is the result of several
 mid-level indices in the interval \([0,1]\) and low-level indices in the
-domain \([0,4]\) on. The low-level indices are coded with the help of
+domain \([0,4]\). The low-level indices are coded with the help of
 several country experts who answer a detailed questionnaire. Most
 questions can be answered by an ordinal scale of five alternatives.
 Consider, as an example, the variable ``Disclosure of campaign
@@ -412,7 +410,7 @@ The database contains data on 201 countries between 1789 and 2017.
 
 \subsection{\texorpdfstring{\texttt{vdem.tectr}}{vdem.tectr}}\label{vdem.tectr}
 
-I have created the package \texttt{vdem.tectr} which contains the
+The package \texttt{vdem.tectr}, which I have created, contains the
 country-year dataset version 8. It can be downloaded via
 \href{github.com/sflippl/vdem.tectr}{github}:
 
@@ -445,7 +443,10 @@ The package contains three datasets:
   as Zanzibar. The function \texttt{vdem\_geocode} makes it possible to
   join the shapes polygons to a data frame as long as the columns
   \texttt{country\_name} and \texttt{year} exist.
-  \includegraphics{bachelor-thesis_files/figure-latex/vdem-spatial-1.pdf}
+
+  \begin{figure}
+  \includegraphics[width=0.7\linewidth]{bachelor-thesis_files/figure-latex/vdem-spatial-1} \caption{Country borders in 2017 in the V-Dem database}\label{fig:vdem-spatial}
+  \end{figure}
 \item
   \texttt{vdem} which contains the variables from \texttt{df\_vdem}, the
   country shapes from \texttt{vdem\_spatial} and further metainformation
@@ -462,9 +463,9 @@ The package has been constructed with the packages \texttt{devtools}
 \texttt{testthat} \citep{testthat}. The Bachelor's Thesis has been
 written with \texttt{bookdown} \citep[\citet{bookdown-2}]{bookdown-1}.
 
-\chapter{First look}\label{first-look}
+\hypertarget{example}{\chapter{First look}\label{example}}
 
-This chapter is devoted to first applied example of the package before
+This chapter is devoted to a first applied example of the package before
 the \protect\hyperlink{concept}{fourth chapter} introduces the concepts
 of \texttt{tectr} in a more comprehensive way.
 
@@ -480,7 +481,7 @@ Basics}{fx\_ggplot: Basics}}\label{fx_ggplot-basics}
 In the following, I will present different example applications of
 \texttt{fx\_ggplot}.
 
-We will at first consider the electoral democracy index and its
+At first, we will consider the electoral democracy index and its
 distribution. The result is depicted in figure \ref{fig:3-1}.
 
 \begin{Shaded}
@@ -534,7 +535,7 @@ default values can flexibly be changed.
 Behind the scenes, the function calls \texttt{fx\_default} which sets
 several default values for every column and saves them in a
 \emph{metaframe} which is stored as an attribute of the data frame. The
-result can be seen in \ref{tab:3-3}
+result can be seen in figure \ref{tab:3-3}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -578,7 +579,7 @@ influence a lot of other default values.
 visualization from the specification of aesthetics and the class of the
 data. Thus, we receive a different plot if we specify the y variable, as
 well. Let us first consider the relationship between the electoral and
-the liberal democracy index in the 2017 which can be seen in
+the liberal democracy index in the 2017 which can be seen in figure
 \ref{fig:3-4}.
 
 \begin{Shaded}
@@ -602,11 +603,11 @@ the liberal democracy index in the 2017 which can be seen in
 
 
 
-In this case, the scatter plot is a sensible choice. On the other hand,
-if we wish to visualize the entire database (which consists of 26537
-observations), an ordinary scatter plot would lead to severe
-overplotting. \texttt{fx\_ggplot} recognizes this and chooses a more
-appropriate graphic in figure \ref{fig:3-5}.
+In this case, the scatter plot is a sensible choice. If we wish to
+visualize the entire database (which consists of 26537 observations), an
+ordinary scatter plot would lead to severe overplotting.
+\texttt{fx\_ggplot} recognizes this and chooses a more appropriate
+graphic in figure \ref{fig:3-5}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -630,7 +631,7 @@ appropriate graphic in figure \ref{fig:3-5}.
 
 This choice is flexible, as well; should we, for instance, wish to use
 the colour aesthetics to represent the year of the observation, the plot
-adapts, as can be seen in \ref{fig:3-6}.
+adapts, as can be seen in figure \ref{fig:3-6}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -684,7 +685,7 @@ over time (figure \ref{fig:3-8}).
 
 }
 
-\caption{Time series with fx\_ggplot}\label{fig:3-8}
+\caption{Time series with \texttt{fx\_ggplot}}\label{fig:3-8}
 \end{figure}
 
 
@@ -697,8 +698,9 @@ is ``Time''. We can modify the metaframe accordingly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# To modify default values, we need to define a function that changes the fxGeom_class of }
-\CommentTok{# the questionable names and returns that (modified or unmodified) argument.}
+\CommentTok{# To modify default values, we need to define a function that changes }
+\CommentTok{# the fxGeom_class of the questionable names and returns that }
+\CommentTok{# (modified or unmodified) argument.}
 
 \NormalTok{year_is_time <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(fxGeom_class, name) \{}
   \ControlFlowTok{if}\NormalTok{(name }\OperatorTok{==}\StringTok{ "year"}\NormalTok{) }\KeywordTok{return}\NormalTok{(}\StringTok{"Time"}\NormalTok{)}
@@ -709,7 +711,8 @@ is ``Time''. We can modify the metaframe accordingly.
 \StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"Afghanistan"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(year, v2x_libdem, country_name) }\OperatorTok{%>%}\StringTok{ }
 
-\StringTok{  }\CommentTok{# If called without an argument, fx_default simply instantiates the metaframe with the names.}
+\StringTok{  }\CommentTok{# If called without an argument, fx_default simply instantiates the }
+\StringTok{  }\CommentTok{# metaframe with the names.}
 
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }
@@ -720,8 +723,8 @@ is ``Time''. We can modify the metaframe accordingly.
     \DataTypeTok{fxGeom_class =} \KeywordTok{fx_default_fxGeom_class}\NormalTok{(., }\DataTypeTok{custom_fun =}\NormalTok{ year_is_time), }
     \DataTypeTok{fxGeom_assoc_vars =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{group =}\NormalTok{ country_name) }
   
-    \CommentTok{# The second variable specifies which observations should be viewed as a instances of a }
-    \CommentTok{# coherent unit, i. e. be connected by lines.}
+    \CommentTok{# The second variable specifies which observations should be viewed as}
+    \CommentTok{# instances of a coherent unit, i. e. be connected by lines.}
   
 \NormalTok{    ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}\StringTok{ }
@@ -748,15 +751,7 @@ Suppose that we now consider all observations:
 \begin{Highlighting}[]
 \NormalTok{df_vdem }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(year, v2x_libdem, country_name) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }
-\StringTok{  }\CommentTok{# If called without an argument, fx_default simply instantiates the metaframe with the names.}
-\StringTok{  }
 \StringTok{  }\KeywordTok{fx_default}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }
-\StringTok{  }\CommentTok{# The function responsible for the default value is fx_default_fxGeom_class. }
-\StringTok{  }\CommentTok{# It accepts as an argument a function that changes these classes.}
-\StringTok{  }\CommentTok{# Its first argument is the data frame itself.}
-\StringTok{  }
 \StringTok{  }\KeywordTok{mutate_mf}\NormalTok{(}
     \DataTypeTok{fxGeom_class =} \KeywordTok{fx_default_fxGeom_class}\NormalTok{(., }\DataTypeTok{custom_fun =}\NormalTok{ year_is_time), }
     \DataTypeTok{fxGeom_assoc_vars =}\NormalTok{ purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}
@@ -766,10 +761,6 @@ Suppose that we now consider all observations:
         \KeywordTok{aes}\NormalTok{()}
 \NormalTok{      \}}
 \NormalTok{    )}
-  
-    \CommentTok{# The second variable specifies which observations should be viewed as a instances of a }
-    \CommentTok{# coherent unit, i. e. be connected by lines.}
-  
 \NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_libdem)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\NormalTok{my_theme}
@@ -1081,7 +1072,7 @@ This mechanism provides a better overview over all possible classes.
 However, it is necessary to explicitly define every task and every
 subclass. Normally, the \texttt{fxd} mechanism should be preferred. S4
 dummy classes are mainly employed when multiple dispatch becomes
-necessary (see \protect\hyperlink{fx-ggplot}{\texttt{fx\_ggplot}}).
+necessary (see \protect\hyperlink{fx_ggplot}{\texttt{fx\_ggplot}}).
 
 \subsection{Other concepts}\label{other-concepts}
 
@@ -1142,7 +1133,7 @@ function for \texttt{fxGeom\_class}:
 \begin{verbatim}
 ## function(data, mf, col, ...)
 ##   fx_default_fxGeom_class(data, mf)
-## <bytecode: 0x0000000046321528>
+## <bytecode: 0x000000001d702f98>
 ## <environment: namespace:tectr>
 \end{verbatim}
 
@@ -1435,9 +1426,8 @@ with the topic ``output''.
 
 \texttt{fx\_output} is stable and the next step will be to refine and
 extend the output forms. In particular, the next version will provide an
-output form ``report'' which creates a dynamical report of the kind
-which we will render in the \protect\hyperlink{application}{fifth
-chapter}.
+output form ``report'' which creates a dynamical report of all
+variables.
 
 \section{\texorpdfstring{\texttt{fx\_write}}{fx\_write}}\label{fx_write}
 
@@ -1446,14 +1436,14 @@ chapter}.
 Besides providing summary tables, the main purpose of \texttt{fx\_info}
 is to make information about the variable accessible. The foundation of
 this information can often be imported from a codebook of some form (see
-the {[}application{]}). Adding and editing this information -- e. g.
-correcting typos -- is, however, an awkward endeavour in R. A text
-editor of some sort would be more suitable. The \texttt{fx\_write}
-family of functions attempts to adress this by allowing you to export
-the semantic data to human-readable documents which can then be
-modified. As it returns the data frame with a \texttt{filepath} column
-which refers to the export file, it can easily be read in -- this
-functionality is provided by \texttt{fx\_read}.
+the \protect\hyperlink{application}{application}). Adding and editing
+this information -- e. g. correcting typos -- is, however, an awkward
+endeavour in R. A text editor of some sort would be more suitable. The
+\texttt{fx\_write} family of functions attempts to adress this by
+allowing you to export the semantic data to human-readable documents
+which can then be modified. As it returns the data frame with a
+\texttt{filepath} column which refers to the export file, it can easily
+be read in -- this functionality is provided by \texttt{fx\_read}.
 
 Currently, only one \texttt{fx\_write} function is implemented:
 \texttt{fx\_write\_json}. This function creates several files in
@@ -1489,7 +1479,7 @@ best alternative.
 This function is at the moment very unstable and should be used with
 caution.
 
-\hypertarget{fx-ggplot}{\section{\texorpdfstring{\texttt{fx\_ggplot}}{fx\_ggplot}}\label{fx-ggplot}}
+\section{\texorpdfstring{\texttt{fx\_ggplot}}{fx\_ggplot}}\label{fx-ggplot}
 
 At last, I present the fx function which has the most extensive
 implementation so far: \texttt{fx\_ggplot}, which is concerned with the
@@ -1740,13 +1730,13 @@ example with modified statistics and a unit on the y axis.
             \DataTypeTok{fxInfo_unit =}\NormalTok{ purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(name, }\OperatorTok{~}\StringTok{ }\ControlFlowTok{if}\NormalTok{(. }\OperatorTok{==}\StringTok{ "price"}\NormalTok{) }\StringTok{"$"} \ControlFlowTok{else} \OtherTok{NULL}\NormalTok{), }
             \DataTypeTok{fxInfo_title_unit.show =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{metaframe}\NormalTok{(fx_diamonds) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(name, }\KeywordTok{starts_with}\NormalTok{(}\StringTok{"fxInfo"}\NormalTok{))}
+\StringTok{  }\KeywordTok{select}\NormalTok{(name, fxInfo_name}\OperatorTok{:}\NormalTok{fxInfo_unit)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 
-\caption{\label{tab:title-ex}Metaframe of diamonds with modified parameters}
+\caption{\label{tab:title-ex}Metaframe of diamonds with modified parameters (Extract)}
 \centering
 \begin{tabular}[t]{lllllll}
 \toprule
@@ -1769,7 +1759,7 @@ This modified metaframe results in the following plot:
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{bachelor-thesis_files/figure-latex/title-1} 
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/title-1} 
 
 }
 
@@ -1921,7 +1911,7 @@ represents the votes for a certain nomination. In this case, we observe:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2
+## [1] 3
 \end{verbatim}
 
 The same applies to the y aesthetic. Why does the heatmap receive more
@@ -2097,9 +2087,496 @@ to specify the desired plot. For instance, the question whether a
 certain variable is represented by fill or colour is largely dependent
 on the layer. Perhaps another mapping would provide better results.
 
-\chapter{Final Words}\label{final-words}
+\hypertarget{application}{\chapter{Application}\label{application}}
 
-We have finished a nice book.
+This chapter is concerned with the application of \texttt{tectr} to the
+V-Dem database. At first, it will present the metaframe and discuss the
+\texttt{fx\_write} function. The second section will present
+\texttt{fx\_info} and \texttt{fx\_output} whereas the third section will
+consider \texttt{fx\_ggplot}.
+
+\section{The metaframe}\label{the-metaframe-1}
+
+The folder ``data-raw'' contains the creation of the metaframe in
+detail. I have imported the codebook \citep{vdem-codebook2018} with the
+help of the \texttt{pdftools} package \citep{pdftools}. Subsequently, I
+have read out different categories of information about the variables.
+The resulting data frame has been exported by \texttt{fx\_write\_json}
+which yielded the data frame \texttt{mf\_revisable}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mf_revisable}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 909 x 8
+##    part_num chapter_num ind_num ind_type name  part_title chapter_title
+##       <dbl>       <dbl>   <int> <chr>    <chr> <chr>      <chr>        
+##  1        2           1       1 D        v2x_~ V-Dem Dem~ V-Dem High-L~
+##  2        2           1       2 D        v2x_~ V-Dem Dem~ V-Dem High-L~
+##  3        2           1       3 D        v2x_~ V-Dem Dem~ V-Dem High-L~
+##  4        2           1       4 D        v2x_~ V-Dem Dem~ V-Dem High-L~
+##  5        2           1       5 D        v2x_~ V-Dem Dem~ V-Dem High-L~
+##  6        2           2       1 D        v2x_~ V-Dem Dem~ V-Dem Mid-Le~
+##  7        2           2       2 D        v2x_~ V-Dem Dem~ V-Dem Mid-Le~
+##  8        2           2       3 D        v2x_~ V-Dem Dem~ V-Dem Mid-Le~
+##  9        2           2       4 D        v2x_~ V-Dem Dem~ V-Dem Mid-Le~
+## 10        2           2       5 D        v2x_~ V-Dem Dem~ V-Dem Mid-Le~
+## # ... with 899 more rows, and 1 more variable: main <S3: filepath>
+\end{verbatim}
+
+In particular, the different information categories have been collapsed
+into a filepath called ``main''.
+
+The files themselves have the following structure:
+
+\begin{verbatim}
+[
+  {
+    "fxInfo_name": "Electoral democracy index",
+    "fxInfo_notes": "",
+    "fxInfo_ordering": "",
+    "fxInfo_project_manager": ["Jan Teorell"],
+    "fxInfo_question": "To what extent is the ideal of electoral democracy in its fullest sense achieved?",
+    "fxInfo_responses": [],
+    "fxInfo_scale": "Interval, from low to high (0-1)",
+    "fxInfo_sources": "v2x_freexp_altinf v2x_frassoc_thick v2x_suffr v2xel_frefair v2x_elecoff",
+    "name": "v2x_polyarchy"
+  }
+]
+\end{verbatim}
+
+I have only included a few exemplary fields in order to demonstrate that
+such a file is well-readable by humans.
+
+At this stage, these variables may be modified by hand in order to add
+additional fields or correct typos.
+
+Afterwards, the metaframe is completed by adding the parameters of
+\texttt{fxGeom}. This results in the \texttt{vdem}-object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{metaframe}\NormalTok{(vdem)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,671 x 32
+##    name  fxInfo_name part_num chapter_num ind_num ind_type part_title
+##    <chr> <chr>          <dbl>       <dbl>   <int> <chr>    <chr>     
+##  1 coun~ Country Na~       NA          NA      NA <NA>     <NA>      
+##  2 year  Year              NA          NA      NA <NA>     <NA>      
+##  3 v2x_~ Electoral ~        2           1       1 D        V-Dem Dem~
+##  4 v2x_~ Electoral ~        2           1       1 D        V-Dem Dem~
+##  5 v2x_~ Electoral ~        2           1       1 D        V-Dem Dem~
+##  6 v2x_~ Liberal de~        2           1       2 D        V-Dem Dem~
+##  7 v2x_~ Liberal de~        2           1       2 D        V-Dem Dem~
+##  8 v2x_~ Liberal de~        2           1       2 D        V-Dem Dem~
+##  9 v2x_~ Participat~        2           1       3 D        V-Dem Dem~
+## 10 v2x_~ Participat~        2           1       3 D        V-Dem Dem~
+## # ... with 2,661 more rows, and 25 more variables: chapter_title <chr>,
+## #   fxInfo_aggregation <chr>, fxInfo_answer_type <chr>,
+## #   fxInfo_citation <chr>, fxInfo_clarification <chr>,
+## #   fxInfo_cpp_tag <chr>, fxInfo_cross_coder_aggregation <chr>,
+## #   fxInfo_data_release <chr>, fxInfo_historical_clarification <chr>,
+## #   fxInfo_notes <chr>, fxInfo_ordering <chr>,
+## #   fxInfo_project_manager <list>, fxInfo_question <chr>,
+## #   fxInfo_responses <list>, fxInfo_scale <chr>, fxInfo_sources <chr>,
+## #   fxInfo_cautionary <chr>, fxGeom_class <chr>, fxGeom_assoc_vars <list>,
+## #   fxGeom_limits <list>, fxGeom_trans <list>, fxGeom_veto <list>,
+## #   fxGeom_vote <list>, fxGeom_drop <lgl>, fxGeom_pal.colour_fill <list>
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{fx\_info}}{fx\_info}}\label{fx_info-1}
+
+We can use \texttt{vdem} to produce uncomplicated and well-structured
+descriptive tables, for instance table \ref{tab:desc}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem, v2x_partipdem, v2x_delibdem, v2x_egaldem) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_info}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{, }\StringTok{"question"}\NormalTok{, }\StringTok{"stats"}\NormalTok{), }
+          \DataTypeTok{statistics =} \KeywordTok{list}\NormalTok{(}
+            \DataTypeTok{mean =} \ControlFlowTok{function}\NormalTok{(x, ...) }\KeywordTok{mean}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{quantile =} \ControlFlowTok{function}\NormalTok{(x, ...) }
+              \KeywordTok{quantile}\NormalTok{(x, }\DataTypeTok{probs =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{0.25}\NormalTok{), }
+                       \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{            )) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_output}\NormalTok{(}\StringTok{"table"}\NormalTok{, }\DataTypeTok{out_format =} \StringTok{"markdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}llrrrr@{}}
+\toprule
+\begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+Name\strut
+\end{minipage} & \begin{minipage}[b]{0.42\columnwidth}\raggedright\strut
+Question\strut
+\end{minipage} & \begin{minipage}[b]{0.03\columnwidth}\raggedleft\strut
+mean\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedleft\strut
+quantile: 25\%\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedleft\strut
+quantile: 50\%\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedleft\strut
+quantile: 75\%\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Electoral democracy index\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+To what extent is the ideal of electoral democracy in its fullest sense
+achieved?\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedleft\strut
+0.26\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.06\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.17\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.37\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Liberal democracy index\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+To what extent is the ideal of liberal democracy achieved?\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedleft\strut
+0.22\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.06\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.12\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.29\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Participatory democracy index\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+To what extent is the ideal of participatory democracy achieved?\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedleft\strut
+0.19\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.04\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.10\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.29\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Deliberative democracy index\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+To what extent is the ideal of deliberative democracy achieved?\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedleft\strut
+0.23\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.04\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.12\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.37\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Egalitarian democracy index\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+To what extent is the ideal of egalitarian democracy achieved?\strut
+\end{minipage} & \begin{minipage}[t]{0.03\columnwidth}\raggedleft\strut
+0.24\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.07\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.15\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedleft\strut
+0.33\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+A more vertical structure is given below by the
+``collapse''-output-form:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_info}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{, }\StringTok{"question"}\NormalTok{, }\StringTok{"clarification"}\NormalTok{, }\StringTok{"stats"}\NormalTok{), }
+          \DataTypeTok{statistics =} \KeywordTok{list}\NormalTok{(}
+            \DataTypeTok{mean =} \ControlFlowTok{function}\NormalTok{(x, ...) }\KeywordTok{mean}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{quantile =} \ControlFlowTok{function}\NormalTok{(x, ...) }\KeywordTok{quantile}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{            )}
+\NormalTok{          ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_output}\NormalTok{(}\StringTok{"collapse"}\NormalTok{, }
+            \DataTypeTok{cell_scheme =} \StringTok{"*\{name\}*}\CharTok{\textbackslash{}n}\StringTok{\{value\}"}\NormalTok{, }
+            \DataTypeTok{cell_sep =} \StringTok{"}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+            \DataTypeTok{out_format =} \StringTok{"markdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Name} Electoral democracy index
+
+\emph{Question} To what extent is the ideal of electoral democracy in
+its fullest sense achieved?
+
+\emph{Clarification} The electoral principle of democracy seeks to
+embody the core value of making rulers responsive to citizens, achieved
+through electoral competition for the electorate's approval under
+circumstances when suffrage is extensive; political and civil society
+organizations can operate freely; elections are clean and not marred by
+fraud or systematic irregularities; and elections affect the composition
+of the chief executive of the country. In between elections, there is
+freedom of expression and an independent media capable of presenting
+alternative views on matters of political relevance. In the V-Dem
+conceptual scheme, electoral democracy is understood as an essential
+element of any other conception of representative democracy --- liberal,
+participatory, deliberative, egalitarian, or some other.
+
+\emph{mean} 0.26
+
+\emph{quantile: 0\%} 0.0073
+
+\emph{quantile: 25\%} 0.062
+
+\emph{quantile: 50\%} 0.17
+
+\emph{quantile: 75\%} 0.37
+
+\emph{quantile: 100\%} 0.94
+
+\hypertarget{fx_ggplot}{\section{\texorpdfstring{\texttt{fx\_ggplot}}{fx\_ggplot}}\label{fx_ggplot}}
+
+As the general features of \texttt{fx\_ggplot} have already been
+presented in the previous chapter, I will focus on a few changes due to
+the adaptations of the metaframe. Firstly, I have provided a consistent
+set of palettes, as can be seen in figure \ref{fig:consistent}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2clrelig_osp, country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{vdem_geocode}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geom =}\NormalTok{ geometry, }\DataTypeTok{fill =}\NormalTok{ v2clrelig_osp)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
+
+\NormalTok{p2 <-}\StringTok{ }\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2015}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2clrelig_ord, country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{vdem_geocode}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{geom =}\NormalTok{ geometry, }\DataTypeTok{fill =}\NormalTok{ v2clrelig_ord)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
+
+\NormalTok{p1}\OperatorTok{/}\NormalTok{p2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bachelor-thesis_files/figure-latex/consistent-1} 
+
+}
+
+\caption{The ordinal scale provides a discretized version of the original scale.}\label{fig:consistent}
+\end{figure}
+
+Furthermore, we plot a time series with confidence intervals for
+different countries in figure \ref{fig:time}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"France"}\NormalTok{, }\StringTok{"Belgium"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(country_name, year, }\KeywordTok{contains}\NormalTok{(}\StringTok{"v2x_polyarchy"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/time-1} 
+
+}
+
+\caption{A time series of the electoral democracy index for Germany, France and Belgium}\label{fig:time}
+\end{figure}
+
+If we include all countries, \texttt{fx\_ggplot} prevents overplotting,
+as in figure \ref{fig:time-all}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(country_name, year, }\KeywordTok{contains}\NormalTok{(}\StringTok{"v2x_polyarchy"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2x_polyarchy)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/time-all-1} 
+
+}
+
+\caption{A time series of the electoral democracy index for all countries}\label{fig:time-all}
+\end{figure}
+
+Of course, we can also plot two democracy indices against each other,
+see figures \ref{fig:scatter} and \ref{fig:scatter-facet}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/scatter-1} 
+
+}
+
+\caption{The electoral democracy index and the liberal democracy index.}\label{fig:scatter}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"France"}\NormalTok{, }\StringTok{"Belgium"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(v2x_polyarchy, v2x_libdem, country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2x_polyarchy, }\DataTypeTok{y =}\NormalTok{ v2x_libdem,}
+                \DataTypeTok{colour =}\NormalTok{ year), }
+            \DataTypeTok{facet_vars =} \KeywordTok{vars}\NormalTok{(country_name)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/scatter-facet-1} 
+
+}
+
+\caption{Electoral and liberal democracy index in Germany, France and Belgium over time}\label{fig:scatter-facet}
+\end{figure}
+
+The time series work for the low-level indices, as well, as can be seen
+in figure \ref{fig:low}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"France"}\NormalTok{, }\StringTok{"Belgium"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"v2meharjrn"}\NormalTok{), country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2meharjrn_osp, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/low-1} 
+
+}
+
+\caption{The electoral democracy index and the liberal democracy index.}\label{fig:low}
+\end{figure}
+
+Figure \ref{fig:low-disc} shows the discretized version.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country_name }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Germany"}\NormalTok{, }\StringTok{"France"}\NormalTok{, }\StringTok{"Belgium"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"v2meharjrn"}\NormalTok{), country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ v2meharjrn_ord, }\DataTypeTok{colour =}\NormalTok{ country_name)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/low-disc-1} 
+
+}
+
+\caption{Harassment of journalists in Germany, France and Belgium over time (discretized)}\label{fig:low-disc}
+\end{figure}
+
+Finally, we plot a discretized variable against a high-level index in
+figure \ref{fig:disc-high}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vdem }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"v2meharjrn"}\NormalTok{), v2x_polyarchy, country_name, year) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fx_ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ v2meharjrn_ord, }\DataTypeTok{y =}\NormalTok{ v2x_polyarchy)) }\OperatorTok{+}
+\StringTok{  }\NormalTok{my_theme}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{bachelor-thesis_files/figure-latex/disc-high-1} 
+
+}
+
+\caption{The electoral democracy index and the liberal democracy index.}\label{fig:disc-high}
+\end{figure}
+
+As a final proof of concept, \protect\hyperlink{vardescs}{appendix B}
+contains an automated report of the high-level indices.
+
+\hypertarget{summary}{\chapter{Summary}\label{summary}}
+
+In this Bachelor's Thesis, I have presented the package \texttt{tectr}
+which intends to assist in data analysis and visualization by allowing
+the user to set default values. I have discussed reasons why this is
+useful and described a framework which I then implemented. At last, I
+presented an example of application to the Varieties of Democracy
+dataset.
+
+As my next steps regarding the development of \texttt{tectr}, I will
+implement a report function for \texttt{fx\_output} which assists in
+creating reports such as the one found in
+\protect\hyperlink{vardescs}{appendix B}. Furthermore, I will revise
+\texttt{fx\_ggplot} such that it is more native to the internal
+structure of \texttt{fx\_ggplot}.
+
+\appendix
+
+
+\chapter{Packages}\label{packages}
+
+This Bachelor's Thesis includes two packages: \texttt{tectr} and
+\texttt{vdem.tectr}. Both can be found on github:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# install.packages("devtools")}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sflippl/tectr"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sflippl/vdem.tectr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As these repositories are going to change in the future (and for reasons
+of completeness), I have additionally included:
+
+\begin{itemize}
+\tightlist
+\item
+  Both built packages
+\item
+  The zipped version of the RStudio projects.
+\end{itemize}
 
 \bibliography{bachelor-thesis.bib}
 

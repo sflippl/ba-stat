@@ -1,6 +1,6 @@
-# First look
+# First look {#example}
 
-This chapter is devoted to first applied example of the package before the 
+This chapter is devoted to a first applied example of the package before the 
 [fourth chapter](#concept) introduces the concepts of `tectr` in a more comprehensive way.
 
 As an example, we will consider the V-Dem database that has been introduced in the preceding chapter. We will focus on the function `fx_ggplot` as an example. It is based on the package `ggplot2` which implements the grammar of graphics to R in order to produce visualizations. [@ggplot]
@@ -9,7 +9,7 @@ As an example, we will consider the V-Dem database that has been introduced in t
 
 In the following, I will present different example applications of `fx_ggplot`.
 
-We will at first consider the electoral democracy index and its distribution. The result is depicted in figure \@ref(fig:3-1).
+At first, we will consider the electoral democracy index and its distribution. The result is depicted in figure \@ref(fig:3-1).
 
 ```{r 3-1, fig.cap = "(ref:3-1)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
@@ -30,7 +30,7 @@ ggplot(df_vdem, aes(x = v2x_polyarchy)) +
 
 Namely, the axis title lists the number of missing values and the x-axis has been log transformed. This is because `tectr` attempts to guess reasonable default values which yield more informative plots than the default values of `ggplot`. It is able to do so because these default values can flexibly be changed.
 
-Behind the scenes, the function calls `fx_default` which sets several default values for every column and saves them in a *metaframe* which is stored as an attribute of the data frame. The result can be seen in \@ref(tab:3-3)
+Behind the scenes, the function calls `fx_default` which sets several default values for every column and saves them in a *metaframe* which is stored as an attribute of the data frame. The result can be seen in figure \@ref(tab:3-3)
 
 ```{r}
 fx_ggplot_columns
@@ -53,7 +53,7 @@ kable(
 
 In `fxGeom_class`, for instance, the class of the variable is listed which has an influence on the defined graphics and is used to influence a lot of other default values.
 
-`fx_ggplot` itself attempts to infer the appropriate visualization from the specification of aesthetics and the class of the data. Thus, we receive a different plot if we specify the y variable, as well. Let us first consider the relationship between the electoral and the liberal democracy index in the 2017 which can be seen in \@ref(fig:3-4).
+`fx_ggplot` itself attempts to infer the appropriate visualization from the specification of aesthetics and the class of the data. Thus, we receive a different plot if we specify the y variable, as well. Let us first consider the relationship between the electoral and the liberal democracy index in the 2017 which can be seen in figure \@ref(fig:3-4).
 
 ```{r 3-4, fig.cap = "(ref:3-4)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
@@ -64,7 +64,7 @@ df_vdem %>%
 ```
 (ref:3-4) Scatter plot with `fx_ggplot`
 
-In this case, the scatter plot is a sensible choice. On the other hand, if we wish to visualize the entire database (which consists of 26537 observations), an ordinary scatter plot would lead to severe overplotting. `fx_ggplot` recognizes this and chooses a more appropriate graphic in figure \@ref(fig:3-5).
+In this case, the scatter plot is a sensible choice. If we wish to visualize the entire database (which consists of 26537 observations), an ordinary scatter plot would lead to severe overplotting. `fx_ggplot` recognizes this and chooses a more appropriate graphic in figure \@ref(fig:3-5).
 
 ```{r 3-5, fig.cap = "(ref:3-5)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
@@ -74,7 +74,7 @@ df_vdem %>%
 ```
 (ref:3-5) `fx_ggplot` prevents overplotting
 
-This choice is flexible, as well; should we, for instance, wish to use the colour aesthetics to represent the year of the observation, the plot adapts, as can be seen in \@ref(fig:3-6).
+This choice is flexible, as well; should we, for instance, wish to use the colour aesthetics to represent the year of the observation, the plot adapts, as can be seen in figure \@ref(fig:3-6).
 
 ```{r 3-6, fig.cap = "(ref:3-6)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
@@ -90,6 +90,7 @@ The increased transparency of the points improves oversight over the plot. Note 
 
 The default values which the plot uses may be changed by modifying the metaframe in which they are stored. Consider, as an example, the development of the liberal democracy index in Germany and Afghanistan over time (figure \@ref(fig:3-8)).
 
+
 ```{r 3-8, fig.cap = "(ref:3-8)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
   filter(country_name %in% c("Germany", "Afghanistan")) %>% 
@@ -97,13 +98,16 @@ df_vdem %>%
   fx_ggplot(aes(x = year, y = v2x_libdem, colour = country_name)) + 
   my_theme
 ```
-(ref:3-8) Time series with fx_ggplot
+(ref:3-8) Time series with `fx_ggplot`
+
 
 This is evidently not a very useful plot; although we are able to extrapolate the developments in both countries, a line plot would be preferred. The problem is that `fx_ggplot` does not know that year represents a time. The fxGeom class corresponding the time variable is "Time". We can modify the metaframe accordingly.
 
+
 ```{r 3-9, fig.cap = "(ref:3-9)", out.width = '50%', fig.align = 'center'}
-# To modify default values, we need to define a function that changes the fxGeom_class of 
-# the questionable names and returns that (modified or unmodified) argument.
+# To modify default values, we need to define a function that changes 
+# the fxGeom_class of the questionable names and returns that 
+# (modified or unmodified) argument.
 
 year_is_time <- function(fxGeom_class, name) {
   if(name == "year") return("Time")
@@ -114,7 +118,8 @@ df_vdem %>%
   filter(country_name %in% c("Germany", "Afghanistan")) %>% 
   select(year, v2x_libdem, country_name) %>% 
 
-  # If called without an argument, fx_default simply instantiates the metaframe with the names.
+  # If called without an argument, fx_default simply instantiates the 
+  # metaframe with the names.
 
   fx_default() %>% 
   
@@ -125,8 +130,8 @@ df_vdem %>%
     fxGeom_class = fx_default_fxGeom_class(., custom_fun = year_is_time), 
     fxGeom_assoc_vars = aes(group = country_name) 
   
-    # The second variable specifies which observations should be viewed as a instances of a 
-    # coherent unit, i. e. be connected by lines.
+    # The second variable specifies which observations should be viewed as
+    # instances of a coherent unit, i. e. be connected by lines.
   
     ) %>% 
   fx_ggplot(aes(x = year, y = v2x_libdem, colour = country_name)) + 
@@ -134,20 +139,13 @@ df_vdem %>%
 ```
 (ref:3-9) Time series with modified metaframe
 
+
 In the resulting figure \@ref(fig:3-9), the expected line plot is displayed. The time class is able to prevent overplotting, as well. Suppose that we now consider all observations: 
 
 ```{r 3-10, fig.cap = "(ref:3-10)", out.width = '50%', fig.align = 'center'}
 df_vdem %>% 
   select(year, v2x_libdem, country_name) %>% 
-  
-  # If called without an argument, fx_default simply instantiates the metaframe with the names.
-  
   fx_default() %>% 
-  
-  # The function responsible for the default value is fx_default_fxGeom_class. 
-  # It accepts as an argument a function that changes these classes.
-  # Its first argument is the data frame itself.
-  
   mutate_mf(
     fxGeom_class = fx_default_fxGeom_class(., custom_fun = year_is_time), 
     fxGeom_assoc_vars = purrr::map(
@@ -157,10 +155,6 @@ df_vdem %>%
         aes()
       }
     )
-  
-    # The second variable specifies which observations should be viewed as a instances of a 
-    # coherent unit, i. e. be connected by lines.
-  
   ) %>% 
   fx_ggplot(aes(x = year, y = v2x_libdem)) + 
   my_theme

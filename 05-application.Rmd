@@ -1,0 +1,167 @@
+# Application {#application}
+
+This chapter is concerned with the application of `tectr` to the V-Dem database. At first, it will present the metaframe and discuss the `fx_write` function. The second section will present `fx_info` and `fx_output` whereas the third section will consider `fx_ggplot`.
+
+## The metaframe
+
+The folder "data-raw" contains the creation of the metaframe in detail. I have imported the codebook [@vdem-codebook2018] with the help of the `pdftools` package [@pdftools]. Subsequently, I have read out different categories of information about the variables. The resulting data frame has been exported by `fx_write_json` which yielded the data frame `mf_revisable`:
+
+```{r}
+mf_revisable
+```
+
+In particular, the different information categories have been collapsed into a filepath called "main".
+
+The files themselves have the following structure:
+
+```
+[
+  {
+    "fxInfo_name": "Electoral democracy index",
+    "fxInfo_notes": "",
+    "fxInfo_ordering": "",
+    "fxInfo_project_manager": ["Jan Teorell"],
+    "fxInfo_question": "To what extent is the ideal of electoral democracy in its fullest sense achieved?",
+    "fxInfo_responses": [],
+    "fxInfo_scale": "Interval, from low to high (0-1)",
+    "fxInfo_sources": "v2x_freexp_altinf v2x_frassoc_thick v2x_suffr v2xel_frefair v2x_elecoff",
+    "name": "v2x_polyarchy"
+  }
+]
+```
+
+I have only included a few exemplary fields in order to demonstrate that such a file is well-readable by humans.
+
+At this stage, these variables may be modified by hand in order to add additional fields or correct typos.
+
+Afterwards, the metaframe is completed by adding the parameters of `fxGeom`. This results in the `vdem`-object:
+
+```{r}
+metaframe(vdem)
+```
+
+## `fx_info` 
+
+We can use `vdem` to produce uncomplicated and well-structured descriptive tables, for instance table \@ref(tab:desc).
+
+```{r desc}
+vdem %>% 
+  select(v2x_polyarchy, v2x_libdem, v2x_partipdem, v2x_delibdem, v2x_egaldem) %>% 
+  fx_info(c("name", "question", "stats"), 
+          statistics = list(
+            mean = function(x, ...) mean(x, na.rm = TRUE),
+            quantile = function(x, ...) 
+              quantile(x, probs = seq(0.25, 0.75, 0.25), 
+                       na.rm = TRUE)
+            )) %>% 
+  select(-name) %>% 
+  fx_output("table", out_format = "markdown")
+```
+
+A more vertical structure is given below by the "collapse"-output-form:
+
+```{r results = 'asis'}
+vdem %>% 
+  select(v2x_polyarchy) %>% 
+  fx_info(c("name", "question", "clarification", "stats"), 
+          statistics = list(
+            mean = function(x, ...) mean(x, na.rm = TRUE),
+            quantile = function(x, ...) quantile(x, na.rm = TRUE)
+            )
+          ) %>% 
+  fx_output("collapse", 
+            cell_scheme = "*{name}*\n{value}", 
+            cell_sep = "\n\n",
+            out_format = "markdown")
+```
+
+## `fx_ggplot`
+
+As the general features of `fx_ggplot` have already been presented in the previous chapter, I will focus on a few changes due to the adaptations of the metaframe. Firstly, I have provided a consistent set of palettes, as can be seen in figure \@ref(fig:consistent).
+
+```{r consistent, fig.cap = "The ordinal scale provides a discretized version of the original scale.", out.width = "60%", fig.align="center"}
+p1 <- vdem %>% 
+  filter(year == 2015) %>% 
+  select(v2clrelig_osp, country_name, year) %>% 
+  vdem_geocode() %>% 
+  fx_ggplot(aes(geom = geometry, fill = v2clrelig_osp)) + 
+  my_theme
+
+p2 <- vdem %>% 
+  filter(year == 2015) %>% 
+  select(v2clrelig_ord, country_name, year) %>% 
+  vdem_geocode() %>% 
+  fx_ggplot(aes(geom = geometry, fill = v2clrelig_ord)) + 
+  my_theme
+
+p1/p2
+```
+
+Furthermore, we plot a time series with confidence intervals for different countries in figure \@ref(fig:time).
+
+```{r time, fig.cap = "A time series of the electoral democracy index for Germany, France and Belgium", out.width = "50%", fig.align="center"}
+vdem %>% 
+  filter(country_name %in% c("Germany", "France", "Belgium")) %>% 
+  select(country_name, year, contains("v2x_polyarchy")) %>% 
+  fx_ggplot(aes(x = year, y = v2x_polyarchy, colour = country_name)) +
+  my_theme
+```
+
+If we include all countries, `fx_ggplot` prevents overplotting, as in figure \@ref(fig:time-all).
+
+```{r time-all, fig.cap = "A time series of the electoral democracy index for all countries", out.width = "50%", fig.align="center"}
+vdem %>% 
+  select(country_name, year, contains("v2x_polyarchy")) %>% 
+  fx_ggplot(aes(x = year, y = v2x_polyarchy)) +
+  my_theme
+```
+
+Of course, we can also plot two democracy indices against each other, see figures \@ref(fig:scatter) and \@ref(fig:scatter-facet).
+
+```{r scatter, fig.cap = "The electoral democracy index and the liberal democracy index.", out.width = "50%", fig.align="center"}
+vdem %>% 
+  select(v2x_polyarchy, v2x_libdem) %>% 
+  fx_ggplot(aes(x = v2x_polyarchy, y = v2x_libdem)) +
+  my_theme
+```
+
+```{r scatter-facet, fig.cap = "Electoral and liberal democracy index in Germany, France and Belgium over time", out.width = "50%", fig.align="center"}
+vdem %>% 
+  filter(country_name %in% c("Germany", "France", "Belgium")) %>% 
+  select(v2x_polyarchy, v2x_libdem, country_name, year) %>% 
+  fx_ggplot(aes(x = v2x_polyarchy, y = v2x_libdem,
+                colour = year), 
+            facet_vars = vars(country_name)) +
+  my_theme
+```
+
+The time series work for the low-level indices, as well, as can be seen in figure \@ref(fig:low).
+
+```{r low, fig.cap = "The electoral democracy index and the liberal democracy index.", out.width = "50%", fig.align="center"}
+vdem %>% 
+  filter(country_name %in% c("Germany", "France", "Belgium")) %>% 
+  select(contains("v2meharjrn"), country_name, year) %>% 
+  fx_ggplot(aes(x = year, y = v2meharjrn_osp, colour = country_name)) + 
+  my_theme
+```
+
+Figure \@ref(fig:low-disc) shows the discretized version.
+
+```{r low-disc, fig.cap = "Harassment of journalists in Germany, France and Belgium over time (discretized)", out.width = "50%", fig.align="center"}
+vdem %>% 
+  filter(country_name %in% c("Germany", "France", "Belgium")) %>% 
+  select(contains("v2meharjrn"), country_name, year) %>% 
+  fx_ggplot(aes(x = year, y = v2meharjrn_ord, colour = country_name)) +
+  my_theme
+```
+
+Finally, we plot a discretized variable against a high-level index in figure \@ref(fig:disc-high).
+
+```{r disc-high, fig.cap = "The electoral democracy index and the liberal democracy index.", out.width = "50%", fig.align="center"}
+vdem %>% 
+  select(contains("v2meharjrn"), v2x_polyarchy, country_name, year) %>% 
+  fx_ggplot(aes(x = v2meharjrn_ord, y = v2x_polyarchy)) +
+  my_theme
+```
+
+As a final proof of concept, [appendix B](#vardescs) contains an automated report of the high-level indices.

@@ -1,0 +1,5 @@
+# Summary {#summary}
+
+In this Bachelor's Thesis, I have presented the package `tectr` which intends to assist in data analysis and visualization by allowing the user to set default values. I have discussed reasons why this is useful and described a framework which I then implemented. At last, I presented an example of application to the Varieties of Democracy dataset.
+
+As my next steps regarding the development of `tectr`, I will implement a report function for `fx_output` which assists in creating reports such as the one found in [appendix B](#vardescs). Furthermore, I will revise `fx_ggplot` such that it is more native to the internal structure of `fx_ggplot`.

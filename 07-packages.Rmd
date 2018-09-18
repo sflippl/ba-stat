@@ -1,0 +1,17 @@
+# (APPENDIX) Appendix {-}
+
+# Packages
+
+This Bachelor's Thesis includes two packages: `tectr` and `vdem.tectr`. Both 
+can be found on github:
+
+```{r eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("sflippl/tectr")
+devtools::install_github("sflippl/vdem.tectr")
+```
+
+As these repositories are going to change in the future (and for reasons of completeness), I have additionally included:
+
+* Both built packages
+* The zipped version of the RStudio projects.
