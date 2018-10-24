@@ -1,1 +1,1 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+This repository contains the code necessary to replicate my Bachelor's Thesis in statistics on "Description, implementation and validation of a user interface for complex datasets in the social sciences". In this process, I have created the package [`effex`](github.com/sflippl/effex) which is currently under development.
